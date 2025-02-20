@@ -264,7 +264,6 @@ public:
 
 	virtual void				UpdateClientData( void );
 
-	bool						IsLerpingFOV( void ) const;
 	virtual float				GetFOV( void );	
 	int							GetDefaultFOV( void ) const;
 	virtual bool				IsZoomed( void )	{ return false; }
@@ -390,9 +389,8 @@ public:
 #if defined USES_ECON_ITEMS
 	// Wearables
 	virtual void			UpdateWearables();
-	const C_EconWearable	*GetWearable( int i ) const { return m_hMyWearables[i]; }
 	C_EconWearable			*GetWearable( int i ) { return m_hMyWearables[i]; }
-	int						GetNumWearables( void ) const { return m_hMyWearables.Count(); }
+	int						GetNumWearables( void ) { return m_hMyWearables.Count(); }
 #endif
 
 	bool					HasFiredWeapon( void ) { return m_bFiredWeapon; }
@@ -406,8 +404,6 @@ protected:
 
 public:
 	int m_StuckLast;
-
-	const char* GetScriptOverlayMaterial() const { return m_Local.m_szScriptOverlayMaterial; }
 	
 	// Data for only the local player
 	CNetworkVarEmbedded( CPlayerLocalData, m_Local );
@@ -482,7 +478,7 @@ protected:
 // DATA
 	int				m_iObserverMode;	// if in spectator mode != 0
 	EHANDLE			m_hObserverTarget;	// current observer target
-	float			m_flObserverChaseDistance; // last distance to observer target
+	float			m_flObserverChaseDistance; // last distance to observer traget
 	Vector			m_vecFreezeFrameStart;
 	float			m_flFreezeFrameStartTime;	// Time at which we entered freeze frame observer mode
 	float			m_flFreezeFrameDistance;

@@ -75,7 +75,6 @@ public:
 	bool				Deploy( void );
 	bool				Holster( CBaseCombatWeapon *pSwitchingTo = NULL );
 
-	const CUtlVector< CBaseEntity* > &GetSatchelVector();
 
 	CWeapon_SLAM();
 
@@ -86,8 +85,6 @@ public:
 
 private:
 	CWeapon_SLAM( const CWeapon_SLAM & );
-
-	CUtlVector< CBaseEntity* > m_SatchelVector;
 };
 
 

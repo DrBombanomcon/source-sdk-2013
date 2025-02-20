@@ -43,7 +43,7 @@ void CSAchievementsAndStatsInterface::CreatePanel( vgui::Panel* pParent )
     // Create achievement & stats dialog if not already created
     if ( !m_pAchievementAndStatsSummary )
     {
-        m_pAchievementAndStatsSummary = new CAchievementAndStatsSummary( pParent );
+        m_pAchievementAndStatsSummary = new CAchievementAndStatsSummary(NULL);
     }
 
     if ( m_pAchievementAndStatsSummary )

@@ -18,10 +18,6 @@
 #include "tf_hud_freezepanel.h"
 #include "tf_hud_objectivestatus.h"
 
-#ifdef TF_CLIENT_DLL
-#include "tf_gamerules.h"
-#endif
-
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
@@ -1395,9 +1391,6 @@ void CControlPointProgressBar::ApplySchemeSettings( IScheme *pScheme )
 	m_pTeardropSide = dynamic_cast<CIconPanel *>( FindChildByName("TeardropSide") );
 	m_pBlocked = dynamic_cast<CIconPanel *>( FindChildByName("Blocked") );
 	m_iOrgHeight = GetTall();
-
-	m_pBar->SetProgressDirection( vgui::CircularProgressBar::PROGRESS_CW );
-	m_pBar->SetReverseProgress( true );
 
 	m_iMidGroupIndex = gHUD.LookupRenderGroupIndexByName( "mid" );
 }

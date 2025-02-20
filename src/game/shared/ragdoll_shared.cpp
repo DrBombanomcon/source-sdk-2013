@@ -333,8 +333,8 @@ void RagdollSetupCollisions( ragdoll_t &ragdoll, vcollide_t *pCollide, int model
 			const char *pBlock = pParse->GetCurrentBlockName();
 			if ( !strcmpi( pBlock, "collisionrules" ) )
 			{
-				IPhysicsCollisionSet *pSetRules = physics->FindOrCreateCollisionSet( modelIndex, ragdoll.listCount );
-				CRagdollCollisionRules rules( pSetRules );
+				IPhysicsCollisionSet *pSet = physics->FindOrCreateCollisionSet( modelIndex, ragdoll.listCount );
+				CRagdollCollisionRules rules(pSet);
 				pParse->ParseCustom( (void *)&rules, &rules );
 				bFoundRules = true;
 			}
@@ -755,11 +755,8 @@ bool ShouldRemoveThisRagdoll( CBaseAnimating *pRagdoll )
 	{
 		if ( g_debug_ragdoll_removal.GetBool() )
 		{
-			if ( debugoverlay )
-			{
-				debugoverlay->AddBoxOverlay( origin, vMins, vMaxs, QAngle( 0, 0, 0 ), 0, 255, 0, 16, 5 );
-				debugoverlay->AddLineOverlay( origin, origin + Vector( 0, 0, 64 ), 0, 255, 0, true, 5 );
-			}
+			debugoverlay->AddBoxOverlay( origin, vMins, vMaxs, QAngle( 0, 0, 0 ), 0, 255, 0, 16, 5 );
+			debugoverlay->AddLineOverlay( origin, origin + Vector( 0, 0, 64 ), 0, 255, 0, true, 5 );
 		}
 
 		return true;
@@ -768,11 +765,8 @@ bool ShouldRemoveThisRagdoll( CBaseAnimating *pRagdoll )
 	{
 		if ( g_debug_ragdoll_removal.GetBool() )
 		{
-			if ( debugoverlay )
-			{
-				debugoverlay->AddBoxOverlay( origin, vMins, vMaxs, QAngle( 0, 0, 0 ), 0, 0, 255, 16, 5 );
-				debugoverlay->AddLineOverlay( origin, origin + Vector( 0, 0, 64 ), 0, 0, 255, true, 5 );
-			}
+			debugoverlay->AddBoxOverlay( origin, vMins, vMaxs, QAngle( 0, 0, 0 ), 0, 0, 255, 16, 5 );
+			debugoverlay->AddLineOverlay( origin, origin + Vector( 0, 0, 64 ), 0, 0, 255, true, 5 );
 		}
 
 		return true;
@@ -1053,14 +1047,14 @@ void CRagdollLRURetirement::MoveToTopOfLRU( CBaseAnimating *pRagdoll, bool bImpo
 		{
 			int iIndex = m_LRUImportantRagdolls.Head();
 
-			CBaseAnimating *pRagdollLRU = m_LRUImportantRagdolls[iIndex].Get();
+			CBaseAnimating *pRagdoll = m_LRUImportantRagdolls[iIndex].Get();
 
-			if ( pRagdollLRU )
+			if ( pRagdoll )
 			{
 #ifdef CLIENT_DLL
-				pRagdollLRU->SUB_Remove();
+				pRagdoll->SUB_Remove();
 #else
-				pRagdollLRU->SUB_StartFadeOut( 0 );
+				pRagdoll->SUB_StartFadeOut( 0 );
 #endif
 				m_LRUImportantRagdolls.Remove(iIndex);
 			}

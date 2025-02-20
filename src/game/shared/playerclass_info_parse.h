@@ -31,7 +31,6 @@ class FilePlayerClassInfo_t
 public:
 
 	FilePlayerClassInfo_t();
-	virtual ~FilePlayerClassInfo_t() {}
 	
 	// Each game can override this to get whatever values it wants from the script.
 	virtual void Parse( KeyValues *pKeyValuesData, const char *szClassName );

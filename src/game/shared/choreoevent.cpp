@@ -4341,7 +4341,7 @@ bool CChoreoEvent::RestoreFromBuffer( CUtlBuffer& buf, CChoreoScene *pScene, ICh
 		char cctoken[ 256 ];
 		pStringPool->GetString( buf.GetShort(), cctoken, sizeof( cctoken ) );
 		SetCloseCaptionToken( cctoken );
-		flags = buf.GetChar();
+		int flags = buf.GetChar();
 		if ( flags & ( 1<<0 ) )
 		{
 			SetUsingCombinedFile( true );
@@ -4483,7 +4483,7 @@ bool CChoreoEvent::RestoreFlexAnimationsFromBuffer( CUtlBuffer& buf, IChoreoStri
 
 		if ( track->IsComboType() )
 		{
-			s = buf.GetUnsignedShort();
+			int s = buf.GetUnsignedShort();
 			for ( int j = 0; j < s; ++j )
 			{
 				float t, v;

@@ -135,12 +135,9 @@ void C_AI_BaseNPC::ClientThink( void )
 			int g = 255 * fFade;
 			int b = 0 * fFade;
 
-			if ( debugoverlay )
-			{
-				debugoverlay->AddLineOverlay( p1, p2, r, g, b, true, 0.05f );
-				debugoverlay->AddLineOverlay( p2, p3, r, g, b, true, 0.05f );
-				debugoverlay->AddLineOverlay( p3, p1, r, g, b, true, 0.05f );
-			}
+			debugoverlay->AddLineOverlay( p1, p2, r, g, b, true, 0.05f );
+			debugoverlay->AddLineOverlay( p2, p3, r, g, b, true, 0.05f );
+			debugoverlay->AddLineOverlay( p3, p1, r, g, b, true, 0.05f );
 		}
 	}
 #endif

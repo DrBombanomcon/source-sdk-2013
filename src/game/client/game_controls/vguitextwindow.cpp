@@ -109,8 +109,6 @@ CTextWindow::CTextWindow(IViewPort *pViewPort) : Frame(NULL, PANEL_INFO	)
 	m_pOK->SetCommand("okay");
 	m_pTextMessage->SetMultiline( true );
 	m_nContentType = TYPE_TEXT;
-
-	Reset();
 }
 
 //-----------------------------------------------------------------------------
@@ -122,7 +120,7 @@ void CTextWindow::ApplySchemeSettings( IScheme *pScheme )
 
 	LoadControlSettings("Resource/UI/TextWindow.res");
 
-	Update();
+	Reset();
 }
 
 //-----------------------------------------------------------------------------
@@ -376,7 +374,7 @@ void CTextWindow::OnCommand( const char *command )
 
 void CTextWindow::OnKeyCodePressed( vgui::KeyCode code )
 {
-	if ( code == KEY_XBUTTON_A || code == KEY_XBUTTON_B || code == STEAMCONTROLLER_A || code == STEAMCONTROLLER_B )
+	if ( code == KEY_XBUTTON_A || code == KEY_XBUTTON_B )
 	{
 		OnCommand( "okay" );
 		return;

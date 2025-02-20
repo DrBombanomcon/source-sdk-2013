@@ -337,7 +337,6 @@ public:
 	CBaseHudChatEntry( vgui::Panel *parent, char const *panelName, vgui::Panel *pChat )
 		: BaseClass( parent, panelName )
 	{
-		SetProportional( true );
 		SetCatchEnterKey( true );
 		SetAllowNonAsciiCharacters( true );
 		SetDrawLanguageIDAtLeft( true );

@@ -188,9 +188,7 @@ void VideoPanel::OnKeyCodePressed( vgui::KeyCode code )
 		 code == KEY_XBUTTON_X || 
 		 code == KEY_XBUTTON_Y || 
 		 code == KEY_XBUTTON_START || 
-		 code == KEY_XBUTTON_BACK ||
-		 code == STEAMCONTROLLER_A ||
-		 code == STEAMCONTROLLER_B )
+		 code == KEY_XBUTTON_BACK )
 	{
 		OnClose();
 	}

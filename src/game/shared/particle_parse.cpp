@@ -23,13 +23,6 @@
 
 #define PARTICLES_MANIFEST_FILE				"particles/particles_manifest.txt"
 
-// How many particle manifests can your map reference.  Was being used to drop bogus manifests into download directory
-// to DoS rival community maps because we can't just be cool.
-//
-// We also prefer to load particles manifests from the BSP now to prevent this, but we have no way with the legacy
-// download system to prevent maps with no particles manifest from having one provided by another source.
-#define PARTICLES_MANIFEST_MAX_MAP_ENTRIES	64
-
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
@@ -112,7 +105,7 @@ void ParseParticleEffects( bool bLoadSheets, bool bPrecache )
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-void ReloadParticleEffects()
+void ReloadParticleEffectsInList( IFileList *pFilesToReload )
 {
 	MEM_ALLOC_CREDIT();
 
@@ -158,7 +151,7 @@ void ReloadParticleEffects()
 		char mapname[MAX_MAP_NAME];
 		Q_FileBase( pszMapName, mapname, sizeof( mapname ) );
 		Q_strlower( mapname );
-		ParseParticleEffectsMap( mapname, true );
+		ParseParticleEffectsMap( mapname, true, pFilesToReload );
 	}
 
 	if ( bReloadAll )
@@ -172,12 +165,12 @@ void ReloadParticleEffects()
 //-----------------------------------------------------------------------------
 // Purpose: loads per-map manifest!
 //-----------------------------------------------------------------------------
-void ParseParticleEffectsMap( const char *pMapName, bool bLoadSheets )
+void ParseParticleEffectsMap( const char *pMapName, bool bLoadSheets, IFileList *pFilesToReload )
 {
 	MEM_ALLOC_CREDIT();
 
 	CUtlVector<CUtlString> files;
-	char szMapManifestFilename[MAX_PATH] = { 0 };
+	char szMapManifestFilename[MAX_PATH];
 
 	szMapManifestFilename[0] = NULL;
 
@@ -186,29 +179,13 @@ void ParseParticleEffectsMap( const char *pMapName, bool bLoadSheets )
 		V_snprintf( szMapManifestFilename, sizeof( szMapManifestFilename ), "maps/%s_particles.txt", pMapName );
 	}
 
-	KeyValues *manifest = new KeyValues( szMapManifestFilename );
-
-	// In order:
-	//  - particles.txt within the map BSP
-	//  - mapname_particles.txt within the map BSP
-	//  - mapname_particles.txt in the GAME path
-	bool bLoaded = ( manifest->LoadFromFile( filesystem, "particles.txt", "BSP" ) ||
-	                 manifest->LoadFromFile( filesystem, szMapManifestFilename, "BSP" ) ||
-	                 manifest->LoadFromFile( filesystem, szMapManifestFilename, "GAME" ) );
-
 	// Open the manifest file, and read the particles specified inside it
-	if ( bLoaded )
+	KeyValues *manifest = new KeyValues( szMapManifestFilename );
+	if ( manifest->LoadFromFile( filesystem, szMapManifestFilename, "GAME" ) )
 	{
 		DevMsg( "Successfully loaded particle effects manifest '%s' for map '%s'\n", szMapManifestFilename, pMapName );
 		for ( KeyValues *sub = manifest->GetFirstSubKey(); sub != NULL; sub = sub->GetNextKey() )
 		{
-			if ( files.Count() >= PARTICLES_MANIFEST_MAX_MAP_ENTRIES )
-			{
-				Warning( "CParticleMgr::LevelInit:  Map particles manifest '%s' specifies more than %d entries.\n",
-				         szMapManifestFilename, PARTICLES_MANIFEST_MAX_MAP_ENTRIES );
-				break;
-			}
-
 			if ( !Q_stricmp( sub->GetName(), "file" ) )
 			{
 				// Ensure the particles are in the particles directory
@@ -248,7 +225,11 @@ void ParseParticleEffectsMap( const char *pMapName, bool bLoadSheets )
 
 	for ( int i = 0; i < nCount; ++i )
 	{
-		g_pParticleSystemMgr->ReadParticleConfigFile( files[i], true, true );
+		// If we've been given a list of particles to reload, only reload those.
+		if ( !pFilesToReload || (pFilesToReload && pFilesToReload->IsFileInList( files[i] )) )
+		{
+			g_pParticleSystemMgr->ReadParticleConfigFile( files[i], true, true );
+		}
 	}
 
 	g_pParticleSystemMgr->DecommitTempMemory();
@@ -260,7 +241,6 @@ void ParseParticleEffectsMap( const char *pMapName, bool bLoadSheets )
 void PrecacheStandardParticleSystems( )
 {
 #ifdef GAME_DLL
-	int nTotalPrecacheCount = 0;
 	// Now add each particle system name to the network string pool, so we can send string_t's 
 	// down to the client instead of full particle system names.
 	for ( int i = 0; i < g_pParticleSystemMgr->GetParticleSystemCount(); i++ )
@@ -270,10 +250,9 @@ void PrecacheStandardParticleSystems( )
 		if ( pParticleSystem->ShouldAlwaysPrecache() )
 		{
 			PrecacheParticleSystem( pParticleSystemName );
-			nTotalPrecacheCount++;
 		}
 	}
-#endif // GAME_DLL
+#endif
 }
 
 
@@ -290,6 +269,7 @@ void DispatchParticleEffect( const char *pszParticleName, ParticleAttachment_t i
 		iAttachment = pEntity->GetBaseAnimating()->LookupAttachment( pszAttachmentName );
 		if ( iAttachment <= 0 )
 		{
+			Warning("Model '%s' doesn't have attachment '%s' to attach particle system '%s' to.\n", STRING(pEntity->GetBaseAnimating()->GetModelName()), pszAttachmentName, pszParticleName );
 			return;
 		}
 	}
@@ -352,6 +332,7 @@ void DispatchParticleEffect( const char *pszParticleName, ParticleAttachment_t i
 		iAttachment = pEntity->GetBaseAnimating()->LookupAttachment( pszAttachmentName );
 		if ( iAttachment <= 0 )
 		{
+			Warning("Model '%s' doesn't have attachment '%s' to attach particle system '%s' to.\n", STRING(pEntity->GetBaseAnimating()->GetModelName()), pszAttachmentName, pszParticleName );
 			return;
 		}
 	}
@@ -588,3 +569,35 @@ void StopParticleEffects( CBaseEntity *pEntity )
 
 #endif	//!CLIENT_DLL
 
+#if defined( CLIENT_DLL ) && defined( STAGING_ONLY )
+	
+	void CC_DispatchParticle( const CCommand& args )
+	{
+		C_BasePlayer *pLocalPlayer = C_BasePlayer::GetLocalPlayer();
+		if ( !pLocalPlayer )
+			return;
+
+		if ( args.ArgC() < 2 )
+		{
+			DevMsg( "Use: dispatch_particle {particle_name} {surface_offset_distance}\n" );
+			return;
+		}
+
+		float flSurfaceOffsetDistance = 0.f;
+		if ( args.ArgC() == 3 )
+		{
+			flSurfaceOffsetDistance = atof( args[2] );
+		}
+
+		Vector vForward;
+		pLocalPlayer->GetVectors( &vForward, NULL, NULL );
+		trace_t tr;
+		UTIL_TraceLine( pLocalPlayer->EyePosition(), pLocalPlayer->EyePosition() + vForward * 3000, MASK_SOLID_BRUSHONLY, NULL, &tr );
+	
+		Vector vTargetDeathPos = tr.endpos;
+		DispatchParticleEffect( args[1], vTargetDeathPos + flSurfaceOffsetDistance * tr.plane.normal, vec3_angle );
+	}
+
+	static ConCommand dispatch_particle( "dispatch_particle", CC_DispatchParticle, "Dispatch specified particle effect 50 units away from the lookat surface normal.\n\tArguments: {particle_name} {surface_offset_distance}", FCVAR_CHEAT );
+
+#endif // CLIENT_DLL && STAGING_ONLY

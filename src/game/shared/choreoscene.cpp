@@ -3485,9 +3485,11 @@ bool CChoreoScene::Merge( CChoreoScene *other )
 		CChoreoActor *a = other->m_Actors[ i ];
 
 		// See if that actor already exists
+		bool newActor = false;
 		CChoreoActor *destActor = FindActor( a->GetName() );
 		if ( !destActor )
 		{
+			newActor = true;
 			destActor = AllocActor();
 			*destActor = *a;
 			destActor->RemoveAllChannels();

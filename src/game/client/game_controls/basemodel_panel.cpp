@@ -10,19 +10,14 @@
 #include "animation.h"
 #include "vgui/IInput.h"
 #include "matsys_controls/manipulator.h"
-#include "bone_setup.h"
 
 using namespace vgui;
-extern float GetAutoPlayTime( void );
 DECLARE_BUILD_FACTORY( CBaseModelPanel );
 
 //-----------------------------------------------------------------------------
 // Purpose:
 //-----------------------------------------------------------------------------
-CBaseModelPanel::CBaseModelPanel( vgui::Panel *pParent, const char *pName )
-	: BaseClass( pParent, pName )
-	, m_nActiveSequence( ACT_INVALID )
-	, m_flActiveSequenceDuration( 0.f )
+CBaseModelPanel::CBaseModelPanel( vgui::Panel *pParent, const char *pName ): BaseClass( pParent, pName )
 {
 	m_bForcePos = false;
 	m_bMousePressed = false;
@@ -62,13 +57,6 @@ void CBaseModelPanel::ApplySettings( KeyValues *inResourceData )
 
 	// Do we allow full manipulation on these panels.
 	m_bAllowFullManipulation = inResourceData->GetBool( "allow_manip", false );
-
-	// Continued velocity after the user releases the mouse after a manipulation
-	m_bUseVelocity = inResourceData->GetBool( "continued_velocity", true );
-	// Don't use velocity if full manipulation is on.  It breaks.
-	m_bUseVelocity &= !m_bAllowFullManipulation;
-	m_flYawVelocityDecay  = inResourceData->GetFloat( "yaw_velocity_decay", 12.f );
-	m_flPitchVelocityDecay  = inResourceData->GetFloat( "pitch_velocity_decay", 12.f );
 
 	// Parse our resource file and apply all necessary updates to the MDL.
  	for ( KeyValues *pData = inResourceData->GetFirstSubKey() ; pData != NULL ; pData = pData->GetNextKey() )
@@ -112,8 +100,6 @@ void CBaseModelPanel::ParseModelResInfo( KeyValues *inResourceData )
 			ParseModelAttachInfo( pData );
 		}
 	}
-
-	SetupModelDefaults();
 }
 
 //-----------------------------------------------------------------------------
@@ -131,7 +117,7 @@ void CBaseModelPanel::ParseModelAnimInfo( KeyValues *inResourceData )
 	m_BMPResData.m_aAnimations[iAnim].m_pszName = ReadAndAllocStringValue( inResourceData, "name" );
 	m_BMPResData.m_aAnimations[iAnim].m_pszSequence = ReadAndAllocStringValue( inResourceData, "sequence" );
 	m_BMPResData.m_aAnimations[iAnim].m_pszActivity = ReadAndAllocStringValue( inResourceData, "activity" );
-	m_BMPResData.m_aAnimations[iAnim].m_bDefault = inResourceData->GetBool( "default" );
+	m_BMPResData.m_aAnimations[iAnim].m_bDefault = ( inResourceData->GetInt( "default", 0 ) == 1 );
 
 	for ( KeyValues *pAnimData = inResourceData->GetFirstSubKey(); pAnimData != NULL; pAnimData = pAnimData->GetNextKey() )
 	{
@@ -274,7 +260,7 @@ void CBaseModelPanel::SetModelAnim( int iAnim )
 
 	if ( iSequence != ACT_INVALID )
 	{
-		SetSequence( iSequence, true );
+		SetSequence( iSequence );
 	}
 }
 
@@ -399,53 +385,6 @@ void CBaseModelPanel::PerformLayout()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void CBaseModelPanel::OnTick()
-{
-	// Cycle stuff gets handled in mdlpanel::OnTick, so we want to fix up
-	// what our sequence is before it gets called.
-
-	// Check if we have a active sequence, and if it's expired and we need
-	// to run our default
-	if ( m_nActiveSequence != ACT_INVALID )
-	{
-		float flElapsedTime = GetAutoPlayTime() - m_RootMDL.m_flCycleStartTime;
-		if ( flElapsedTime >= m_flActiveSequenceDuration )
-		{
-			m_nActiveSequence = ACT_INVALID;
-			m_flActiveSequenceDuration = 0.f;
-
-			SetupModelDefaults();
-		}
-	}
-
-	BaseClass::OnTick();
-}
-
-void CBaseModelPanel::OnThink()
-{
-	BaseClass::OnThink();
-
-	float flDt = 0.f;
-	if ( m_flLastThink != 0.f )
-	{
-		flDt = Plat_FloatTime() - m_flLastThink;
-	}
-	m_flLastThink = Plat_FloatTime();
-
-	if ( !m_bMousePressed && m_bUseVelocity )
-	{
-		RotateYaw( m_flYawVelocity );
-		RotatePitch( m_flPitchVelocity );
-
-		// Decay
-		m_flYawVelocity *= 1.f - Clamp( m_flYawVelocityDecay * flDt, 0.f, 1.f );
-		m_flPitchVelocity *= 1.f - Clamp( m_flPitchVelocityDecay * flDt, 0.f, 1.f );
-	}
-}
-
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 void CBaseModelPanel::OnKeyCodePressed ( vgui::KeyCode code )
 {
 	if ( m_bAllowFullManipulation )
@@ -554,7 +493,6 @@ void CBaseModelPanel::OnCursorMoved( int x, int y )
 
 			// Apply the delta and rotate the player.
 			RotateYaw( flDelta );
-			m_flYawVelocity = flDelta;
 		}
 
 		if ( m_bAllowPitch )
@@ -565,7 +503,6 @@ void CBaseModelPanel::OnCursorMoved( int x, int y )
 
 			// Apply the delta and rotate the player.
 			RotatePitch( flDelta );
-			m_flPitchVelocity = flDelta;
 		}
 	}
 }
@@ -616,20 +553,6 @@ Vector CBaseModelPanel::GetPlayerPos() const
 QAngle CBaseModelPanel::GetPlayerAngles() const
 {
 	return m_angPlayer;
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-void CBaseModelPanel::PlaySequence( const char *pszSequenceName )
-{
-	CStudioHdr studioHDR( GetStudioHdr(), g_pMDLCache );
-	int iSeq = ::LookupSequence( &studioHDR, pszSequenceName );
-	if ( iSeq != ACT_INVALID )
-	{
-		m_nActiveSequence = iSeq;
-		m_flActiveSequenceDuration = Studio_Duration( &studioHDR, iSeq, NULL );
-		SetSequence( m_nActiveSequence, true );
-	}
 }
 
 //-----------------------------------------------------------------------------

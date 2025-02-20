@@ -8,7 +8,6 @@
 #ifndef VPROF_H
 #define VPROF_H
 
-#include "threadtools.h"
 #include "tier0/dbg.h"
 #include "tier0/fasttimer.h"
 #include "tier0/l2cache.h"
@@ -453,8 +452,8 @@ public:
 	void Start();
 	void Stop();
 
-	void SetTargetThreadId( ThreadId_t id ) { m_TargetThreadId = id; }
-	ThreadId_t GetTargetThreadId() { return m_TargetThreadId; }
+	void SetTargetThreadId( unsigned id ) { m_TargetThreadId = id; }
+	unsigned GetTargetThreadId() { return m_TargetThreadId; }
 	bool InTargetThread() { return ( m_TargetThreadId == ThreadGetCurrentId() ); }
 
 #ifdef _X360
@@ -675,7 +674,7 @@ protected:
 	bool					m_bTraceCompleteEvent;
 #endif
 
-	ThreadId_t m_TargetThreadId;
+	unsigned m_TargetThreadId;
 
 	StreamOut_t				m_pOutputStream;
 };

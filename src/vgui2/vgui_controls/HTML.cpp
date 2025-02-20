@@ -110,10 +110,6 @@ private:
 //-----------------------------------------------------------------------------
 // Purpose: Constructor
 //-----------------------------------------------------------------------------
-#ifdef _WIN32
-// Old code, stricter compiler
-#pragma warning(disable : 4355) // warning C4355: 'this': used in base member initializer list
-#endif
 HTML::HTML(Panel *parent, const char *name, bool allowJavaScript, bool bPopupWindow) : Panel(parent, name), 
 m_NeedsPaint( this, &HTML::BrowserNeedsPaint ),
 m_StartRequest( this, &HTML::BrowserStartRequest ),
@@ -1196,11 +1192,7 @@ HTML::CHTMLFindBar::CHTMLFindBar( HTML *parent ) : EditablePanel( parent, "FindB
 	m_pFindBar->SendNewLine( true );
 	m_pFindCountLabel = new Label( this, "FindCount", "" );
 	m_pFindCountLabel->SetVisible( false );
-
-	if ( g_pFullFileSystem->FileExists( "resource/layout/htmlfindbar.layout" ) )
-	{
-		LoadControlSettings( "resource/layout/htmlfindbar.layout" );
-	}
+	LoadControlSettings( "resource/layout/htmlfindbar.layout" );
 }
 
 
@@ -1368,7 +1360,7 @@ void HTML::BrowserFinishedRequest( HTML_FinishedRequest_t *pCmd )
 		PostActionSignal( new KeyValues( "PageTitleChange", "title", pCmd->pchPageTitle ) );
 
 	CUtlMap < CUtlString, CUtlString > mapHeaders;
-	mapHeaders.SetLessFunc( UtlStringLessFunc );
+	SetDefLessFunc( mapHeaders );
 	// headers are no longer reported on loads
 
 	OnFinishRequest( pCmd->pchURL, pCmd->pchPageTitle, mapHeaders );
@@ -1380,7 +1372,7 @@ void HTML::BrowserFinishedRequest( HTML_FinishedRequest_t *pCmd )
 void HTML::BrowserOpenNewTab( HTML_OpenLinkInNewTab_t *pCmd )
 {
 	(pCmd);
-	// Not supported by default, if a child class overrides us and knows how to handle tabs, then it can do this.
+	// Not suppored by default, if a child class overrides us and knows how to handle tabs, then it can do this.
 }
 
 //-----------------------------------------------------------------------------

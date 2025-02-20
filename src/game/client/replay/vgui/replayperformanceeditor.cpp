@@ -1389,7 +1389,7 @@ static void Replay_GotoTick( bool bConfirmed, void *pContext )
 {
 	if ( bConfirmed )
 	{
-		int nGotoTick = (int)(intp)pContext;
+		int nGotoTick = (int)pContext;
 		CFmtStr fmtCmd( "demo_gototick %i\ndemo_pause\n", nGotoTick );
 		engine->ClientCmd_Unrestricted( fmtCmd.Access() );
 	}

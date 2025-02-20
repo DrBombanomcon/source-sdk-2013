@@ -163,10 +163,8 @@ protected:
 	virtual void	FullLadderMove();
 
 	// The basic solid body movement clip that slides along multiple planes
-	// - flSlideMultiplier controls how much of a player's velocity should be redirected along walls vs nulled out.
-	//   Classic source behavior is always null-out, but some movement modes allow a redirection multiplier.
-	virtual int		TryPlayerMove( Vector *pFirstDest=NULL, trace_t *pFirstTrace=NULL, float flSlideMultiplier = 0.f );
-
+	virtual int		TryPlayerMove( Vector *pFirstDest=NULL, trace_t *pFirstTrace=NULL );
+	
 	virtual bool	LadderMove( void );
 	virtual bool	OnLadder( trace_t &trace );
 	virtual float	LadderDistance( void ) const { return 2.0f; }	///< Returns the distance a player can be from a ladder and still attach to it
@@ -184,10 +182,7 @@ protected:
 	// returns the blocked flags:
 	// 0x01 == floor
 	// 0x02 == step / wall
-	//
-	// redirectCoeff - multiplier on the clipped velocity to apply along their new direction. 0 -> stomp into-normal
-	//                 velocity, 1 -> redirect it all along new vector.
-	int				ClipVelocity( Vector& in, Vector& normal, Vector& out, float overbounce, float redirectCoeff = 0.f );
+	int				ClipVelocity( Vector& in, Vector& normal, Vector& out, float overbounce );
 
 	// If pmove.origin is in a solid position,
 	// try nudging slightly on all axis to
@@ -270,8 +265,8 @@ protected:
 	};
 
 	// Cache used to remove redundant calls to GetPointContents().
-	int m_CachedGetPointContents[ MAX_PLAYERS_ARRAY_SAFE ][ MAX_PC_CACHE_SLOTS ];
-	Vector m_CachedGetPointContentsPoint[ MAX_PLAYERS_ARRAY_SAFE ][ MAX_PC_CACHE_SLOTS ];	
+	int m_CachedGetPointContents[ MAX_PLAYERS ][ MAX_PC_CACHE_SLOTS ];
+	Vector m_CachedGetPointContentsPoint[ MAX_PLAYERS ][ MAX_PC_CACHE_SLOTS ];	
 
 	Vector			m_vecProximityMins;		// Used to be globals in sv_user.cpp.
 	Vector			m_vecProximityMaxs;
@@ -281,7 +276,7 @@ protected:
 //private:
 	int				m_iSpeedCropped;
 
-	float			m_flStuckCheckTime[MAX_PLAYERS_ARRAY_SAFE][2]; // Last time we did a full test
+	float			m_flStuckCheckTime[MAX_PLAYERS+1][2]; // Last time we did a full test
 
 	// special function for teleport-with-duck for episodic
 #ifdef HL2_EPISODIC

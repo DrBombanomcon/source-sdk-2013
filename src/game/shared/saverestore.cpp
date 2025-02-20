@@ -1124,7 +1124,9 @@ void CSave::WritePositionVector( const char *pname, const Vector *value, int cou
 
 void CSave::WritePositionVector( const Vector *value, int count )
 {
-	for ( int i = 0; i < count; i++ )
+	int i;
+	Vector tmp;
+	for ( i = 0; i < count; i++ )
 	{
 		Vector tmp = value[i];
 

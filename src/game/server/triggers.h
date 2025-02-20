@@ -58,7 +58,6 @@ public:
 	// Input handlers
 	virtual void InputEnable( inputdata_t &inputdata );
 	virtual void InputDisable( inputdata_t &inputdata );
-	virtual void InputDisableAndEndTouch( inputdata_t &inputdata );
 	virtual void InputToggle( inputdata_t &inputdata );
 	virtual void InputTouchTest ( inputdata_t &inputdata );
 
@@ -71,7 +70,7 @@ public:
 	virtual void EndTouch(CBaseEntity *pOther);
 	virtual void StartTouchAll() {}
 	virtual void EndTouchAll() {}
-	virtual bool IsTouching( const CBaseEntity *pOther ) const;
+	bool IsTouching( CBaseEntity *pOther );
 
 	CBaseEntity *GetTouchedEntityOfType( const char *sClassName );
 

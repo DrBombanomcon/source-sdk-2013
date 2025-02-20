@@ -126,7 +126,7 @@ public:
 
 	virtual bool			Interpolate( float currentTime );
 
-	virtual bool			ShouldFlipViewModel() OVERRIDE;
+	bool					ShouldFlipViewModel();
 	void					UpdateAnimationParity( void );
 
 	virtual void			ApplyBoneMatrixTransform( matrix3x4_t& transform );

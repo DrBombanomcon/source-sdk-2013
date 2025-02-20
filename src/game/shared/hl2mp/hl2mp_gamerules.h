@@ -120,8 +120,6 @@ public:
 	void CleanUpMap();
 	void CheckRestartGame();
 	void RestartGame();
-
-	void OnNavMeshLoad( void );
 	
 #ifndef CLIENT_DLL
 	virtual Vector VecItemRespawnSpot( CItem *pItem );
@@ -137,9 +135,6 @@ public:
 	const char *GetChatFormat( bool bTeamOnly, CBasePlayer *pPlayer );
 
 #endif
-
-	bool IsOfficialMap( void );
-
 	virtual void ClientDisconnected( edict_t *pClient );
 
 	bool CheckGameOver( void );

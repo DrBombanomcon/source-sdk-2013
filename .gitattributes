@@ -1,5 +1,9 @@
-buildallprojects text
-vpc binary
+creategameprojects text
+createallprojects text
+xcode_ccache_wrapper text
+vpc text
+vpc_linux binary
+vpc_osx binary
 
 *.sh text
 *.bat text
@@ -33,13 +37,15 @@ vpc binary
 *.asm text
 
 .gitignore text
-README.md text
+sourcesdk_def.mak text
+smdlexp.mak text
+README text
 CONTRIBUTING text
 LICENSE text
 
 *.exe binary
-*.dll binary
 protoc binary
 ccache binary
 
-*_english.txt binary
+gtest_output_test_golden_lin.txt binary
+mod_*_english.txt binary

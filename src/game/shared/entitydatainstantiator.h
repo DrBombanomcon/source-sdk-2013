@@ -115,8 +115,7 @@ private:
 	static unsigned int KeyFunc( const HashEntry &src )
 	{
 		// Shift right to get rid of alignment bits and border the struct on a 16 byte boundary
-		uint nKey = (uint) ( ( uintp(src.key) & 0xFFFFFFFF ) >> 10 );
-		return nKey;
+		return (unsigned int)src.key;
 	}
 
 	CUtlHash< HashEntry >	m_HashTable;

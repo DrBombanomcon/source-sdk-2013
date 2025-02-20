@@ -17,7 +17,6 @@
 extern ConVar ai_shot_bias_min;
 extern ConVar ai_shot_bias_max;
 
-class IUniformRandomStream;
 
 //---------------------------------------------------------
 // Caches off a shot direction and allows you to perform
@@ -38,7 +37,7 @@ public:
 		VectorVectors( m_vecShotDirection, m_vecRight, m_vecUp );
 	}
 
-	const Vector &ApplySpread( const Vector &vecSpread, float bias = 1.0, IUniformRandomStream* pCustomRandom = NULL );
+	const Vector &ApplySpread( const Vector &vecSpread, float bias = 1.0 );
 
 	const Vector &GetShotDirection()	{ return m_vecShotDirection; }
 	const Vector &GetResult()			{ return m_vecResult; }
@@ -57,7 +56,7 @@ private:
 // and modify the direction to point somewhere within the 
 // spread. This used to live inside FireBullets.
 //---------------------------------------------------------
-inline const Vector &CShotManipulator::ApplySpread( const Vector &vecSpread, float bias /*= 1.0*/, IUniformRandomStream* pCustomRandom /*= NULL*/ )
+inline const Vector &CShotManipulator::ApplySpread( const Vector &vecSpread, float bias )
 {
 	// get circular gaussian spread
 	float x, y, z;
@@ -77,9 +76,8 @@ inline const Vector &CShotManipulator::ApplySpread( const Vector &vecSpread, flo
 
 	do
 	{
-		IUniformRandomStream* pRandom = pCustomRandom ? pCustomRandom : random;
-		x = pRandom->RandomFloat(-1,1) * flatness + pRandom->RandomFloat(-1,1) * (1 - flatness);
-		y = pRandom->RandomFloat(-1,1) * flatness + pRandom->RandomFloat(-1,1) * (1 - flatness);
+		x = random->RandomFloat(-1,1) * flatness + random->RandomFloat(-1,1) * (1 - flatness);
+		y = random->RandomFloat(-1,1) * flatness + random->RandomFloat(-1,1) * (1 - flatness);
 		if ( shotBias < 0 )
 		{
 			x = ( x >= 0 ) ? 1.0 - x : -1.0 - x;

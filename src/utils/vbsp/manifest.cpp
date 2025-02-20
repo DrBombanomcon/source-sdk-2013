@@ -347,6 +347,7 @@ bool CManifest::LoadSubMaps( CMapFile *pMapFile, const char *pszFileName )
 	return true;
 }
 
+
 //-----------------------------------------------------------------------------
 // Purpose: 
 // Input  : 

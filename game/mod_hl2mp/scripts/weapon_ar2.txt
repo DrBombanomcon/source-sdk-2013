@@ -51,19 +51,14 @@ WeaponData
 				"font"		"WeaponIconsSelected"
 				"character"	"l"
 		}
-		"weapon_small"
-		{
-				"font"		"WeaponIconsSmall"
-				"character"	"l"
-		}
 		"ammo"
 		{
-				"font"		"WeaponIconsSmall"
+				"font"		"WeaponIcons"
 				"character"	"u"
 		}
 		"ammo2"
 		{
-				"font"		"WeaponIconsSmall"
+				"font"		"WeaponIcons"
 				"character"	"z"
 		}
 		"crosshair"

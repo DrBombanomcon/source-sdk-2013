@@ -11,11 +11,6 @@
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
-void RegisterScriptMessages( void )
-{
-	usermessages->Register( "SavedConvar", -1 );
-}
-
 void RegisterUserMessages( void );
 
 //-----------------------------------------------------------------------------
@@ -24,6 +19,8 @@ void RegisterUserMessages( void );
 //-----------------------------------------------------------------------------
 CUserMessages::CUserMessages()
 {
+	// Game specific registration function;
+	RegisterUserMessages();
 }
 
 CUserMessages::~CUserMessages()
@@ -189,30 +186,6 @@ bool CUserMessages::DispatchUserMessage( int msg_type, bf_read &msg_data )
 }
 
 // Singleton
-
+static CUserMessages g_UserMessages;
 // Expose to rest of .dll
-CUserMessages *usermessages = NULL;
-void CreateUserMessages()
-{
-	if ( !usermessages )
-	{
-		usermessages = new CUserMessages();
-		// Game specific registration function;
-		RegisterUserMessages();
-	}
-}
-
-// A helper to create and cleanup the usermessages singleton
-static struct UserMessageHelper
-{
-	UserMessageHelper()
-	{
-		CreateUserMessages();
-	}
-
-	~UserMessageHelper()
-	{
-		delete usermessages;
-		usermessages = NULL;
-	}
-} s_usermessage_helper;
+CUserMessages *usermessages = &g_UserMessages;
