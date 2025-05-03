@@ -288,7 +288,8 @@ int g_nLoadoutClassOrder[] =
 	TF_CLASS_ENGINEER,
 	TF_CLASS_MEDIC,
 	TF_CLASS_SNIPER,
-	TF_CLASS_SPY
+	TF_CLASS_SPY,
+	TF_CLASS_SWARMER,
 };
 
 
@@ -313,6 +314,7 @@ CCharInfoLoadoutSubPanel::CCharInfoLoadoutSubPanel(Panel *parent) : vgui::Proper
 	m_pClassButtons[ TF_CLASS_MEDIC ] = new CImageButton( this, "medic" );
 	m_pClassButtons[ TF_CLASS_SNIPER ] = new CImageButton( this, "sniper" );
 	m_pClassButtons[ TF_CLASS_SPY ] = new CImageButton( this, "spy" );
+	m_pClassButtons[ TF_CLASS_SWARMER ] = new CImageButton(this, "swarmer");
 
 	for( int i = 0; i < Q_ARRAYSIZE( m_pClassButtons ); i++ )
 	{
@@ -859,7 +861,7 @@ void CCharInfoLoadoutSubPanel::PerformLayout( void )
 		int i = g_nLoadoutClassOrder[iPanel];
 		m_pClassButtons[i]->SetArmed( false );
 
-		m_pClassButtons[i]->SetEnabled( TFInventoryManager()->GetLocalTFInventory()->RetrievedInventoryFromSteam() );
+		m_pClassButtons[i]->SetEnabled( true ); //TFInventoryManager()->GetLocalTFInventory()->RetrievedInventoryFromSteam() 
 
 		if ( m_pClassButtons[i]->IsWithin( x,y ) && iBestZ < m_pClassButtons[i]->GetZPos() )
 		{

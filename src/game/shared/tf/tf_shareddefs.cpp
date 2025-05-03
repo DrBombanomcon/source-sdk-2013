@@ -48,6 +48,7 @@ const char *g_aPlayerClassNames[TF_CLASS_MENU_BUTTONS] =
 	"#TF_Class_Name_Spy",
 	"#TF_Class_Name_Engineer",
 	"#TF_Class_Name_Civilian",
+	"#TF_CLass_Name_Swarmer",
 	"",
 	"#TF_Random"
 };
@@ -65,6 +66,7 @@ const char *g_aPlayerClassNames_NonLocalized[TF_CLASS_MENU_BUTTONS] =
 	"Spy",
 	"Engineer",
 	"Civilian",
+	"Swarmer",
 	"",
 	"Random"
 };
@@ -82,6 +84,7 @@ const char *g_aRawPlayerClassNamesShort[TF_CLASS_MENU_BUTTONS] =
 	"spy",
 	"engineer",
 	"civilian",
+	"swarm",
 	"",
 	"random"
 };
@@ -99,6 +102,7 @@ const char *g_aRawPlayerClassNames[TF_CLASS_MENU_BUTTONS] =
 	"spy",
 	"engineer",
 	"civilian",
+	"swarmer",
 	"",
 	"random"
 };
@@ -116,6 +120,7 @@ const char g_szBotModels[][ MAX_PATH ] =
 	"models/bots/pyro/bot_pyro.mdl",
 	"models/bots/spy/bot_spy.mdl",
 	"models/bots/engineer/bot_engineer.mdl",
+	"models/bots/scout/bot_scout.mdl",
 };
 
 const char g_szPlayerRobotModels[][MAX_PATH] =
