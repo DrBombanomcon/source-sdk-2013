@@ -22,7 +22,8 @@ const char *g_pszInactiveClassPortraits[] =
 	"class_sel_sm_engineer_inactive",	
 	"class_sel_sm_medic_inactive",	
 	"class_sel_sm_sniper_inactive",	
-	"class_sel_sm_spy_inactive",	
+	"class_sel_sm_spy_inactive",
+	"class_sel_sm_scout_inactive", //Swarmer TODO: Replace later
 	"class_sel_sm_random_inactive",	 // Random
 };
 

@@ -1658,6 +1658,7 @@ protected:
 	COutputEvent m_outputOnPlayerSpawnAsPyro;
 	COutputEvent m_outputOnPlayerSpawnAsSpy;
 	COutputEvent m_outputOnPlayerSpawnAsEngineer;
+	COutputEvent m_outputOnPlayerSpawnAsSwarmer;
 	// outputs based on the weapon the player swapped to
 	COutputEvent m_outputOnPlayerSwappedToWeaponSlotPrimary;
 	COutputEvent m_outputOnPlayerSwappedToWeaponSlotSecondary;

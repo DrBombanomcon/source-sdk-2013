@@ -37,6 +37,7 @@ const char *g_sImagesBlue[] = {
 	"class_sel_sm_pyro_blu",
 	"class_sel_sm_spy_blu",
 	"class_sel_sm_engineer_blu",
+	"class_sel_sm_scout_blu", //Swarmer TODO: Replace later
 	"",
 };
 
@@ -51,6 +52,7 @@ const char *g_sImagesRed[] = {
 	"class_sel_sm_pyro_red",
 	"class_sel_sm_spy_red",
 	"class_sel_sm_engineer_red",
+	"class_sel_sm_scout_red", //Swarmer TODO: Replace later
 	"",
 };
 

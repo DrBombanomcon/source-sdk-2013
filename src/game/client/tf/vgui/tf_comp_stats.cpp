@@ -120,6 +120,7 @@ public:
 			SetupClassIcon( pStatsContainer, "medic", TF_CLASS_MEDIC, stats );
 			SetupClassIcon( pStatsContainer, "sniper", TF_CLASS_SNIPER, stats );
 			SetupClassIcon( pStatsContainer, "spy", TF_CLASS_SPY, stats );
+			SetupClassIcon(pStatsContainer, "swarmer", TF_CLASS_SWARMER, stats);
 
 			SetupMedalForStat( pStatsContainer, stats.kills_medal(), "kills" );
 			SetupMedalForStat( pStatsContainer, stats.damage_medal(), "damage" );

@@ -49,7 +49,8 @@ const char *g_pszTipsClassImages[] =
 	"class_portraits/heavy",	// TF_CLASS_HEAVYWEAPONS,
 	"class_portraits/pyro",	// TF_CLASS_PYRO,
 	"class_portraits/spy",		// TF_CLASS_SPY,
-	"class_portraits/engineer",		// TF_CLASS_ENGINEER,		
+	"class_portraits/engineer",		// TF_CLASS_ENGINEER,
+	"class_portraits/scout",	// TF_CLASS_SWARMER,				
 };
 
 ClassDetails_t g_PerClassStatDetails[15] =

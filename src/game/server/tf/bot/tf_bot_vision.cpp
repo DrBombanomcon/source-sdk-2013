@@ -183,71 +183,78 @@ bool CTFBotVision::IsIgnored( CBaseEntity *subject ) const
 		return true;
 	}
 
-	if ( subject->IsPlayer() )
+	if (subject->IsPlayer())
 	{
-		CTFPlayer *enemy = static_cast< CTFPlayer * >( subject );
+		CTFPlayer* enemy = static_cast<CTFPlayer*>(subject);
 
 		// test for designer-defined ignorance
-		switch( enemy->GetPlayerClass()->GetClassIndex() )
+		switch (enemy->GetPlayerClass()->GetClassIndex())
 		{
 		case TF_CLASS_MEDIC:
-			if ( me->IsBehaviorFlagSet( TFBOT_IGNORE_ENEMY_MEDICS ) )
+			if (me->IsBehaviorFlagSet(TFBOT_IGNORE_ENEMY_MEDICS))
 			{
 				return true;
 			}
 			break;
 
 		case TF_CLASS_ENGINEER:
-			if ( me->IsBehaviorFlagSet( TFBOT_IGNORE_ENEMY_ENGINEERS ) )
+			if (me->IsBehaviorFlagSet(TFBOT_IGNORE_ENEMY_ENGINEERS))
 			{
 				return true;
 			}
 			break;
 
 		case TF_CLASS_SNIPER:
-			if ( me->IsBehaviorFlagSet( TFBOT_IGNORE_ENEMY_SNIPERS ) )
+			if (me->IsBehaviorFlagSet(TFBOT_IGNORE_ENEMY_SNIPERS))
 			{
 				return true;
 			}
 			break;
 
 		case TF_CLASS_SCOUT:
-			if ( me->IsBehaviorFlagSet( TFBOT_IGNORE_ENEMY_SCOUTS ) )
+			if (me->IsBehaviorFlagSet(TFBOT_IGNORE_ENEMY_SCOUTS))
 			{
 				return true;
 			}
 			break;
 
 		case TF_CLASS_SPY:
-			if ( me->IsBehaviorFlagSet( TFBOT_IGNORE_ENEMY_SPIES ) )
+			if (me->IsBehaviorFlagSet(TFBOT_IGNORE_ENEMY_SPIES))
 			{
 				return true;
 			}
 			break;
 
 		case TF_CLASS_DEMOMAN:
-			if ( me->IsBehaviorFlagSet( TFBOT_IGNORE_ENEMY_DEMOMEN ) )
+			if (me->IsBehaviorFlagSet(TFBOT_IGNORE_ENEMY_DEMOMEN))
 			{
 				return true;
 			}
 			break;
 
 		case TF_CLASS_SOLDIER:
-			if ( me->IsBehaviorFlagSet( TFBOT_IGNORE_ENEMY_SOLDIERS ) )
+			if (me->IsBehaviorFlagSet(TFBOT_IGNORE_ENEMY_SOLDIERS))
 			{
 				return true;
 			}
 			break;
 
 		case TF_CLASS_HEAVYWEAPONS:
-			if ( me->IsBehaviorFlagSet( TFBOT_IGNORE_ENEMY_HEAVIES ) )
+			if (me->IsBehaviorFlagSet(TFBOT_IGNORE_ENEMY_HEAVIES))
 			{
 				return true;
 			}
 			break;
 
 		case TF_CLASS_PYRO:
-			if ( me->IsBehaviorFlagSet( TFBOT_IGNORE_ENEMY_PYROS ) )
+			if (me->IsBehaviorFlagSet(TFBOT_IGNORE_ENEMY_PYROS))
+			{
+				return true;
+			}
+			break;
+
+		case TF_CLASS_SWARMER:
+			if (me->IsBehaviorFlagSet(TFBOT_IGNORE_ENEMY_SWARMERS))
 			{
 				return true;
 			}
