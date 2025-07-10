@@ -502,6 +502,3 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-game/mod_tf_win64.exe
-game/crash_mod_tf_win64.exe_20250503131729_1.dmp
-*.dmp

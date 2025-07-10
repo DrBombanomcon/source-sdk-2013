@@ -346,8 +346,6 @@ public:
 	int NumEngineersTeleportSpawned( void ) const;
 	void IncrementEngineerTeleportSpawned( void );
 
-	//Vscript function; Arbitary forces the win senario. Doesn't compenstates for money unearned
-	void ForceWin();
 private:
 	bool IsDoneWithNonSupportWaves( void );
 
