@@ -1263,10 +1263,10 @@ void CPopulationManager::WaveEnd( bool bSuccess )
 void CPopulationManager::VscriptForceWaveEnd(bool bSuccess)
 {
 	CWave* pWave = GetCurrentWave();
-	if (!bSuccess)
+	if ( !bSuccess )
 	{
 		//If told to end in a failure, it will auto-reset without the end screen
-		if (pWave)
+		if ( pWave )
 		{
 			pWave->ForceFinish();
 			WaveEnd(bSuccess);
@@ -1280,7 +1280,7 @@ void CPopulationManager::VscriptForceWaveEnd(bool bSuccess)
 	}
 	else
 	{
-		if (pWave)
+		if ( pWave )
 		{
 			pWave->ForceWin();
 		}

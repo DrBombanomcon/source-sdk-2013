@@ -42,28 +42,27 @@ public:
 	DECLARE_DATADESC();
 };
 
-BEGIN_DATADESC(CPointPopulatorInterface)
+BEGIN_DATADESC( CPointPopulatorInterface )
 
 // Inputs
-DEFINE_INPUTFUNC(FIELD_VOID, "PauseBotSpawning", InputPauseBotSpawning),
-DEFINE_INPUTFUNC(FIELD_VOID, "UnpauseBotSpawning", InputUnpauseBotSpawning),
-DEFINE_INPUTFUNC(FIELD_STRING, "ChangeBotAttributes", InputChangeBotAttributes),
-DEFINE_INPUTFUNC(FIELD_STRING, "ChangeDefaultEventAttributes", InputChangeDefaultEventAttributes),
+	DEFINE_INPUTFUNC( FIELD_VOID, "PauseBotSpawning", InputPauseBotSpawning ),
+	DEFINE_INPUTFUNC( FIELD_VOID, "UnpauseBotSpawning", InputUnpauseBotSpawning ),
+	DEFINE_INPUTFUNC( FIELD_STRING, "ChangeBotAttributes", InputChangeBotAttributes ),
+	DEFINE_INPUTFUNC( FIELD_STRING, "ChangeDefaultEventAttributes", InputChangeDefaultEventAttributes ),
 
 END_DATADESC()
 
-BEGIN_ENT_SCRIPTDESC_ROOT(CPointPopulatorInterface, "Interface for MvM populator")
-DEFINE_SCRIPTFUNC_NAMED(ScriptGetWaveNumber, "GetWaveNumber", "Get Current Wave number")
-DEFINE_SCRIPTFUNC_NAMED(ScriptGetWaveTotal, "GetTotalWaveCount", "Get Total Wave in current mission")
-DEFINE_SCRIPTFUNC_NAMED(ScriptStartWave, "ForceWaveStart", "Forcibly Start current wave")
-DEFINE_SCRIPTFUNC_NAMED(JumpToWaveVscript, "SetCurrentWave", "Arugments - (waveNum, CurrencyPercent); Set the current Wave")
-DEFINE_SCRIPTFUNC_NAMED(ScriptForceEndWave, "ForceWaveEnd", "Arugments - (victory); Force finishes the current Wave")
-DEFINE_SCRIPTFUNC(PauseBotSpawn, "Pause Bot spawnwaves")
-DEFINE_SCRIPTFUNC(UnPauseBotSpawn, "Resume Bot spawnwaves")
-DEFINE_SCRIPTFUNC(BotSpawnState, "Are spawnwaves paused")
-//Not sure if these are needed but ehh, redundency
-DEFINE_SCRIPTFUNC_NAMED(ScriptChangeBotAttributes, "ChangeBotAttributes", "Arugments - (attribute); ChangeBotAttributes input as a vscript function")
-DEFINE_SCRIPTFUNC_NAMED(ScriptChangeDefaultEventAttributes, "ChangeDefaultEventAttributes", "Arugments - (attribute); ChangeDefaultEventAttributes input as a vscript function")
+	BEGIN_ENT_SCRIPTDESC_ROOT( CPointPopulatorInterface, "Interface for MvM populator" )
+	DEFINE_SCRIPTFUNC_NAMED( ScriptGetWaveNumber, "GetWaveNumber", "Get Current Wave number" )
+	DEFINE_SCRIPTFUNC_NAMED( ScriptGetWaveTotal, "GetTotalWaveCount", "Get Total Wave in current mission" )
+	DEFINE_SCRIPTFUNC_NAMED( ScriptStartWave, "ForceWaveStart", "Forcibly Start current wave" )
+	DEFINE_SCRIPTFUNC_NAMED( JumpToWaveVscript, "SetCurrentWave", "Arugments - (waveNum, CurrencyPercent); Set the current Wave" )
+	DEFINE_SCRIPTFUNC_NAMED( ScriptForceEndWave, "ForceWaveEnd", "Arugments - (victory); Force finishes the current Wave" )
+	DEFINE_SCRIPTFUNC( PauseBotSpawn, "Pause Bot spawnwaves" )
+	DEFINE_SCRIPTFUNC( UnPauseBotSpawn, "Resume Bot spawnwaves" )
+	DEFINE_SCRIPTFUNC( BotSpawnState, "Are spawnwaves paused" )
+	DEFINE_SCRIPTFUNC_NAMED( ScriptChangeBotAttributes, "ChangeBotAttributes", "Arugments - (attribute); ChangeBotAttributes input as a vscript function" )
+	DEFINE_SCRIPTFUNC_NAMED( ScriptChangeDefaultEventAttributes, "ChangeDefaultEventAttributes", "Arugments - (attribute); ChangeDefaultEventAttributes input as a vscript function" )
 END_SCRIPTDESC();
 
 LINK_ENTITY_TO_CLASS( point_populator_interface, CPointPopulatorInterface );
@@ -132,21 +131,21 @@ void CPointPopulatorInterface::InputChangeDefaultEventAttributes(inputdata_t &in
 //The following are the above but replaced the input text for direct string
 void CPointPopulatorInterface::ScriptChangeBotAttributes(const char* pszEventName)
 {
-	if (tf_populator_debug.GetBool() && g_pPopulationManager && !g_pPopulationManager->HasEventChangeAttributes(pszEventName))
+	if ( tf_populator_debug.GetBool() && g_pPopulationManager && !g_pPopulationManager->HasEventChangeAttributes(pszEventName) )
 	{
 		Warning("ChangeBotAttributes: Failed to find event [%s] in the pop file\n", pszEventName);
 		return;
 	}
 
-	if (TFGameRules()->IsMannVsMachineMode())
+	if ( TFGameRules()->IsMannVsMachineMode() )
 	{
 		CUtlVector< CTFBot* > botVector;
 		CollectPlayers(&botVector, TF_TEAM_PVE_INVADERS, COLLECT_ONLY_LIVING_PLAYERS);
 
-		for (int i = 0; i < botVector.Count(); ++i)
+		for ( int i = 0; i < botVector.Count(); ++i )
 		{
 			const CTFBot::EventChangeAttributes_t* pEvent = botVector[i]->GetEventChangeAttributes(pszEventName);
-			if (pEvent)
+			if ( pEvent )
 			{
 				botVector[i]->OnEventChangeAttributes(pEvent);
 			}
@@ -156,13 +155,13 @@ void CPointPopulatorInterface::ScriptChangeBotAttributes(const char* pszEventNam
 
 void CPointPopulatorInterface::ScriptChangeDefaultEventAttributes(const char* pszEventName)
 {
-	if (tf_populator_debug.GetBool() && g_pPopulationManager && !g_pPopulationManager->HasEventChangeAttributes(pszEventName))
+	if ( tf_populator_debug.GetBool() && g_pPopulationManager && !g_pPopulationManager->HasEventChangeAttributes(pszEventName) )
 	{
 		Warning("ChangeBotAttributes: Failed to find event [%s] in the pop file\n", pszEventName);
 		return;
 	}
 
-	if (g_pPopulationManager)
+	if ( g_pPopulationManager )
 	{
 		g_pPopulationManager->SetDefaultEventChangeAttributesName(pszEventName);
 	}
