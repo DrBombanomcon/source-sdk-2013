@@ -505,3 +505,16 @@ FodyWeavers.xsd
 game/mod_tf_win64.exe
 game/crash_mod_tf_win64.exe_20250503131729_1.dmp
 *.dmp
+game/mod_tf/maps/graphs/mvm_mannhattan.ain
+game/mod_tf/maps/graphs/mvm_bigrock.ain
+game/mod_tf/gamestate.txt
+game/mod_tf/downloadlists/mvm_mannhattan.lst
+game/mod_tf/downloadlists/mvm_decoy.lst
+game/mod_tf/downloadlists/mvm_coaltown.lst
+game/mod_tf/downloadlists/mvm_bigrock.lst
+game/mod_tf/cfg/user.scr
+game/mod_tf/cfg/server_blacklist.txt
+game/mod_tf/voice_ban.dt
+game/mod_tf_win64.exe
+game/platform/config/serverbrowser.vdf
+game/platform/config/ingamedialogconfig.vdf
