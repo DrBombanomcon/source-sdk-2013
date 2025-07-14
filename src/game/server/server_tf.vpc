@@ -111,6 +111,12 @@ $Project "Server (TF)"
 			$File	"$SRCDIR\game\server\tf\workshop\maps_workshop.cpp"
 		}
 
+		$Folder	"ModTF"
+		{
+			$File	"$SRCDIR\game\shared\tf\tf_weapon_swarmer_melee.h"
+			$File	"$SRCDIR\game\shared\tf\tf_weapon_swarmer_melee.cpp"
+		}
+
 		$Folder	"TF"
 		{
 			$File	"$SRCDIR\game\shared\tf\tf_weapon_passtime_gun.cpp"

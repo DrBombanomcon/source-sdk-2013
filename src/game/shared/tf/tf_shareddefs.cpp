@@ -714,6 +714,7 @@ const char *g_aWeaponNames[] =
 	"TF_WEAPON_JAR_GAS",
 	"TF_WEAPON_GRENADE_JAR_GAS",
 	"TF_WEPON_FLAME_BALL",
+	"TF_WEAPON_SWARMER_MELEE",
 
 };
 COMPILE_TIME_ASSERT( ARRAYSIZE( g_aWeaponNames ) == TF_WEAPON_COUNT );
@@ -830,6 +831,7 @@ int g_aWeaponDamageTypes[] =
 	DMG_GENERIC, // TF_WEAPON_JAR_GAS
 	DMG_GENERIC, // TF_WEAPON_GRENADE_JAR_GAS
 	DMG_GENERIC | DMG_PREVENT_PHYSICS_FORCE, // TF_WEAPON_FLAME_BALL
+	DMG_CLUB,	//TF_WEAPON_SWARMER_MELEE
 
 };
 
@@ -1710,7 +1712,7 @@ wpntranslation_class_weapons_t pszWpnEntTranslationList[] =
 			"tf_weapon_fireaxe",		// TF_CLASS_PYRO,
 			"tf_weapon_knife",			// TF_CLASS_SPY,
 			"tf_weapon_wrench",			// TF_CLASS_ENGINEER,
-			"tf_weapon_bat",			// TF_CLASS_SWARMER		
+			"tf_weapon_swarmer_melee",			// TF_CLASS_SWARMER		
 		}
 	},
 	{

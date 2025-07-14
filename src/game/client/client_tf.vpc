@@ -207,6 +207,12 @@ $Project "Client (TF)"
 			}
 		}
 
+		$Folder	"ModTF"
+		{
+			$File	"$SRCDIR\game\shared\tf\tf_weapon_swarmer_melee.h"
+			$File	"$SRCDIR\game\shared\tf\tf_weapon_swarmer_melee.cpp"
+		}
+
 		$Folder	"TF"
 		{
 			$File	"$SRCDIR\game\shared\tf\tf_weapon_passtime_gun.cpp"

@@ -371,7 +371,6 @@ void CZombie::FireDeathOutput( CBaseEntity *pCulprit )
 	return pZombie;
 }
 
-
 bool CZombie::ShouldSuicide() const
 {
 	// out of life time
@@ -650,4 +649,54 @@ float CZombieLocomotion::GetMaxYawRate( void ) const
 bool CZombieLocomotion::ShouldCollideWith( const CBaseEntity *object ) const
 {
 	return false;
+}
+
+LINK_ENTITY_TO_CLASS(tf_swarmie, CSwarmie);
+
+BEGIN_DATADESC(CSwarmie)
+END_DATADESC()
+
+CSwarmie::CSwarmie()
+{
+	m_Source = NULL;
+}
+
+CSwarmie::~CSwarmie()
+{
+	m_Source = NULL;
+}
+
+CSwarmie* CSwarmie::SpawnAtPos(const Vector& vSpawnPos, float flLifeTime , int nTeam , CTFSwarmer_Melee* pWeapon , SkeletonType_t nSkeletonType)
+{
+	CBaseEntity* pOwner = pWeapon->GetTFPlayerOwner();
+	CSwarmie* pZombie = (CSwarmie*)CreateEntityByName("tf_swarmie");
+	if (pZombie)
+	{
+		pZombie->ChangeTeam(nTeam);
+
+		DispatchSpawn(pZombie);
+
+		pZombie->SetAbsOrigin(vSpawnPos);
+		pZombie->SetOwnerEntity(pOwner);
+
+		if (flLifeTime > 0.f)
+		{
+			pZombie->StartLifeTimer(flLifeTime);
+		}
+
+		pZombie->SetSkeletonType(nSkeletonType);
+		pZombie->m_Source = pWeapon;
+	}
+
+	return pZombie;
+}
+
+void CSwarmie::UpdateOnRemove()
+{
+	if (m_Source)
+	{
+		m_Source->RemoveZombie();
+		m_Source = NULL;
+	}
+	BaseClass::UpdateOnRemove();
 }

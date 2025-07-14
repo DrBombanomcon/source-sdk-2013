@@ -1,0 +1,57 @@
+#base items_game.txt
+
+"items_game"
+{
+	"prefabs"
+	{
+		"moditem"
+		{
+			"item_quality"	"normal"
+			"customitem"	"1"
+			"propername"	"1"
+		}
+		"weapon_swarmer_melee"
+		{
+			"prefab"	"moditem"
+			"enabled"	"1"
+			"item_class"	"tf_weapon_swarmer_melee"
+			"craft_material_type"	"weapon"
+			"craft_class"	"weapon"
+			"base_item_name"	"TF_WEAPON_SWARMER_MELEE"
+			"tags"
+			{
+				"can_deal_damage"			"1"
+				"can_deal_critical_damage"	"1"
+			}
+			"item_type_name"	"TF_WEAPON_SWARMER_MELEE"
+			"item_name"	"SWARMER_MELEE"
+			"item_slot"	"melee"
+			"item_quality"	"normal"
+			"baseitem" "0"
+			"show_in_armory"	"1"
+			"image_inventory"	"backpack/weapons/c_models/c_bat"
+			"model_player"	"models/weapons/c_models/c_bat.mdl"
+			"attach_to_hands"	"1"
+			"inspect_panel_dist" "35"
+			"used_by_classes"
+			{
+				"swarmer"	"1"
+			}
+			"static_attrs"
+			{
+				"min_viewmodel_offset"		"10 0 -7"
+			}
+			"mouse_pressed_sound"	"ui/item_metal_weapon_pickup.wav"
+			"drop_sound"		"ui/item_metal_weapon_drop.wav"
+		}
+	}
+	"items"
+	{
+		"34400"
+		{
+			"name"	"TF_WEAPON_SWARMER_MELEE"
+			"prefab"	"weapon_swarmer_melee"
+			"baseitem"	"0"
+		}
+	}
+}

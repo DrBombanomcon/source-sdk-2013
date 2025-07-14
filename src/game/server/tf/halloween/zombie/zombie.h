@@ -11,9 +11,10 @@
 #include "NextBotGroundLocomotion.h"
 #include "../headless_hatman_body.h"
 #include "Path/NextBotPathFollow.h"
+#include "tf_weapon_swarmer_melee.h"
 
 class CZombie;
-
+class CTFSwarmer_Melee;
 
 //----------------------------------------------------------------------------
 class CZombieLocomotion : public NextBotGroundLocomotion
@@ -129,7 +130,23 @@ private:
 	COutputEvent m_OnDeath;
 };
 
-
+//------------------------------------------------------------------------
+// A child zombie class for the swarmer playerclass
+// In the future this should be in it's own .h and .cpp file, but since it's just a 1 for 1; this is fine.
+// Keeping it a seperate class would allow us to expand on it further without having to worry about pre-existing maps
+//------------------------------------------------------------------------
+class CSwarmie : public CZombie
+{
+public:
+	DECLARE_CLASS(CSwarmie, CZombie);
+	DECLARE_DATADESC();
+	CSwarmie();
+	~CSwarmie();
+	virtual void UpdateOnRemove();
+	static CSwarmie* SpawnAtPos(const Vector& vSpawnPos, float flLifeTime = 0.f, int nTeam = TF_TEAM_HALLOWEEN, CTFSwarmer_Melee* pWeapon = NULL, SkeletonType_t nSkeletonType = SKELETON_NORMAL);
+private:
+	CTFSwarmer_Melee* m_Source;
+};
 
 //--------------------------------------------------------------------------------------------------------------
 class CZombiePathCost : public IPathCost
