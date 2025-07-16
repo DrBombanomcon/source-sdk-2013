@@ -50,7 +50,8 @@ const char *g_pszTipsClassImages[] =
 	"class_portraits/pyro",	// TF_CLASS_PYRO,
 	"class_portraits/spy",		// TF_CLASS_SPY,
 	"class_portraits/engineer",		// TF_CLASS_ENGINEER,
-	"class_portraits/scout",	// TF_CLASS_SWARMER,				
+	"class_portraits/scout",	// TF_CLASS_SWARMER,
+	"class_portraits/engineer",		// TF_CLASS_WESTERN,				
 };
 
 ClassDetails_t g_PerClassStatDetails[15] =
@@ -436,7 +437,7 @@ void CTFStatsSummaryPanel::ApplySchemeSettings(vgui::IScheme *pScheme)
 	m_pClassComboBox->AddItem( "#StatSummary_Label_AsAnyClass", pKeyValues );
 	for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass <= TF_LAST_NORMAL_CLASS; iClass++ )
 	{
-		if ( iClass == TF_CLASS_CIVILIAN || iClass == TF_CLASS_SWARMER)
+		if (iClass > TF_CLASS_ENGINEER)
 			continue;
 		pKeyValues = new KeyValues( "data" );
 		pKeyValues->SetInt( "class", iClass );
@@ -891,7 +892,7 @@ void CTFStatsSummaryPanel::UpdateDialog()
 	// if we don't have stats for any class, add empty stat entries for them 
 	for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass <= TF_LAST_NORMAL_CLASS; iClass++ )
 	{
-		if ( iClass == TF_CLASS_CIVILIAN || iClass == TF_CLASS_SWARMER)
+		if ( iClass > TF_CLASS_ENGINEER)
 			continue; // Ignore the civilian.
 
 		int j;
@@ -956,7 +957,7 @@ void CTFStatsSummaryPanel::UpdateBarCharts()
 		for ( int i = 0; i < m_aClassStats.Count(); i++ )
 		{	
 			int iClass = m_aClassStats[i].iPlayerClass;
-			if ( iClass == TF_CLASS_CIVILIAN || iClass == TF_CLASS_SWARMER)
+			if ( iClass > TF_CLASS_ENGINEER)
 			{
 				continue;
 			}

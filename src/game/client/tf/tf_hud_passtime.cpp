@@ -96,6 +96,8 @@ static const char *GetPlayerProgressPortrait( C_TFPlayer *pPlayer )
 			return (iTeam == TF_TEAM_RED) ? "../passtime/hud/portrait_eng_red"		: "../passtime/hud/portrait_eng_blu";
 		case TF_CLASS_SWARMER: //Swarmer TODO: Replace
 			return (iTeam == TF_TEAM_RED) ? "../passtime/hud/portrait_scout_red" : "../passtime/hud/portrait_scout_blu";
+		case TF_CLASS_WESTERN:
+			return (iTeam == TF_TEAM_RED) ? "../passtime/hud/portrait_eng_red" : "../passtime/hud/portrait_eng_blu";
 		default:
 			return (iTeam == TF_TEAM_RED) ? "../passtime/hud/portrait_scout_red"		: "../passtime/hud/portrait_scout_blu";
 	}

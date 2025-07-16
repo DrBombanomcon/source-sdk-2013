@@ -1949,6 +1949,7 @@ void CTFPlayer::RuneRegenThink( void )
 	{
 	case TF_CLASS_SCOUT:
 	case TF_CLASS_SPY:
+	case TF_CLASS_WESTERN:
 		flAmount = 16;
 		break;
 	case TF_CLASS_SNIPER:

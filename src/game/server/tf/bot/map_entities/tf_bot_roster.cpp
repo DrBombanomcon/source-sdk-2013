@@ -23,6 +23,7 @@ BEGIN_DATADESC( CTFBotRoster )
 	DEFINE_KEYFIELD( m_bAllowedClasses[TF_CLASS_SPY],			FIELD_BOOLEAN,	"allowSpy" ),
 	DEFINE_KEYFIELD( m_bAllowedClasses[TF_CLASS_ENGINEER],		FIELD_BOOLEAN,	"allowEngineer" ),
 	DEFINE_KEYFIELD(m_bAllowedClasses[TF_CLASS_SWARMER], FIELD_BOOLEAN, "allowSwarmer"),
+	DEFINE_KEYFIELD(m_bAllowedClasses[TF_CLASS_WESTERN], FIELD_BOOLEAN, "allowWestern"),
 
 	DEFINE_INPUTFUNC( FIELD_STRING, "SetTeam", InputSetTeam ),
 	DEFINE_INPUTFUNC( FIELD_BOOLEAN, "SetAllowScout", InputSetAllowScout ),
@@ -35,6 +36,7 @@ BEGIN_DATADESC( CTFBotRoster )
 	DEFINE_INPUTFUNC( FIELD_BOOLEAN, "SetAllowSpy", InputSetAllowSpy ),
 	DEFINE_INPUTFUNC( FIELD_BOOLEAN, "SetAllowEngineer", InputSetAllowEngineer ),
 	DEFINE_INPUTFUNC(FIELD_BOOLEAN, "SetAllowSwarmer", InputSetAllowSwarmer),
+	DEFINE_INPUTFUNC(FIELD_BOOLEAN, "SetAllowWestern", InputSetAllowWestern),
 
 END_DATADESC()
 
@@ -99,6 +101,10 @@ void CTFBotRoster::InputSetAllowSwarmer(inputdata_t& inputdata)
 	m_bAllowedClasses[TF_CLASS_SWARMER] = inputdata.value.Bool();
 }
 
+void CTFBotRoster::InputSetAllowWestern(inputdata_t& inputdata)
+{
+	m_bAllowedClasses[TF_CLASS_WESTERN] = inputdata.value.Bool();
+}
 //------------------------------------------------------------------------------
 
 bool CTFBotRoster::IsClassAllowed( int iBotClass ) const

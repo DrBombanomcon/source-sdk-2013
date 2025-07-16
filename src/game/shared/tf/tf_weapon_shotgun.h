@@ -18,6 +18,7 @@
 #define CTFShotgun_HWG C_TFShotgun_HWG
 #define CTFShotgun_Pyro C_TFShotgun_Pyro
 #define CTFScatterGun C_TFScatterGun
+#define CTFSuperScatterGun C_TFSuperScatterGun
 #define CTFShotgun_Revenge C_TFShotgun_Revenge
 #define CTFSodaPopper C_TFSodaPopper
 #define CTFPEPBrawlerBlaster C_TFPEPBrawlerBlaster
@@ -167,6 +168,17 @@ public:
 	const char*		GetEffectLabelText( void )			{ return "#TF_HYPE"; }
 	float			GetProgress( void );
 };
+
+class CTFSuperScatterGun : public CTFScatterGun
+{
+public:
+	DECLARE_CLASS(CTFSuperScatterGun, CTFScatterGun);
+	DECLARE_NETWORKCLASS();
+	DECLARE_PREDICTABLE();
+
+	virtual int		GetWeaponID(void) const { return TF_WEAPON_SUPER_SCATTERGUN; }
+};
+
 
 class CTFPEPBrawlerBlaster : public CTFScatterGun
 {

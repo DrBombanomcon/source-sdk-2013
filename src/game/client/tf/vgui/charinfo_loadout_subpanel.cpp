@@ -290,6 +290,7 @@ int g_nLoadoutClassOrder[] =
 	TF_CLASS_SNIPER,
 	TF_CLASS_SPY,
 	TF_CLASS_SWARMER,
+	TF_CLASS_WESTERN,
 };
 
 
@@ -315,6 +316,7 @@ CCharInfoLoadoutSubPanel::CCharInfoLoadoutSubPanel(Panel *parent) : vgui::Proper
 	m_pClassButtons[ TF_CLASS_SNIPER ] = new CImageButton( this, "sniper" );
 	m_pClassButtons[ TF_CLASS_SPY ] = new CImageButton( this, "spy" );
 	m_pClassButtons[ TF_CLASS_SWARMER ] = new CImageButton(this, "swarmer");
+	m_pClassButtons[TF_CLASS_WESTERN] = new CImageButton(this, "western");
 
 	for( int i = 0; i < Q_ARRAYSIZE( m_pClassButtons ); i++ )
 	{

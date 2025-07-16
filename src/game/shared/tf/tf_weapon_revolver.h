@@ -75,12 +75,19 @@ private:
 
 //=============================================================================
 // Secondary Revolver (Engy)
+// Highjacking this for Western
 class CTFRevolver_Secondary : public CTFRevolver
 {
 public:
 	DECLARE_CLASS( CTFRevolver_Secondary, CTFRevolver );
 	DECLARE_NETWORKCLASS();
 	DECLARE_PREDICTABLE();
+
+#ifdef GAME_DLL
+	DECLARE_DATADESC();
+#endif
+
+	virtual int		GetWeaponID(void) const { return TF_WEAPON_REVOLVER_SECONDARY; }
 };
 
 #endif // TF_WEAPON_REVOLVER_H

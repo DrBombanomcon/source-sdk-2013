@@ -1640,6 +1640,7 @@ public:
 				case TF_CLASS_SPY: 				pKeyValues->SetWString( "player_class", g_pVGuiLocalize->Find( "#TF_Class_Name_Spy" ) ); break;
 				case TF_CLASS_ENGINEER: 		pKeyValues->SetWString( "player_class", g_pVGuiLocalize->Find( "#TF_Class_Name_Engineer" ) ); break;
 				case TF_CLASS_SWARMER: 		pKeyValues->SetWString("player_class", g_pVGuiLocalize->Find("#TF_Class_Name_Swarmer")); break;
+				case TF_CLASS_WESTERN: 		pKeyValues->SetWString("player_class", g_pVGuiLocalize->Find("#TF_Class_Name_Western")); break;
 				}
 				ShowMessageBox( "#TF_Duel_Title",  "#TF_Duel_WrongClass", pKeyValues, "#GameUI_OK" );
 				return;
@@ -1844,6 +1845,7 @@ public:
 			case TF_CLASS_SPY: 				pKeyValues->SetWString( "player_class", g_pVGuiLocalize->Find( "#TF_Class_Name_Spy" ) ); break;
 			case TF_CLASS_ENGINEER: 		pKeyValues->SetWString( "player_class", g_pVGuiLocalize->Find( "#TF_Class_Name_Engineer" ) ); break;
 			case TF_CLASS_SWARMER: 		pKeyValues->SetWString("player_class", g_pVGuiLocalize->Find("#TF_Class_Name_Swarmer")); break;
+			case TF_CLASS_WESTERN: 		pKeyValues->SetWString("player_class", g_pVGuiLocalize->Find("#TF_Class_Name_Western")); break;
 			}
 		}
 		if ( localSteamID == steamIDInitiator || localSteamID == steamIDTarget )
@@ -2360,6 +2362,7 @@ void CSelectPlayerForDuelDialog::SetSelectedClass( int iClass )
 	case TF_CLASS_SPY: 				pClassName = "#TF_Class_Name_Spy"; break;
 	case TF_CLASS_ENGINEER: 		pClassName = "#TF_Class_Name_Engineer"; break;
 	case TF_CLASS_SWARMER: 		pClassName = "#TF_Class_Name_Swarmer"; break;
+	case TF_CLASS_WESTERN: 		pClassName = "#TF_Class_Name_Western"; break;
 	}
 
 	wchar_t wszText[1024]=L"";

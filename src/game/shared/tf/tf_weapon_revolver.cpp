@@ -41,6 +41,25 @@ END_DATADESC()
 #endif
 
 
+IMPLEMENT_NETWORKCLASS_ALIASED( TFRevolver_Secondary, DT_WeaponRevolver_Secondary )
+BEGIN_NETWORK_TABLE( CTFRevolver_Secondary, DT_WeaponRevolver_Secondary )
+END_NETWORK_TABLE()
+
+#ifdef CLIENT_DLL
+BEGIN_PREDICTION_DATA(CTFRevolver_Secondary)
+DEFINE_PRED_FIELD(m_flLastAccuracyCheck, FIELD_FLOAT, 0),
+END_PREDICTION_DATA()
+#endif
+
+LINK_ENTITY_TO_CLASS( tf_weapon_revolver_secondary, CTFRevolver_Secondary );
+PRECACHE_WEAPON_REGISTER( tf_weapon_revolver_secondary );
+
+
+#ifndef CLIENT_DLL
+BEGIN_DATADESC( CTFRevolver_Secondary )
+END_DATADESC()
+#endif
+
 //=============================================================================
 //
 // Weapon Revolver functions.

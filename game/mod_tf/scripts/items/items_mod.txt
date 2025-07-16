@@ -9,6 +9,7 @@
 			"item_quality"	"normal"
 			"customitem"	"1"
 			"propername"	"1"
+			"show_in_armory"	"1"
 		}
 		"weapon_swarmer_melee"
 		{
@@ -28,7 +29,6 @@
 			"item_slot"	"melee"
 			"item_quality"	"normal"
 			"baseitem" "0"
-			"show_in_armory"	"1"
 			"image_inventory"	"backpack/weapons/c_models/c_bat"
 			"model_player"	"models/weapons/c_models/c_bat.mdl"
 			"attach_to_hands"	"1"
@@ -44,6 +44,168 @@
 			"mouse_pressed_sound"	"ui/item_metal_weapon_pickup.wav"
 			"drop_sound"		"ui/item_metal_weapon_drop.wav"
 		}
+		"weapon_western_primary"
+		{
+			"prefab"	"moditem"
+			"enabled"	"1"
+			"item_class"	"tf_weapon_super_scattergun"
+			"craft_class"	"weapon"
+			"craft_material_type"	"weapon"
+			"capabilities"
+			{
+				"nameable"		"1"
+			}
+			"tags"
+			{
+				"can_deal_damage"			"1"
+				"can_deal_critical_damage"	"1"
+				"can_deal_mvm_penetration_damage"	"1"
+				"can_deal_long_distance_damage"	"1"
+			}
+			"base_item_name"	"The Force-a-Nature"
+			"item_type_name"	"TF_Weapon_Super_Scattergun"
+			"item_name"	"TF_Weapon_Super_Scattergun"
+			"item_description"	"SuperScatterGun"
+			"item_logname"	"force_a_nature"
+			"item_iconname"	"force_a_nature"
+			"item_slot"	"primary"
+			"anim_slot"	"item2"
+			"min_ilevel"	"10"
+			"max_ilevel"	"10"
+			"image_inventory"	"backpack/weapons/c_models/c_double_barrel"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"
+			"model_player"	"models/weapons/c_models/c_double_barrel.mdl"
+			"attach_to_hands" "1"
+			"inspect_panel_dist" "38"
+			"used_by_classes"
+			{
+				"western"	"1"
+			}
+			"static_attrs"
+			{
+				"min_viewmodel_offset"					"10 0 -10"
+			}
+			"attributes"
+			{
+				//I want to have these as part of the Super Scattergun Class, but I could use version without these stats
+				"scattergun has knockback"
+				{
+					"attribute_class"	"set_scattergun_has_knockback"
+					"value"	"1"
+				}
+				"scattergun no reload single"
+				{
+					"attribute_class"	"set_scattergun_no_reload_single"
+					"value"	"1"
+				}
+				"disable fancy class select anim"
+				{
+					"attribute_class"	"disable_fancy_class_select_anim"
+					"value"	"1"
+				}
+			}
+			"visuals"
+			{
+				"sound_single_shot"	"Weapon_Scatter_Gun_Double.Single"
+				"sound_burst"	"Weapon_Scatter_Gun_Double.SingleCrit"
+				"muzzle_flash"	"muzzle_bignasty"
+				"tracer_effect"	"bullet_bignasty_tracer01"
+
+				"animation_replacement"
+				{
+					"ACT_PRIMARY_VM_INSPECT_START"		"ACT_ITEM2_VM_INSPECT_START"
+					"ACT_PRIMARY_VM_INSPECT_IDLE"		"ACT_ITEM2_VM_INSPECT_IDLE"
+					"ACT_PRIMARY_VM_INSPECT_END"		"ACT_ITEM2_VM_INSPECT_END"
+				}
+			}
+			"mouse_pressed_sound"	"ui/item_heavy_gun_pickup.wav"
+			"drop_sound"		"ui/item_heavy_gun_drop.wav"
+			"xifier_class_remap"	"force_a_nature"
+		}
+		"weapon_western_secondary"
+		{
+			"prefab"	"moditem"
+			"enabled"	"1"
+			"item_class"	"tf_weapon_revolver_secondary"
+			"craft_material_type"	"weapon"
+			"capabilities"
+			{
+				"nameable"		"1"
+			}
+			"tags"
+			{
+				"can_deal_damage"			"1"
+				"can_deal_critical_damage"	"1"
+				"can_deal_mvm_penetration_damage"	"1"
+				"can_deal_long_distance_damage"	"1"
+			}
+			"base_item_name"	"TF_WEAPON_REVOLVER_SECONDARY"
+			"show_in_armory"	"1"
+			"item_type_name"	"TF_Weapon_Revolver_Secondary"
+			"item_name"	"TF_Weapon_Revolver_Secondary"
+			"item_slot"	"secondary"
+			"item_quality"	"unique"
+			"min_ilevel"	"1"
+			"max_ilevel"	"99"
+			"image_inventory"	"backpack/weapons/w_models/w_revolver"
+			"model_player"	"models/weapons/c_models/c_revolver/c_revolver.mdl"
+			"attach_to_hands"	"1"
+			"inspect_panel_dist" "31"
+			"used_by_classes"
+			{
+				"western"	"1"
+				"spy"		"1"
+			}
+			"static_attrs"
+			{
+				"weapon_stattrak_module_scale"			"0.497"
+				"min_viewmodel_offset"					"10 0 -6"
+			}
+			"mouse_pressed_sound"	"ui/item_light_gun_pickup.wav"
+			"drop_sound"		"ui/item_light_gun_drop.wav"
+			"xifier_class_remap"	"weapon_revolver"
+			"particle_suffix"		"revolver"
+		}
+		"weapon_western_melee"
+		{
+			"prefab"	"moditem"
+			"capabilities"
+			{
+				"nameable"		"1"
+			}
+			"tags"
+			{
+				"can_deal_damage"			"1"
+			}
+			"first_sale_date"	"2010/09/29"
+			"enabled"	"1"
+			"item_class"	"tf_weapon_bottle_western"
+			"craft_class"	"weapon"
+			"craft_material_type"	"weapon"
+			"item_type_name"	"#TF_Weapon_Bottle"
+			"item_name"	"#TF_Weapon_Bottle"
+			"item_slot"	"melee"
+			"item_quality"	"normal"
+			"min_ilevel"	"1"
+			"max_ilevel"	"1"
+			"image_inventory"	"backpack/weapons/w_models/w_bottle"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"  
+			"inspect_panel_dist" 				"30"					
+			"model_player"	"models/weapons/c_models/c_bottle/c_bottle.mdl"
+			"attach_to_hands" "1"
+			"used_by_classes"
+			{
+				"western"	"1"
+			}
+			"static_attrs"
+			{
+				"min_viewmodel_offset"					"10 0 -14"
+			}
+			"mouse_pressed_sound"	"ui/item_bottle_pickup.wav"
+			"drop_sound"		"ui/item_bottle_drop.wav"
+		}
 	}
 	"items"
 	{
@@ -51,6 +213,24 @@
 		{
 			"name"	"TF_WEAPON_SWARMER_MELEE"
 			"prefab"	"weapon_swarmer_melee"
+			"baseitem"	"0"
+		}
+		"34401"
+		{
+			"name"	"TF_WEAPON_WESTERN_PRIMARY"
+			"prefab"	"weapon_western_primary"
+			"baseitem"	"0"
+		}
+		"34402"
+		{
+			"name"	"TF_WEAPON_WESTERN_SECONDARY"
+			"prefab"	"weapon_western_secondary"
+			"baseitem" "0"
+		}
+		"34403"
+		{
+			"name"	"TF_WEAPON_BOTTLE_WESTERN"
+			"prefab"	"weapon_western_melee"
 			"baseitem"	"0"
 		}
 	}

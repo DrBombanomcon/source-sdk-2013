@@ -4388,13 +4388,13 @@ void CTFGCServerSystem::SDK_ApplyLocalLoadout(CGCClientSharedObjectCache* pCache
 			CEconItem soIndex;
 			soIndex.SetItemID(uItemId);
 
-			CEconItem* pItem = (CEconItem*) pItemCache->FindSharedObject(soIndex);
-			if (pItem) {
+			//CEconItem* pItem = (CEconItem*) pItemCache->FindSharedObject(soIndex);
+			//if (pItem) {
 				pTFInventory->EquipLocal(uItemId, iClass, iSlot);
-			}
-			else {
-				Warning("Failed to find item %llu in shared object, but client says it should be equipped by [%i] in slot [%i].\n", uItemId, iClass, iSlot);
-			}
+			//}
+			//else {
+			//	Warning("Failed to find item %llu in shared object, but client says it should be equipped by [%i] in slot [%i].\n", uItemId, iClass, iSlot);
+			//}
 		}
 	}
 }

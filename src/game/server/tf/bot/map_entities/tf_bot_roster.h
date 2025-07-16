@@ -26,6 +26,7 @@ public:
 	void InputSetAllowSpy( inputdata_t &inputdata );
 	void InputSetAllowEngineer( inputdata_t &inputdata );
 	void InputSetAllowSwarmer(inputdata_t& inputdata);
+	void InputSetAllowWestern(inputdata_t& inputdata);
 
 	// misc.
 	bool IsClassAllowed( int iBotClass ) const;

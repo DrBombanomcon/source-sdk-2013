@@ -365,6 +365,7 @@ bool CFlexSceneFileManager::Init()
 		"spy",
 		"engineer",
 		"swarmer",
+		"western",
 	};
 
 	char fn[ MAX_PATH ];

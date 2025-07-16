@@ -111,6 +111,9 @@ static const char *GetTimelineClassImage( int nTeam, int nClass )
 	case TF_CLASS_SWARMER: //TODO: Replace with proper assets later
 		pszReturnImage = (nTeam == TF_TEAM_BLUE) ? "scout_blu" : "scout_red";
 		break;
+	case TF_CLASS_WESTERN:
+		pszReturnImage = (nTeam == TF_TEAM_BLUE) ? "engineer_blu" : "engineer_red";
+		break;
 	default:
 		break;
 	}

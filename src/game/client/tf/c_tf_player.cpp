@@ -246,6 +246,7 @@ const char *g_pszHeadGibs[] =
 	"models/player\\gibs\\spygib007.mdl",
 	"models/player\\gibs\\engineergib006.mdl",
 	"models/player\\gibs\\scoutgib007.mdl", //Swarmer TODO: Replace later
+	"models/player\\gibs\\engineergib006.mdl",
 };
 
 const char *g_pszBotHeadGibs[] =
@@ -261,6 +262,7 @@ const char *g_pszBotHeadGibs[] =
 	"models/bots\\gibs\\spybot_gib_head.mdl",
 	"models/bots\\gibs\\engineerbot_gib_head.mdl",
 	"models/player\\gibs\\scoutgib007.mdl", //Swarmer
+	"models/bots\\gibs\\engineerbot_gib_head.mdl",
 };
 
 const char *pszHeadLabelNames[] =

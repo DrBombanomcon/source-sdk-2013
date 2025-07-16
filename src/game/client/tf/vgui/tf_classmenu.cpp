@@ -492,6 +492,7 @@ CTFClassMenu::CTFClassMenu( IViewPort *pViewPort )
 	m_pClassButtons[TF_CLASS_SPY] = new CExImageButton( this, "spy", "", this );
 	m_pClassButtons[TF_CLASS_RANDOM] = new CExImageButton( this, "random", "", this );
 	m_pClassButtons[TF_CLASS_SWARMER] = new CExImageButton(this, "swarmer", "", this);
+	m_pClassButtons[TF_CLASS_WESTERN] = new CExImageButton(this, "western", "", this);
 #endif
 
 	m_pEditLoadoutButton = NULL;
@@ -511,6 +512,7 @@ CTFClassMenu::CTFClassMenu( IViewPort *pViewPort )
 	m_pMvmUpgradeImages[TF_CLASS_ENGINEER] = new vgui::ImagePanel( this, "MvMUpgradeImageEngineer" );
 	m_pMvmUpgradeImages[TF_CLASS_SPY] = new vgui::ImagePanel( this, "MvMUpgradeImageSpy" );
 	m_pMvmUpgradeImages[TF_CLASS_SWARMER] = new vgui::ImagePanel(this, "MvMUpgradeImageScout");
+	m_pMvmUpgradeImages[TF_CLASS_WESTERN] = new vgui::ImagePanel(this, "MvMUpgradeImageEngineer");
 
 	vgui::ivgui()->AddTickSignal( GetVPanel() );
 }
@@ -545,6 +547,7 @@ void CTFClassMenu::ApplySchemeSettings( IScheme *pScheme )
 		m_pClassHintIcons[TF_CLASS_SNIPER] = dynamic_cast< CSCHintIcon* >( FindChildByName( "SniperHintIcon" ) );
 		m_pClassHintIcons[TF_CLASS_RANDOM] = dynamic_cast< CSCHintIcon* >( FindChildByName( "RandomHintIcon" ) );
 		m_pClassHintIcons[TF_CLASS_SWARMER] = dynamic_cast<CSCHintIcon*>(FindChildByName("ScoutHintIcon"));
+		m_pClassHintIcons[TF_CLASS_WESTERN] = dynamic_cast<CSCHintIcon*>(FindChildByName("EngineerHintIcon"));
 
 		for ( int i = 0; i < TF_CLASS_MENU_BUTTONS; i++ )
 		{
@@ -696,7 +699,8 @@ const char *g_pszLegacyClassSelectVCDWeapons[TF_LAST_NORMAL_CLASS] =
 	"tf_weapon_flamethrower",				// TF_CLASS_PYRO,
 	"",										// TF_CLASS_SPY,				// weapons handled individually
 	"tf_weapon_wrench",						// TF_CLASS_ENGINEER,		
-	"",										// TF_CLASS_SWARMER
+	"",										// TF_CLASS_SWARMER		
+	"",										// TF_CLASS_WESTERN
 };
 
 int g_iLegacyClassSelectWeaponSlots[TF_LAST_NORMAL_CLASS] =
@@ -711,7 +715,8 @@ int g_iLegacyClassSelectWeaponSlots[TF_LAST_NORMAL_CLASS] =
 	LOADOUT_POSITION_PRIMARY,		// TF_CLASS_PYRO,
 	LOADOUT_POSITION_MELEE,			// TF_CLASS_SPY,
 	LOADOUT_POSITION_MELEE,			// TF_CLASS_ENGINEER,
-	LOADOUT_POSITION_PRIMARY,		// TF_CLASS_SWARMER		
+	LOADOUT_POSITION_PRIMARY,		// TF_CLASS_SWARMER	
+	LOADOUT_POSITION_PRIMARY,		// TF_CLASS_WESTERN	
 };
 
 //-----------------------------------------------------------------------------
@@ -1374,6 +1379,7 @@ static const char *g_sClassImagesBlue[] = {
 	"class_sel_sm_spy_blu",
 
 	"class_sel_sm_scout_blu", //Swarmer
+	"class_sel_sm_engineer_blu",
 	"class_sel_sm_scout_blu",
 };
 
@@ -1392,6 +1398,7 @@ static const char *g_sClassImagesRed[] = {
 	"class_sel_sm_spy_red",
 
 	"class_sel_sm_scout_red", //Swarmer
+	"class_sel_sm_engineer_red",
 	"class_sel_sm_scout_red",
 };
 
@@ -1410,6 +1417,7 @@ int g_ClassDefinesRemap[] = {
 	TF_CLASS_SPY,
 
 	TF_CLASS_SWARMER,
+	TF_CLASS_WESTERN,
 	TF_CLASS_CIVILIAN,
 };
 

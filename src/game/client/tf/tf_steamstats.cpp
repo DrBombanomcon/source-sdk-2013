@@ -84,6 +84,7 @@ StatMap_t* g_SteamStats_Class[] = {
 	g_SteamStats_Spy,		// Spy
 	g_SteamStats_Engineer,	// Engineer
 	NULL,					// Swarmer
+	NULL,					// Western
 };
 
 // subset of map stats which we store in Steam

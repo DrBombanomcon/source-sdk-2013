@@ -174,6 +174,7 @@ static int g_TauntCamRagdollAchievements[] =
 	ACHIEVEMENT_TF_SPY_FREEZECAM_FLICK,		// TF_CLASS_SPY,
 	0,		// TF_CLASS_ENGINEER,
 	0,		// TF_CLASS_SWARMER,
+	0,		// TF_CLASS_WESTERN,
 
 	0,		// TF_CLASS_CIVILIAN,
 	0,		// TF_CLASS_COUNT_ALL,
@@ -193,6 +194,7 @@ static int g_TauntCamAchievements[] =
 	0,		// TF_CLASS_SPY,
 	ACHIEVEMENT_TF_ENGINEER_FREEZECAM_TAUNT,	// TF_CLASS_ENGINEER,
 	0,		// TF_CLASS_SWARMER,
+	0,		// TF_CLASS_WESTERN,
 	0,		// TF_CLASS_CIVILIAN,
 	0,		// TF_CLASS_COUNT_ALL,
 };
@@ -212,6 +214,7 @@ static int g_TauntCamAchievements2[] =
 	0,		// TF_CLASS_SPY,
 	0,		// TF_CLASS_ENGINEER,
 	0,		// TF_CLASS_SWARMER,
+	0,		// TF_CLASS_WESTERN,
 
 	0,		// TF_CLASS_CIVILIAN,
 	0,		// TF_CLASS_COUNT_ALL,
@@ -788,6 +791,7 @@ ConVar tf_tournament_classlimit_heavy( "tf_tournament_classlimit_heavy", "-1", F
 ConVar tf_tournament_classlimit_pyro( "tf_tournament_classlimit_pyro", "-1", FCVAR_REPLICATED, "Tournament mode per-team class limit for Pyros.\n" );
 ConVar tf_tournament_classlimit_spy( "tf_tournament_classlimit_spy", "-1", FCVAR_REPLICATED, "Tournament mode per-team class limit for Spies.\n" );
 ConVar tf_tournament_classlimit_swarmer("tf_tournament_classlimit_swarmer", "-1", FCVAR_REPLICATED, "Tournament mode per-team class limit for Swarmers.\n");
+ConVar tf_tournament_classlimit_western("tf_tournament_classlimit_western", "-1", FCVAR_REPLICATED, "Tournament mode per-team class limit for Westerns.\n");
 ConVar tf_tournament_classlimit_engineer( "tf_tournament_classlimit_engineer", "-1", FCVAR_REPLICATED, "Tournament mode per-team class limit for Engineers.\n" );
 ConVar tf_tournament_classchange_allowed( "tf_tournament_classchange_allowed", "1", FCVAR_REPLICATED, "Allow players to change class while the game is active?.\n" );
 ConVar tf_tournament_classchange_ready_allowed( "tf_tournament_classchange_ready_allowed", "1", FCVAR_REPLICATED, "Allow players to change class after they are READY?.\n" );
@@ -1307,6 +1311,7 @@ Vector g_TFClassViewVectors[TF_LAST_NORMAL_CLASS + 1] =
 	Vector( 0, 0, 75 ),		// TF_CLASS_SPY,
 	Vector( 0, 0, 68 ),		// TF_CLASS_ENGINEER,
 	Vector( 0, 0, 65 ),		// TF_CLASS_SWARMER,
+	Vector(0, 0, 65),		// TF_CLASS_WESTERN,
 
 	Vector( 0, 0, 65 ),		// TF_CLASS_CIVILIAN,		// TF_LAST_NORMAL_CLASS
 };
@@ -11239,6 +11244,7 @@ static kill_eater_event_t g_eClassKillEvents[] =
 	kKillEaterEvent_SpyKill,					// TF_CLASS_SPY
 	kKillEaterEvent_EngineerKill,				// TF_CLASS_ENGINEER
 	kKillEaterEvent_SwarmerKill,				// TF_CLASS_SWARMER
+	kKillEaterEvent_WesternKill,				// TF_CLASS_WESTERN
 };
 COMPILE_TIME_ASSERT( ARRAYSIZE( g_eClassKillEvents ) == (TF_LAST_NORMAL_CLASS - TF_FIRST_NORMAL_CLASS) );
 
@@ -11255,6 +11261,7 @@ static kill_eater_event_t g_eRobotClassKillEvents[] =
 	kKillEaterEvent_RobotSpyKill,					// TF_CLASS_SPY
 	kKillEaterEvent_RobotEngineerKill,				// TF_CLASS_ENGINEER
 	kKillEaterEvent_RobotSwarmerKill,				// TF_CLASS_SWARMER
+	kKillEaterEvent_RobotWesternKill,				// TF_CLASS_WESTERN
 };
 COMPILE_TIME_ASSERT( ARRAYSIZE( g_eRobotClassKillEvents ) == (TF_LAST_NORMAL_CLASS - TF_FIRST_NORMAL_CLASS) );
 
@@ -17597,6 +17604,7 @@ int CTFGameRules::GetClassLimit( int iClass )
 		case TF_CLASS_SPY: return tf_tournament_classlimit_spy.GetInt(); break;
 		case TF_CLASS_ENGINEER: return tf_tournament_classlimit_engineer.GetInt(); break;
 		case TF_CLASS_SWARMER: return tf_tournament_classlimit_swarmer.GetInt(); break;
+		case TF_CLASS_WESTERN: return tf_tournament_classlimit_western.GetInt(); break;
 		default:
 			break;
 		}
@@ -19310,6 +19318,7 @@ BEGIN_DATADESC( CTrainingModeLogic )
 	DEFINE_OUTPUT( m_outputOnPlayerSpawnAsSpy, "OnPlayerSpawnAsSpy" ),
 	DEFINE_OUTPUT( m_outputOnPlayerSpawnAsEngineer, "OnPlayerSpawnAsEngineer" ),
 	DEFINE_OUTPUT(m_outputOnPlayerSpawnAsSwarmer, "OnPlayerSpawnAsSwarmer"),
+	DEFINE_OUTPUT(m_outputOnPlayerSpawnAsWestern, "OnPlayerSpawnAsWestern"),
 	DEFINE_OUTPUT( m_outputOnPlayerDied, "OnPlayerDied" ),
 	DEFINE_OUTPUT( m_outputOnBotDied, "OnBotDied" ),
 	DEFINE_OUTPUT( m_outputOnPlayerSwappedToWeaponSlotPrimary, "OnPlayerSwappedToPrimary" ),
@@ -19370,6 +19379,7 @@ void CTrainingModeLogic::OnPlayerSpawned( CTFPlayer* pPlayer )
 	case TF_CLASS_SPY:			m_outputOnPlayerSpawnAsSpy.FireOutput( this, this ); break;
 	case TF_CLASS_ENGINEER:		m_outputOnPlayerSpawnAsEngineer.FireOutput( this, this ); break;
 	case TF_CLASS_SWARMER:		m_outputOnPlayerSpawnAsSwarmer.FireOutput(this, this); break;
+	case TF_CLASS_WESTERN:		m_outputOnPlayerSpawnAsWestern.FireOutput(this, this); break;
 	}
 }
 

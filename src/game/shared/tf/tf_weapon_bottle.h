@@ -11,6 +11,7 @@
 #ifdef CLIENT_DLL
 #define CTFBreakableMelee C_TFBreakableMelee
 #define CTFBottle C_TFBottle
+#define CTFBottleAlt C_TFBottleAlt
 #define CTFBreakableSign C_TFBreakableSign
 #define CTFStickBomb C_TFStickBomb
 #endif
@@ -58,6 +59,17 @@ public:
 	DECLARE_PREDICTABLE_OVERRIDE();
 
 	virtual int			GetWeaponID( void ) const OVERRIDE { return TF_WEAPON_BOTTLE; }
+};
+
+class CTFBottleAlt : public CTFBreakableMelee
+{
+public:
+
+	DECLARE_CLASS(CTFBottleAlt, CTFBreakableMelee);
+	DECLARE_NETWORKCLASS_OVERRIDE();
+	DECLARE_PREDICTABLE_OVERRIDE();
+
+	virtual int			GetWeaponID(void) const OVERRIDE { return TF_WEAPON_BOTTLE_WESTERN; }
 };
 
 //=============================================================================

@@ -48,7 +48,8 @@ const char *g_aPlayerClassNames[TF_CLASS_MENU_BUTTONS] =
 	"#TF_Class_Name_Spy",
 	"#TF_Class_Name_Engineer",
 	"#TF_Class_Name_Civilian",
-	"#TF_CLass_Name_Swarmer",
+	"#TF_Class_Name_Swarmer",
+	"#TF_Class_Name_Western",
 	"",
 	"#TF_Random"
 };
@@ -67,6 +68,7 @@ const char *g_aPlayerClassNames_NonLocalized[TF_CLASS_MENU_BUTTONS] =
 	"Engineer",
 	"Civilian",
 	"Swarmer",
+	"Western",
 	"",
 	"Random"
 };
@@ -85,6 +87,7 @@ const char *g_aRawPlayerClassNamesShort[TF_CLASS_MENU_BUTTONS] =
 	"engineer",
 	"civilian",
 	"swarm",
+	"western",
 	"",
 	"random"
 };
@@ -103,6 +106,7 @@ const char *g_aRawPlayerClassNames[TF_CLASS_MENU_BUTTONS] =
 	"engineer",
 	"civilian",
 	"swarmer",
+	"western",
 	"",
 	"random"
 };
@@ -121,6 +125,7 @@ const char g_szBotModels[][ MAX_PATH ] =
 	"models/bots/spy/bot_spy.mdl",
 	"models/bots/engineer/bot_engineer.mdl",
 	"models/bots/scout/bot_scout.mdl", //Swarmer
+	"models/bots/engineer/bot_engineer.mdl", //Western
 };
 
 const char g_szPlayerRobotModels[][MAX_PATH] =
@@ -198,6 +203,7 @@ const char *g_pszBreadModels[] =
 	"models/weapons/c_models/c_bread/c_bread_ration.mdl",		// Soldier
 	"models/weapons/c_models/c_bread/c_bread_russianblack.mdl",	// Heavy?
 	"models/weapons/c_models/c_bread/c_bread_plainloaf.mdl",	// Swarmer
+	"models/weapons/c_models/c_bread/c_bread_cornbread.mdl",	// Western
 };
 
 int GetClassIndexFromString( const char *pClassName, int nLastClassIndex/*=TF_LAST_NORMAL_CLASS*/ )
@@ -715,6 +721,9 @@ const char *g_aWeaponNames[] =
 	"TF_WEAPON_GRENADE_JAR_GAS",
 	"TF_WEPON_FLAME_BALL",
 	"TF_WEAPON_SWARMER_MELEE",
+	"TF_WEAPON_SUPER_SCATTERGUN",
+	"TF_WEAPON_REVOLVER_SECONDARY",
+	"TF_WEAPON_BOTTLE_WESTERN",
 
 };
 COMPILE_TIME_ASSERT( ARRAYSIZE( g_aWeaponNames ) == TF_WEAPON_COUNT );
@@ -832,6 +841,9 @@ int g_aWeaponDamageTypes[] =
 	DMG_GENERIC, // TF_WEAPON_GRENADE_JAR_GAS
 	DMG_GENERIC | DMG_PREVENT_PHYSICS_FORCE, // TF_WEAPON_FLAME_BALL
 	DMG_CLUB,	//TF_WEAPON_SWARMER_MELEE
+	DMG_BUCKSHOT | DMG_USEDISTANCEMOD,  // TF_WEAPON_SUPER_SCATTERGUN,
+	DMG_BULLET | DMG_USEDISTANCEMOD,		// TF_WEAPON_REVOLVER_SECONDARY,
+	DMG_CLUB,		// TF_WEAPON_BOTTLE_WESTERN, 
 
 };
 
@@ -1647,6 +1659,7 @@ wpntranslation_class_weapons_t pszWpnEntTranslationList[] =
 			"",							// TF_CLASS_SPY,
 			"tf_weapon_shotgun_primary",// TF_CLASS_ENGINEER,
 			"",							// TF_CLASS_SWARMER,
+			"",							// TF_CLASS_WESTERN,
 		}
 	},
 
@@ -1663,7 +1676,8 @@ wpntranslation_class_weapons_t pszWpnEntTranslationList[] =
 			"",							// TF_CLASS_PYRO,
 			"",							// TF_CLASS_SPY,
 			"tf_weapon_pistol",			// TF_CLASS_ENGINEER,
-			"",							// TF_CLASS_SWARMER,		
+			"",							// TF_CLASS_SWARMER,	
+			"",							// TF_CLASS_WESTERN,	
 		}
 	},
 
@@ -1680,7 +1694,8 @@ wpntranslation_class_weapons_t pszWpnEntTranslationList[] =
 			"",							// TF_CLASS_PYRO,
 			"",							// TF_CLASS_SPY,
 			"",							// TF_CLASS_ENGINEER,
-			"",							// TF_CLASS_SWARMER,		
+			"",							// TF_CLASS_SWARMER,	
+			"",							// TF_CLASS_WESTERN,	
 		}
 	},
 	{
@@ -1696,7 +1711,8 @@ wpntranslation_class_weapons_t pszWpnEntTranslationList[] =
 			"",							// TF_CLASS_PYRO,
 			"",							// TF_CLASS_SPY,
 			"",							// TF_CLASS_ENGINEER,
-			"",							// TF_CLASS_SWARMER,		
+			"",							// TF_CLASS_SWARMER,
+			"",							// TF_CLASS_WESTERN,		
 		}
 	},
 	{
@@ -1712,7 +1728,8 @@ wpntranslation_class_weapons_t pszWpnEntTranslationList[] =
 			"tf_weapon_fireaxe",		// TF_CLASS_PYRO,
 			"tf_weapon_knife",			// TF_CLASS_SPY,
 			"tf_weapon_wrench",			// TF_CLASS_ENGINEER,
-			"tf_weapon_swarmer_melee",			// TF_CLASS_SWARMER		
+			"tf_weapon_swarmer_melee",			// TF_CLASS_SWARMER
+			"tf_weapon_bottle",							// TF_CLASS_WESTERN,		
 		}
 	},
 	{
@@ -1728,7 +1745,8 @@ wpntranslation_class_weapons_t pszWpnEntTranslationList[] =
 			"tf_weapon_throwable_secondary",			// TF_CLASS_PYRO,
 			"tf_weapon_throwable_secondary",			// TF_CLASS_SPY,
 			"tf_weapon_throwable_secondary",			// TF_CLASS_ENGINEER,
-			"tf_weapon_throwable_secondary",			// TF_CLASS_SWARMER,		
+			"tf_weapon_throwable_secondary",			// TF_CLASS_SWARMER,
+			"tf_weapon_throwable_secondary",			// TF_CLASS_WESTERN,		
 		}
 	},
 	{
@@ -1744,7 +1762,8 @@ wpntranslation_class_weapons_t pszWpnEntTranslationList[] =
 			"",			// TF_CLASS_PYRO,
 			""			// TF_CLASS_SPY,
 			"",			// TF_CLASS_ENGINEER,
-			"",			// TF_CLASS_SWARMER,		
+			"",			// TF_CLASS_SWARMER,
+			"",			// TF_CLASS_WESTERN,			
 		}
 	},
 	{
@@ -1760,7 +1779,8 @@ wpntranslation_class_weapons_t pszWpnEntTranslationList[] =
 			"",			// TF_CLASS_PYRO,
 			"tf_weapon_revolver",				// TF_CLASS_SPY,
 			"tf_weapon_revolver_secondary",		// TF_CLASS_ENGINEER,
-			"",			// TF_CLASS_SWARMER,		
+			"",			// TF_CLASS_SWARMER,
+			"tf_weapon_revolver_secondary",			// TF_CLASS_WESTERN,		
 		}
 	},
 };
@@ -1880,6 +1900,7 @@ const char *g_pszClassIcons[SCOREBOARD_CLASS_ICONS] =
 	"../hud/leaderboard_class_spy",
 	"../hud/leaderboard_class_engineer",
 	"../hud/leaderboard_class_scout", //Swarmer TODO: Replace
+	"../hud/leaderboard_class_engineer", //Western TODO: Replace
 	"../hud/leaderboard_class_scout_d",
 	"../hud/leaderboard_class_sniper_d",
 	"../hud/leaderboard_class_soldier_d",
@@ -1890,6 +1911,7 @@ const char *g_pszClassIcons[SCOREBOARD_CLASS_ICONS] =
 	"../hud/leaderboard_class_spy_d",
 	"../hud/leaderboard_class_engineer_d",
 	"../hud/leaderboard_class_scout_d",	//Swarmer TODO: Replace
+	"../hud/leaderboard_class_engineer_d", //Western TODO: Replace
 };
 
 const char *g_pszClassIconsAlt[SCOREBOARD_CLASS_ICONS] =
@@ -1905,6 +1927,7 @@ const char *g_pszClassIconsAlt[SCOREBOARD_CLASS_ICONS] =
 	"class_icons/class_icon_orange_spy",
 	"class_icons/class_icon_orange_engineer",
 	"class_icons/class_icon_orange_scout",	//Swarmer TODO: Replace
+	"class_icons/class_icon_orange_engineer", //Western TODO: Replace
 	"class_icons/class_icon_orange_scout_d",
 	"class_icons/class_icon_orange_sniper_d",
 	"class_icons/class_icon_orange_soldier_d",
@@ -1915,6 +1938,7 @@ const char *g_pszClassIconsAlt[SCOREBOARD_CLASS_ICONS] =
 	"class_icons/class_icon_orange_spy_d",
 	"class_icons/class_icon_orange_engineer_d",
 	"class_icons/class_icon_orange_scout_d",	//Swarmer TODO: Replace
+	"class_icons/class_icon_orange_engineer_d", //Western TODO: Replace
 };
 
 const char *g_pszItemClassImagesRed[] =
@@ -1930,6 +1954,7 @@ const char *g_pszItemClassImagesRed[] =
 	"class_portraits/spy",			// TF_CLASS_SPY,
 	"class_portraits/engineer",		// TF_CLASS_ENGINEER,
 	"class_portraits/scout",		// TF_CLASS_SWARMER TODO: Replace
+	"class_portraits/engineer",		// TF_CLASS_WESTERN TODO: Replae
 	"class_portraits/scout_grey",		// TF_CLASS_SCOUT,			
 	"class_portraits/sniper_grey",		// TF_CLASS_SNIPER,
 	"class_portraits/soldier_grey",		// TF_CLASS_SOLDIER,
@@ -1940,6 +1965,7 @@ const char *g_pszItemClassImagesRed[] =
 	"class_portraits/spy_grey",			// TF_CLASS_SPY,
 	"class_portraits/engineer_grey",	// TF_CLASS_ENGINEER,
 	"class_portraits/scout_grey",		// TF_CLASS_SWARMER, TODO: Replace
+	"class_portraits/engineer_grey",	// TF_CLASS_WESTERN TODO: Replace
 };
 
 const char *g_pszItemClassImagesBlue[] =
@@ -1955,6 +1981,7 @@ const char *g_pszItemClassImagesBlue[] =
 	"class_portraits/spy_blue",			// TF_CLASS_SPY,
 	"class_portraits/engineer_blue",	// TF_CLASS_ENGINEER,
 	"class_portraits/scout_blue",		// TF_CLASS_SWARMER, TODO: Replace
+	"class_portraits/engineer_blue",	// TF_CLASS_WESTERN, TODO: Replace
 	"class_portraits/scout_blue_grey",		// TF_CLASS_SCOUT,			
 	"class_portraits/sniper_blue_grey",		// TF_CLASS_SNIPER,
 	"class_portraits/soldier_blue_grey",	// TF_CLASS_SOLDIER,
@@ -1965,6 +1992,7 @@ const char *g_pszItemClassImagesBlue[] =
 	"class_portraits/spy_blue_grey",		// TF_CLASS_SPY,
 	"class_portraits/engineer_blue_grey",	// TF_CLASS_ENGINEER,
 	"class_portraits/scout_blue_grey",		// TF_CLASS_SWARMER, TODO: Replace
+	"class_portraits/engineer_blue_grey",	// TF_CLASS_ENGINEER, TODO: Replace
 };
 
 const char *g_pszCompetitiveMedalImages[] =

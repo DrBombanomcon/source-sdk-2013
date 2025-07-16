@@ -1659,6 +1659,7 @@ protected:
 	COutputEvent m_outputOnPlayerSpawnAsSpy;
 	COutputEvent m_outputOnPlayerSpawnAsEngineer;
 	COutputEvent m_outputOnPlayerSpawnAsSwarmer;
+	COutputEvent m_outputOnPlayerSpawnAsWestern;
 	// outputs based on the weapon the player swapped to
 	COutputEvent m_outputOnPlayerSwappedToWeaponSlotPrimary;
 	COutputEvent m_outputOnPlayerSwappedToWeaponSlotSecondary;

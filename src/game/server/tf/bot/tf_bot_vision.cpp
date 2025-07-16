@@ -259,6 +259,13 @@ bool CTFBotVision::IsIgnored( CBaseEntity *subject ) const
 				return true;
 			}
 			break;
+
+		case TF_CLASS_WESTERN:
+			if (me->IsBehaviorFlagSet(TFBOT_IGNORE_ENEMY_WESTERNS))
+			{
+				return true;
+			}
+			break;
 		}
 
 

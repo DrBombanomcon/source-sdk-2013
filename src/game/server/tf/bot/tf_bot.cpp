@@ -841,6 +841,7 @@ bool CTFBot::GetWeightDesiredClassToSpawn( CUtlVector< ETFClass > &vecClassToSpa
 		{ TF_CLASS_SNIPER,			5, 0, 0, { 0, 1, 1, 1 } },
 		{ TF_CLASS_SPY,				5, 0, 0, { 0, 1, 2, 2 } },
 		{ TF_CLASS_SWARMER,		0, 4, 1, { 1, 2, 3, 3 } },
+		{ TF_CLASS_WESTERN,		0, 4, 1, { 1, 2, 3, 3 } },
 
 		{ TF_CLASS_UNDEFINED,		0, -1 },
 	};
@@ -857,6 +858,7 @@ bool CTFBot::GetWeightDesiredClassToSpawn( CUtlVector< ETFClass > &vecClassToSpa
 		{ TF_CLASS_SPY,				5, 0, 0, { 0, 1, 2, 2 } },
 		{ TF_CLASS_ENGINEER,		5, 0, 0, { 1, 1, 1, 1 } },
 		{ TF_CLASS_SWARMER,			0, 0, 0, { NoLimit, NoLimit, NoLimit, NoLimit } },
+		{ TF_CLASS_WESTERN,			0, 0, 1, { 3, 3, 3, 3 } },
 
 		{ TF_CLASS_UNDEFINED,		0, -1 },
 	};
@@ -873,6 +875,7 @@ bool CTFBot::GetWeightDesiredClassToSpawn( CUtlVector< ETFClass > &vecClassToSpa
 		{ TF_CLASS_SPY,				0, -1 },
 		{ TF_CLASS_ENGINEER,		0, -1 },
 		{ TF_CLASS_SWARMER,			1, 0, 1, { 0, 0, 1, 1 } },
+		{ TF_CLASS_WESTERN,			0, 0, 0, { 0, 0, 2, 2 } },
 
 		{ TF_CLASS_UNDEFINED,		0, -1 },
 	};
@@ -3092,6 +3095,7 @@ float CTFBot::GetThreatDanger( CBaseCombatCharacter *who ) const
 		case TF_CLASS_SPY:
 		case TF_CLASS_DEMOMAN:
 		case TF_CLASS_SWARMER:
+		case TF_CLASS_WESTERN:
 			return 0.6f;		// 3/5
 
 		case TF_CLASS_SOLDIER:
@@ -3553,6 +3557,8 @@ bool CTFBot::IsHitScanWeapon( CTFWeaponBase *weapon ) const
 		case TF_WEAPON_SNIPERRIFLE_DECAP:
 		case TF_WEAPON_PEP_BRAWLER_BLASTER:
 		case TF_WEAPON_SNIPERRIFLE_CLASSIC:
+		case TF_WEAPON_REVOLVER_SECONDARY:
+		case TF_WEAPON_SUPER_SCATTERGUN:
 			return true;
 		};
 	}

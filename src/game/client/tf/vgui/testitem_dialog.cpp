@@ -55,6 +55,7 @@ static const char *g_pszClassSubdirectories[] =
 	"spy",			// TF_CLASS_SPY,
 	"engineer",		// TF_CLASS_ENGINEER,
 	"swarmer",		// TF_CLASS_SWARMER,
+	"western",		// TF_CLASS_WESTERN,
 };
 
 //-----------------------------------------------------------------------------

@@ -55,6 +55,19 @@ END_PREDICTION_DATA()
 LINK_ENTITY_TO_CLASS( tf_weapon_bottle, CTFBottle );
 PRECACHE_WEAPON_REGISTER( tf_weapon_bottle );
 
+
+IMPLEMENT_NETWORKCLASS_ALIASED(TFBottleAlt, DT_TFWeaponBottleAlt)
+
+BEGIN_NETWORK_TABLE(CTFBottleAlt, DT_TFWeaponBottleAlt)
+END_NETWORK_TABLE()
+
+BEGIN_PREDICTION_DATA(CTFBottleAlt)
+END_PREDICTION_DATA()
+
+LINK_ENTITY_TO_CLASS(tf_weapon_bottle_western, CTFBottleAlt);
+PRECACHE_WEAPON_REGISTER(tf_weapon_bottle_western);
+
+
 //=============================================================================
 //
 // Weapon Breakable Sign tables.
