@@ -85,6 +85,7 @@ StatMap_t* g_SteamStats_Class[] = {
 	g_SteamStats_Engineer,	// Engineer
 	NULL,					// Swarmer
 	NULL,					// Western
+	NULL,					// Gunner
 };
 
 // subset of map stats which we store in Steam

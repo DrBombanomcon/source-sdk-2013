@@ -5997,8 +5997,9 @@ void CTFPlayerShared::OnRemoveCompetitiveLoser( void )
 //-----------------------------------------------------------------------------
 void CTFPlayerShared::UpdateChargeMeter( void )
 {
-	if ( !m_pOuter->IsPlayerClass( TF_CLASS_DEMOMAN ) )
-		return;
+	// Commenting this out since I'm giving a sheild to a non-demoman; Revise later if it becomes an issue
+	//if ( !m_pOuter->IsPlayerClass( TF_CLASS_DEMOMAN ) )
+	//	return;
 
 	if ( InCond( TF_COND_SHIELD_CHARGE ) )
 	{
@@ -10866,11 +10867,13 @@ float CTFPlayer::TeamFortress_CalculateMaxSpeed( bool bIgnoreSpecialAbility /*= 
 		{
 			maxfbspeed *= pSword->GetSwordSpeedMod();
 		}
+	}
 
-		if ( !bIgnoreSpecialAbility && m_Shared.InCond( TF_COND_SHIELD_CHARGE ) )
-		{
-			maxfbspeed = tf_max_charge_speed.GetFloat();
-		}
+	//Moved this out from above and removed other condition
+	//Should allow gunner to charge
+	if (m_Shared.InCond(TF_COND_SHIELD_CHARGE))
+	{
+		maxfbspeed = tf_max_charge_speed.GetFloat();
 	}
 
 	bool bCarryPenalty = true;
@@ -12251,6 +12254,7 @@ bool CTFPlayer::DoClassSpecialSkill( void )
 		break;
 
 	case TF_CLASS_DEMOMAN:
+	case TF_CLASS_GUNNER:
 		if ( !m_Shared.HasPasstimeBall() )
 		{
 			CTFPipebombLauncher *pPipebombLauncher = static_cast<CTFPipebombLauncher*>( Weapon_OwnsThisID( TF_WEAPON_PIPEBOMBLAUNCHER ) );

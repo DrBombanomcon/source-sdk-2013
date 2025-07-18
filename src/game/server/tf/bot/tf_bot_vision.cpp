@@ -266,6 +266,13 @@ bool CTFBotVision::IsIgnored( CBaseEntity *subject ) const
 				return true;
 			}
 			break;
+
+		case TF_CLASS_GUNNER:
+			if (me->IsBehaviorFlagSet(TFBOT_IGNORE_ENEMY_GUNNERS))
+			{
+				return true;
+			}
+			break;
 		}
 
 

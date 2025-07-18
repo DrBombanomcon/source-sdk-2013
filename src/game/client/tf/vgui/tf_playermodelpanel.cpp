@@ -1294,7 +1294,8 @@ int ClassZoomZ[] =
 	27, // TF_CLASS_SPY,
 	20, // TF_CLASS_ENGINEER,		
 	20, // TF_CLASS_SWARMER,		
-	20, // TF_CLASS_WESTERN,		
+	20, // TF_CLASS_WESTERN,
+	20,	// TF_CLASS_GUNNER,
 };
 
 //-----------------------------------------------------------------------------

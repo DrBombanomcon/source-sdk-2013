@@ -298,3 +298,16 @@ void CTFWearableRazorback::OnResourceMeterFilled()
 	}
 #endif // GAME_DLL
 }
+
+LINK_ENTITY_TO_CLASS(tf_wearable_modshield, CTFWearableModShield);
+IMPLEMENT_NETWORKCLASS_ALIASED(TFWearableModShield, DT_TFWearableModShield)
+
+// Network Table --
+BEGIN_NETWORK_TABLE(CTFWearableModShield, DT_TFWearableModShield)
+END_NETWORK_TABLE()
+// -- Network Table
+
+// Data Desc --
+BEGIN_DATADESC(CTFWearableModShield)
+END_DATADESC()
+// -- Data Desc

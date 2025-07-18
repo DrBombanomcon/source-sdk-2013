@@ -1963,6 +1963,7 @@ void CTFPlayer::RuneRegenThink( void )
 		flAmount = 12;
 		break;
 	case TF_CLASS_SOLDIER:
+	case TF_CLASS_GUNNER:
 		flAmount = 10;
 		break;
 	case TF_CLASS_HEAVYWEAPONS:

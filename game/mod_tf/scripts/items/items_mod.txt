@@ -206,6 +206,137 @@
 			"mouse_pressed_sound"	"ui/item_bottle_pickup.wav"
 			"drop_sound"		"ui/item_bottle_drop.wav"
 		}
+		"weapon_chaingun"
+		{
+			"prefab"	"moditem"
+			"capabilities"
+			{
+				"nameable"		"1"
+			}
+			"tags"
+			{
+				"can_deal_damage"			"1"
+				"can_deal_posthumous_damage"	"1"
+				"can_deal_long_distance_damage"	"1"
+			}
+			"first_sale_date"	"2010/09/29"
+			"enabled"	"1"
+			"item_class"	"tf_weapon_chaingun"
+			"craft_class"	"weapon"
+			"craft_material_type"	"weapon"
+			"item_type_name"	"TF_Weapon_Chaingun"
+			"item_name"	"TF_Weapon_Chaingun"
+			"item_slot"	"primary"
+			"item_quality"	"normal"
+			"min_ilevel"	"1"
+			"max_ilevel"	"1"
+			"image_inventory"	"backpack/weapons/w_models/w_syringegun"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"
+			"inspect_panel_dist" 				"44"					
+			"model_player"	"models/weapons/c_models/c_syringegun/c_syringegun.mdl"
+			"attach_to_hands"	"1"
+			"used_by_classes"
+			{
+				"gunner"	"1"
+			}
+			"static_attrs"
+			{
+				"min_viewmodel_offset"		"10 0 -12"
+			}
+			"mouse_pressed_sound"	"ui/item_light_gun_pickup.wav"
+			"drop_sound"		"ui/item_light_gun_drop.wav"
+		}
+		"weapon_gunner_demosheild"
+		{
+			"prefab"	"moditem"
+			"item_class"	"tf_wearable_demoshield"
+			"craft_class"	"weapon"
+			"craft_material_type"	"weapon"
+			"capabilities"
+			{
+				"nameable"		"1"
+			}
+			"tags"
+			{
+				"can_deal_damage"			"1"
+			}
+			"base_item_name"	"Shield"
+			"item_type_name" 	"TF_Wearable_Shield"
+			"item_name"		"Gunner_Shield"
+			"item_description"	"#TF_Unique_Achievement_Shield_Desc"
+			"item_slot"		"secondary"
+			"equip_region"		"arms"
+			"anim_slot"		"FORCE_NOT_USED"
+			"item_logname"	"demoshield"
+			"item_iconname"	"demoshield"
+			"image_inventory"	"backpack/weapons/c_models/c_targe/c_targe"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"
+			"inspect_panel_dist" 			"33"
+			"model_player"	"models/weapons/c_models/c_targe/c_targe.mdl"
+			"act_as_wearable" "1"
+			"attach_to_hands"	"0"
+			"attach_to_hands_vm_only"	"1"
+			"used_by_classes"
+			{
+				"gunner"	"1"
+			}
+			"attributes"
+			{
+				"charge impact damage increased"
+				{
+					"attribute_class"	"charge_impact_damage"
+					"value"			"1.5"
+				}
+				"kill refills meter"
+				{
+					"attribute_class"	"kill_refills_meter"
+					"value"			"0.85"
+				}
+			}
+			"mouse_pressed_sound"	"ui/item_wood_pole_pickup.wav"
+			"drop_sound"		"ui/item_wood_pole_drop.wav"
+			"xifier_class_remap"	"weapon_targe"
+		}
+		"weapon_gunner_club"
+		{
+			"prefab"	"moditem"
+			"capabilities"
+			{
+				"nameable"		"1"
+			}
+			"tags"
+			{
+				"can_deal_damage"			"1"
+			}
+			"first_sale_date"	"2010/09/29"
+			"enabled"	"1"
+			"item_class"	"tf_weapon_club_gunner"
+			"craft_class"	"weapon"
+			"craft_material_type"	"weapon"
+			"item_type_name"	"TF_Weapon_Club_Gunner"
+			"item_name"	"TF_Weapon_Club_Gunner"
+			"item_slot"	"melee"
+			"item_quality"	"normal"
+			"min_ilevel"	"1"
+			"max_ilevel"	"1"
+			"image_inventory"	"backpack/weapons/w_models/w_machete"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"
+			"model_player"	"models/weapons/c_models/c_machete/c_machete.mdl"
+			"attach_to_hands"	"1"
+			"used_by_classes"
+			{
+				"gunner"	"1"
+			}
+			"static_attrs"
+			{
+				"min_viewmodel_offset"		"10 0 -6"
+			}
+			"mouse_pressed_sound"	"ui/item_knife_small_pickup.wav"
+			"drop_sound"		"ui/item_metal_weapon_drop.wav"
+		}
 	}
 	"items"
 	{
@@ -231,6 +362,24 @@
 		{
 			"name"	"TF_WEAPON_BOTTLE_WESTERN"
 			"prefab"	"weapon_western_melee"
+			"baseitem"	"0"
+		}
+		"34404"
+		{
+			"name"	"TF_WEAPON_CHAINGUN"
+			"prefab"	"weapon_chaingun"
+			"baseitem"	"0"
+		}
+		"34405"
+		{
+			"name"	"TF_WEARABLE_GUNNER_SHIELD"
+			"prefab"	"weapon_gunner_demosheild"
+			"baseitem"	"0"
+		}
+		"34406"
+		{
+			"name"	"TF_WEAPON_GUNNER_MELEE"
+			"prefab"	"weapon_gunner_club"
 			"baseitem"	"0"
 		}
 	}

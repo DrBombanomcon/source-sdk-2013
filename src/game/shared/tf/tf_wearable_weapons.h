@@ -24,6 +24,7 @@
 #ifdef CLIENT_DLL
 #define CTFWearableDemoShield C_TFWearableDemoShield
 #define CTFWearableRazorback C_TFWearableRazorback
+#define CTFWearableModShield C_TFWearableModShield
 class C_TFSword;
 #endif
 
@@ -62,6 +63,17 @@ private:
 #ifdef GAME_DLL
 	bool m_bImpactedSomething;
 #endif
+};
+
+class CTFWearableModShield : public CTFWearableDemoShield
+{
+	DECLARE_CLASS(CTFWearableModShield, CTFWearableDemoShield);
+
+public:
+	DECLARE_NETWORKCLASS();
+	DECLARE_DATADESC();
+
+	CTFWearableModShield() {}
 };
 
 class CTFWearableRazorback : public CTFWearable

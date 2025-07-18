@@ -31,6 +31,18 @@ END_PREDICTION_DATA()
 LINK_ENTITY_TO_CLASS( tf_weapon_club, CTFClub );
 PRECACHE_WEAPON_REGISTER( tf_weapon_club );
 
+
+IMPLEMENT_NETWORKCLASS_ALIASED(TFClubGunner, DT_TFWeaponClub_Gunner)
+
+BEGIN_NETWORK_TABLE(CTFClubGunner, DT_TFWeaponClub_Gunner)
+END_NETWORK_TABLE()
+
+BEGIN_PREDICTION_DATA(CTFClubGunner)
+END_PREDICTION_DATA()
+
+LINK_ENTITY_TO_CLASS(tf_weapon_club_gunner, CTFClubGunner);
+PRECACHE_WEAPON_REGISTER(tf_weapon_club_gunner);
+
 //=============================================================================
 //
 // Weapon Club functions.
@@ -40,5 +52,9 @@ PRECACHE_WEAPON_REGISTER( tf_weapon_club );
 // Purpose:
 //-----------------------------------------------------------------------------
 CTFClub::CTFClub()
+{
+}
+
+CTFClubGunner::CTFClubGunner()
 {
 }

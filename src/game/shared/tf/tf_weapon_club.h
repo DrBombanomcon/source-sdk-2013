@@ -14,6 +14,7 @@
 
 #ifdef CLIENT_DLL
 #define CTFClub C_TFClub
+#define CTFClubGunner C_TFClubGunner
 #endif
 
 //=============================================================================
@@ -34,6 +35,22 @@ public:
 private:
 
 	CTFClub( const CTFClub & ) {}
+};
+
+class CTFClubGunner : public CTFWeaponBaseMelee
+{
+public:
+
+	DECLARE_CLASS(CTFClub, CTFWeaponBaseMelee);
+	DECLARE_NETWORKCLASS();
+	DECLARE_PREDICTABLE();
+
+	CTFClubGunner();
+	virtual int			GetWeaponID(void) const { return TF_WEAPON_CLUB_GUNNER; }
+
+private:
+
+	CTFClubGunner(const CTFClubGunner&) {}
 };
 
 #endif // TF_WEAPON_CLUB_H

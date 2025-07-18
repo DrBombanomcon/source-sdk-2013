@@ -211,6 +211,9 @@ $Project "Client (TF)"
 		{
 			$File	"$SRCDIR\game\shared\tf\tf_weapon_swarmer_melee.h"
 			$File	"$SRCDIR\game\shared\tf\tf_weapon_swarmer_melee.cpp"
+			
+			$File	"$SRCDIR\game\shared\tf\tf_weapon_chaingun.h"
+			$File	"$SRCDIR\game\shared\tf\tf_weapon_chaingun.cpp"
 		}
 
 		$Folder	"TF"

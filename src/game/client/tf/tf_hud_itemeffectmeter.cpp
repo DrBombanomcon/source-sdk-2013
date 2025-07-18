@@ -954,6 +954,7 @@ static const char *pszClassIcons[] = {
 	"../hud/leaderboard_class_engineer",
 	"../hud/leaderboard_class_scout", //Swarmer TODO: Replace later 
 	"../hud/leaderboard_class_engineer",
+	"../hud/leaderboard_class_soldier",
 };
 
 template <>
