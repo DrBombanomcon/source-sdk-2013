@@ -843,6 +843,7 @@ bool CTFBot::GetWeightDesiredClassToSpawn( CUtlVector< ETFClass > &vecClassToSpa
 		{ TF_CLASS_SWARMER,		0, 4, 1, { 1, 2, 3, 3 } },
 		{ TF_CLASS_WESTERN,		0, 4, 1, { 1, 2, 3, 3 } },
 		{ TF_CLASS_GUNNER,	3, 0, 0, { 1, 1, 2, 2 } },
+		{ TF_CLASS_ASSALIENT,			4, 4, 1, { 1, 1, 2, 2 } },
 
 		{ TF_CLASS_UNDEFINED,		0, -1 },
 	};
@@ -861,6 +862,7 @@ bool CTFBot::GetWeightDesiredClassToSpawn( CUtlVector< ETFClass > &vecClassToSpa
 		{ TF_CLASS_SWARMER,			0, 0, 0, { NoLimit, NoLimit, NoLimit, NoLimit } },
 		{ TF_CLASS_WESTERN,			0, 0, 1, { 3, 3, 3, 3 } },
 		{ TF_CLASS_GUNNER,	3, 0, 0, { 1, 1, 2, 2 } },
+		{ TF_CLASS_ASSALIENT,			4, 4, 1, { 1, 1, 2, 2 } },
 
 		{ TF_CLASS_UNDEFINED,		0, -1 },
 	};
@@ -879,6 +881,7 @@ bool CTFBot::GetWeightDesiredClassToSpawn( CUtlVector< ETFClass > &vecClassToSpa
 		{ TF_CLASS_SWARMER,			1, 0, 1, { 0, 0, 1, 1 } },
 		{ TF_CLASS_WESTERN,			0, 0, 0, { 0, 0, 2, 2 } },
 		{ TF_CLASS_GUNNER,	3, 0, 0, { 0, 0, 2, 2 } },
+		{ TF_CLASS_ASSALIENT,			1, 0, 1, { 0, 0, 1, 1 } },
 
 		{ TF_CLASS_UNDEFINED,		0, -1 },
 	};
@@ -3088,6 +3091,7 @@ float CTFBot::GetThreatDanger( CBaseCombatCharacter *who ) const
 		switch( player->GetPlayerClass()->GetClassIndex() )
 		{
 		case TF_CLASS_MEDIC:
+		case TF_CLASS_ASSALIENT:
 			return 0.2f;		// 1/5
 
 		case TF_CLASS_ENGINEER:

@@ -74,6 +74,7 @@ extern ConVar	tf_arena_change_limit;
 extern ConVar	tf_ctf_bonus_time;
 extern ConVar	tf_mvm_respec_enabled;
 extern ConVar	tf_spawn_glows_duration;
+extern ConVar	mod_enable_original_classes;
 
 #ifdef GAME_DLL
 extern ConVar mp_tournament_prevent_team_switch_on_readyup;
@@ -132,7 +133,6 @@ enum {
 //=============================================================================
 // HPE_END
 //=============================================================================
-
 
 extern Vector g_TFClassViewVectors[];
 
@@ -1661,6 +1661,7 @@ protected:
 	COutputEvent m_outputOnPlayerSpawnAsSwarmer;
 	COutputEvent m_outputOnPlayerSpawnAsWestern;
 	COutputEvent m_outputOnPlayerSpawnAsGunner;
+	COutputEvent m_outputOnPlayerSpawnAsAssalient;
 	// outputs based on the weapon the player swapped to
 	COutputEvent m_outputOnPlayerSwappedToWeaponSlotPrimary;
 	COutputEvent m_outputOnPlayerSwappedToWeaponSlotSecondary;

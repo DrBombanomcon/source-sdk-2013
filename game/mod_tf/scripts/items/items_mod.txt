@@ -382,5 +382,169 @@
 			"prefab"	"weapon_gunner_club"
 			"baseitem"	"0"
 		}
+		"34407"
+		{
+			"name"	"TF_HEALING_PASSIVE"
+			"prefab"	"moditem"
+			"item_class"	"tf_wearable_medigun"
+			"craft_class"	"weapon"
+			"craft_material_type"	"weapon"
+			"capabilities"
+			{
+				"nameable"		"1"
+			}
+			"tags"
+			{
+				"can_deal_damage"			"1"
+			}
+			"base_item_name"	"Passive Medigun"
+			"item_type_name" 	"TF_Wearable_Medigun"
+			"item_name"		"Assalient_MediPack"
+			"item_description"	"Medic gun"
+			"item_slot"		"secondary"
+			"equip_region"		"arms"
+			"anim_slot"		"FORCE_NOT_USED"
+			"item_logname"	"demoshield"
+			"item_iconname"	"demoshield"
+			"image_inventory"	"backpack/weapons/c_models/c_targe/c_targe"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"
+			"inspect_panel_dist" 			"33"
+			"model_player"	"models/weapons/c_models/c_targe/c_targe.mdl"
+			"act_as_wearable" "1"
+			"attach_to_hands"	"0"
+			"attach_to_hands_vm_only"	"1"
+			"used_by_classes"
+			{
+				"assalient"	"1"
+			}
+			"mouse_pressed_sound"	"ui/item_wood_pole_pickup.wav"
+			"drop_sound"		"ui/item_wood_pole_drop.wav"
+			"xifier_class_remap"	"weapon_targe"
+		}
+		"34408"
+		{
+			"name"	"TF_WEAPON_SHOTGUN_PRIMARY_ASSALIENT"
+			"prefab"	"weapon_shotgun moditem"
+			"item_slot"	"primary"
+			"used_by_classes"
+			{
+				"assalient"	"1"
+			}
+		}
+		"34409"
+		{
+			"name"	"TF_WEAPON_BONESAW_ASSALIENT"
+			"prefab"	"weapon_bonesaw moditem"
+			"craft_class"	"weapon"
+			"craft_material_type"	"weapon"
+			"item_quality"	"normal"
+			"used_by_classes"
+			{
+				"assalient"	"1"
+			}
+			"min_ilevel"	"1"
+			"max_ilevel"	"1"
+		}
+
+		"34410"
+		{
+			"name"	"TF_WEAPON_PDA_ASSALIENT_BUILD"
+			"capabilities"
+			{
+				"nameable"		"1"
+			}
+			"prefab"	"moditem"
+			"first_sale_date"	"2010/09/29"
+			"item_class"	"tf_weapon_pda_engineer_build"
+			"craft_class"	"weapon"
+			"craft_material_type"	"weapon"
+			"item_name"	"#TF_Weapon_PDA_Engineer_Builder"
+			"item_type_name"	"#TF_Weapon_PDA_Engineer"
+			"item_slot"	"pda"
+			"item_quality"	"normal"
+			"min_ilevel"	"1"
+			"max_ilevel"	"1"
+			"attach_to_hands" "1"
+			"image_inventory"	"backpack/weapons/w_models/w_builder"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"
+			"model_player"	"models/weapons/c_models/c_builder/c_builder.mdl"
+			"used_by_classes"
+			{
+				"assalient"	"1"
+			}
+			"static_attrs"
+			{
+				"min_viewmodel_offset"					"10 0 -10"				
+			}
+			"attributes"
+			{
+				"kill eater score type"
+				{
+					"attribute_class"	"kill_eater_score_type"
+					"value" 	"3" 
+				}
+				"kill eater score type 2"
+				{
+					"attribute_class"	"kill_eater_score_type_2"
+					"value" 	"59" 
+				}
+				"kill eater score type 3"
+				{
+					"attribute_class"	"kill_eater_score_type_3"
+					"value" 	"60" 
+				}
+			}
+			"mouse_pressed_sound"	"ui/item_metal_weapon_pickup.wav"
+			"drop_sound"		"ui/item_metal_weapon_drop.wav"
+			"visuals"
+			{
+				"animation_replacement"
+				{
+					"ACT_VM_IDLE"	"ACT_ENGINEER_PDA2_VM_IDLE"
+					"ACT_VM_DRAW"	"ACT_ENGINEER_PDA2_VM_DRAW"
+				}
+			}
+		}
+		"34411"
+		{
+			"name"	"TF_WEAPON_PDA_ASSALIENT_DESTROY"
+			"prefab"	"moditem"
+			"first_sale_date"	"2010/09/29"
+			"item_class"	"tf_weapon_pda_engineer_destroy"
+			"craft_class"	"weapon"
+			"craft_material_type"	"weapon"
+			"item_name"	"#TF_Weapon_PDA_Engineer_Destroyer"
+			"item_type_name"	"#TF_Weapon_PDA_Engineer"
+			"item_slot"	"pda2"
+			"anim_slot"	"pda"
+			"item_quality"	"normal"
+			"min_ilevel"	"1"
+			"max_ilevel"	"1"
+			"attach_to_hands" "1"
+			"image_inventory"	"backpack/weapons/w_models/w_pda_engineer"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"
+			"model_player"	"models/weapons/c_models/c_pda_engineer/c_pda_engineer.mdl"
+			"used_by_classes"
+			{
+				"assalient"	"1"
+			}
+			"static_attrs"
+			{
+				"min_viewmodel_offset"					"10 0 -10"				
+			}
+			"mouse_pressed_sound"	"ui/item_metal_weapon_pickup.wav"
+			"drop_sound"		"ui/item_metal_weapon_drop.wav"
+			"visuals"
+			{
+				"animation_replacement"
+				{
+					"ACT_VM_IDLE"	"ACT_ENGINEER_PDA1_VM_IDLE"
+					"ACT_VM_DRAW"	"ACT_ENGINEER_PDA1_VM_DRAW"
+				}
+			}
+		}
 	}
 }

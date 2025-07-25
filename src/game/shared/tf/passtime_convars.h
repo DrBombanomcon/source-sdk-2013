@@ -50,6 +50,7 @@ extern ConVar
 	tf_passtime_throwarc_swarmer,
 	tf_passtime_throwarc_western,
 	tf_passtime_throwarc_gunner,
+	tf_passtime_throwarc_assalient,
 	tf_passtime_throwspeed_scout,
 	tf_passtime_throwspeed_sniper,
 	tf_passtime_throwspeed_soldier,
@@ -62,6 +63,7 @@ extern ConVar
 	tf_passtime_throwspeed_swarmer,
 	tf_passtime_throwspeed_western,
 	tf_passtime_throwspeed_gunner,
+	tf_passtime_throwspeed_assalient,
 	tf_passtime_throwspeed_velocity_scale,
 	tf_passtime_save_stats,
 

@@ -1468,6 +1468,7 @@ static PlayerClassInfo_t gs_PlayerClassData[] =
 	{ "Swarmer",	"#TF_Class_Name_Swarmer" },
 	{ "Western",	"#TF_Class_Name_Western" },
 	{ "Gunner",	"#TF_Class_Name_Gunner" },
+	{ "Assalient",	"#TF_Class_Name_Assalient" },
 	{ "Invalid",	"" }						// lots of code loops over these classes based on LOADOUT_COUNT, which is wrong, but this allows them to do it safely
 };
 

@@ -273,6 +273,13 @@ bool CTFBotVision::IsIgnored( CBaseEntity *subject ) const
 				return true;
 			}
 			break;
+
+		case TF_CLASS_ASSALIENT:
+			if (me->IsBehaviorFlagSet(TFBOT_IGNORE_ENEMY_ASSALIENT))
+			{
+				return true;
+			}
+			break;
 		}
 
 

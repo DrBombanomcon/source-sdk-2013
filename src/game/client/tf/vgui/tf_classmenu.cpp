@@ -494,10 +494,17 @@ CTFClassMenu::CTFClassMenu( IViewPort *pViewPort )
 	m_pClassButtons[TF_CLASS_SWARMER] = new CExImageButton(this, "swarmer", "", this);
 	m_pClassButtons[TF_CLASS_WESTERN] = new CExImageButton(this, "western", "", this);
 	m_pClassButtons[TF_CLASS_GUNNER] = new CExImageButton(this, "gunner", "", this);
+	m_pClassButtons[TF_CLASS_ASSALIENT] = new CExImageButton(this, "assalient", "", this);
 #endif
 
 	m_pEditLoadoutButton = NULL;
 	m_nBaseMusicGuid = -1;
+	m_pToggleClassGroup = new CExImageButton(this, "toggle", "", this);
+	m_bShowOriginals = true;
+	if (!mod_enable_original_classes.GetBool())
+	{
+		UpdateClassButtons();
+	}
 
 	ListenForGameEvent( "localplayer_changeteam" );
 	ListenForGameEvent( "show_match_summary" );
@@ -515,6 +522,7 @@ CTFClassMenu::CTFClassMenu( IViewPort *pViewPort )
 	m_pMvmUpgradeImages[TF_CLASS_SWARMER] = new vgui::ImagePanel(this, "MvMUpgradeImageScout");
 	m_pMvmUpgradeImages[TF_CLASS_WESTERN] = new vgui::ImagePanel(this, "MvMUpgradeImageEngineer");
 	m_pMvmUpgradeImages[TF_CLASS_GUNNER] = new vgui::ImagePanel(this, "MvMUpgradeImageSolider");
+	m_pMvmUpgradeImages[TF_CLASS_ASSALIENT] = new vgui::ImagePanel(this, "MvMUpgradeImageMedic");
 
 	vgui::ivgui()->AddTickSignal( GetVPanel() );
 }
@@ -551,6 +559,7 @@ void CTFClassMenu::ApplySchemeSettings( IScheme *pScheme )
 		m_pClassHintIcons[TF_CLASS_SWARMER] = dynamic_cast<CSCHintIcon*>(FindChildByName("ScoutHintIcon"));
 		m_pClassHintIcons[TF_CLASS_WESTERN] = dynamic_cast<CSCHintIcon*>(FindChildByName("EngineerHintIcon"));
 		m_pClassHintIcons[TF_CLASS_GUNNER] = dynamic_cast<CSCHintIcon*>(FindChildByName("SoldierHintIcon"));
+		m_pClassHintIcons[TF_CLASS_ASSALIENT] = dynamic_cast<CSCHintIcon*>(FindChildByName("MedicHintIcon"));
 
 		for ( int i = 0; i < TF_CLASS_MENU_BUTTONS; i++ )
 		{
@@ -675,6 +684,12 @@ void CTFClassMenu::ShowPanel( bool bShow )
 
 		Activate();
 
+		if (!m_bShowOriginals)
+		{
+			m_bShowOriginals = true;
+			UpdateClassButtons();
+		}
+
 		m_iClassMenuKey = gameuifuncs->GetButtonCodeForBind( "changeclass" );
 		m_iScoreBoardKey = gameuifuncs->GetButtonCodeForBind( "showscores" );
 
@@ -705,6 +720,7 @@ const char *g_pszLegacyClassSelectVCDWeapons[TF_LAST_NORMAL_CLASS] =
 	"",										// TF_CLASS_SWARMER		
 	"",										// TF_CLASS_WESTERN
 	"",										// TF_CLASS_GUNNER
+	"",										// TF_CLASS_ASSALIENT
 };
 
 int g_iLegacyClassSelectWeaponSlots[TF_LAST_NORMAL_CLASS] =
@@ -721,7 +737,8 @@ int g_iLegacyClassSelectWeaponSlots[TF_LAST_NORMAL_CLASS] =
 	LOADOUT_POSITION_MELEE,			// TF_CLASS_ENGINEER,
 	LOADOUT_POSITION_PRIMARY,		// TF_CLASS_SWARMER	
 	LOADOUT_POSITION_PRIMARY,		// TF_CLASS_WESTERN
-	LOADOUT_POSITION_PRIMARY,		// TF_CLASS_GUNNER	
+	LOADOUT_POSITION_PRIMARY,		// TF_CLASS_GUNNER
+	LOADOUT_POSITION_PRIMARY,		// TF_CLASS_ASSALIENT		
 };
 
 //-----------------------------------------------------------------------------
@@ -1014,13 +1031,13 @@ void CTFClassMenu::OnThink()
 	int aCursorPos[2];
 	vgui::input()->GetCursorPos( aCursorPos[0], aCursorPos[1] );
 
-	// Go through all buttons - if the mouse is within one, select that class
+	// Go through all buttons - if the mouse is within one, select that classs
 	for ( int i = 0; i < ARRAYSIZE( m_pClassButtons ); ++i )
 	{
 		if ( !m_pClassButtons[ i ] )
 			continue;
 
-		if ( m_iCurrentClassIndex != i && m_pClassButtons[ i ]->IsWithin( aCursorPos[0], aCursorPos[1] ) )
+		if ( m_iCurrentClassIndex != i && m_pClassButtons[ i ]->IsWithin( aCursorPos[0], aCursorPos[1] ) && m_pClassButtons[i]->IsEnabled())
 		{
 			SelectClass( i );
 		}
@@ -1298,6 +1315,11 @@ void CTFClassMenu::OnCommand( const char *command )
 	{
 		const char *pClass = command + 6;
 		const int iClass = atoi( pClass );
+		
+		if ( !mod_enable_original_classes.GetBool() && iClass <= TF_LAST_ORIGINAL_CLASS )
+		{
+			return;
+		}
 
 		// Avoid restarting the animation if the user selected on the same class
 		if ( iClass != m_iCurrentClassIndex )
@@ -1333,6 +1355,10 @@ void CTFClassMenu::OnCommand( const char *command )
 		// Go directly to the loadout for the selected class
 		EconUI()->OpenEconUI( -m_iCurrentClassIndex );	
 	}
+	else if (!strcmpi(command, "toggleclasses"))
+	{
+		UpdateClassButtons();
+	}
 	else
 	{
 		BaseClass::OnCommand( command );
@@ -1366,6 +1392,12 @@ static const char *g_sDialogVariables[] = {
 	"numMedic",
 	"numSniper",
 	"numSpy",
+
+	"numSwarmer",
+	"numWestern",
+	"numGunner",
+
+	"numAssalient",
 	"",
 };
 
@@ -1387,6 +1419,7 @@ static const char *g_sClassImagesBlue[] = {
 	"class_sel_sm_engineer_blu",
 	"class_sel_sm_soldier_blu",
 
+	"class_sel_sm_medic_blu",
 	"class_sel_sm_scout_blu",
 };
 
@@ -1408,6 +1441,7 @@ static const char *g_sClassImagesRed[] = {
 	"class_sel_sm_engineer_red",
 	"class_sel_sm_soldier_red",
 
+	"class_sel_sm_medic_red",
 	"class_sel_sm_scout_red",
 };
 
@@ -1428,6 +1462,8 @@ int g_ClassDefinesRemap[] = {
 	TF_CLASS_SWARMER,
 	TF_CLASS_WESTERN,
 	TF_CLASS_GUNNER,
+
+	TF_CLASS_ASSALIENT,
 	TF_CLASS_CIVILIAN,
 };
 
@@ -1706,4 +1742,38 @@ void CTFClassMenu::CheckMvMUpgrades()
 	}
 }
 
+void CTFClassMenu::UpdateClassButtons()
+{
+	if (IsShowingOriginals())
+	{
+		for (int i = 1; i <= TF_LAST_ORIGINAL_CLASS; i++)
+		{
+			m_pClassButtons[i]->SetVisible(false);
+			m_pClassButtons[i]->SetEnabled(false);
+		}
+		for (int i = TF_LAST_ORIGINAL_CLASS + 1; i < TF_LAST_NORMAL_CLASS; i++)
+		{
+			m_pClassButtons[i]->SetVisible(true);
+			m_pClassButtons[i]->SetEnabled(true);
+		}
+		m_bShowOriginals = false;
+	}
+	else
+	{
+		if (mod_enable_original_classes.GetBool())
+		{
+			for (int i = 1; i <= TF_LAST_ORIGINAL_CLASS; i++)
+			{
+				m_pClassButtons[i]->SetVisible(true);
+				m_pClassButtons[i]->SetEnabled(true);
+			}
+			for (int i = TF_LAST_ORIGINAL_CLASS + 1; i < TF_LAST_NORMAL_CLASS; i++)
+			{
+				m_pClassButtons[i]->SetVisible(false);
+				m_pClassButtons[i]->SetEnabled(false);
+			}
+			m_bShowOriginals = true;
+		}
+	}
+}
 

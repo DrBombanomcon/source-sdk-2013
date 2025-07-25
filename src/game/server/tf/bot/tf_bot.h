@@ -46,6 +46,7 @@ extern void BotGenerateAndWearItem( CTFPlayer *pBot, const char *itemName );
 #define TFBOT_IGNORE_ENEMY_SWARMERS		0x0800
 #define TFBOT_IGNORE_ENEMY_WESTERNS		0x1000
 #define TFBOT_IGNORE_ENEMY_GUNNERS		0x2000
+#define TFBOT_IGNORE_ENEMY_ASSALIENT	0x4000
 
 #define TFBOT_ALL_BEHAVIOR_FLAGS		0xFFFF
 

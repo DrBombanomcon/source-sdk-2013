@@ -663,7 +663,6 @@ public:
 					m_flDamagePerSecond = 0.f;
 					m_flDamageMeterTotal = 0.f;
 				}
-				
 				m_flDamageMeterTotal += iDamage;
 			}
 		}

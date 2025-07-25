@@ -24,6 +24,7 @@ extern bool UseHWMorphModels();
 #define TF_CLASS_SWARMER_FILE			"scripts/playerclasses/swarmer_test"
 #define TF_CLASS_WESTERN_FILE			"scripts/playerclasses/western"
 #define TF_CLASS_GUNNER_FILE			"scripts/playerclasses/gunner"
+#define TF_CLASS_ASSALIENT_FILE			"scripts/playerclasses/assalient"
 #define TF_CLASS_CIVILIAN_FILE			"scripts/playerclasses/civilian"
 
 const char *s_aPlayerClassFiles[] =
@@ -41,6 +42,7 @@ const char *s_aPlayerClassFiles[] =
 	TF_CLASS_SWARMER_FILE,
 	TF_CLASS_WESTERN_FILE,
 	TF_CLASS_GUNNER_FILE,
+	TF_CLASS_ASSALIENT_FILE,
 	TF_CLASS_CIVILIAN_FILE
 };
 

@@ -28,6 +28,7 @@ public:
 	void InputSetAllowSwarmer(inputdata_t& inputdata);
 	void InputSetAllowWestern(inputdata_t& inputdata);
 	void InputSetAllowGunner(inputdata_t& inputdata);
+	void InputSetAllowAssalient(inputdata_t& inputdata);
 
 	// misc.
 	bool IsClassAllowed( int iBotClass ) const;

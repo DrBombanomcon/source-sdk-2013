@@ -101,6 +101,7 @@
 
 #include "tf_wearable_weapons.h"
 #include "tf_weapon_bonesaw.h"
+#include "tf_wearable_medigun.h"
 
 static ConVar tf_demoman_charge_frametime_scaling( "tf_demoman_charge_frametime_scaling", "1", FCVAR_REPLICATED | FCVAR_CHEAT, "When enabled, scale yaw limiting based on client performance (frametime)." );
 static const float YAW_CAP_SCALE_MIN = 0.2f;
@@ -627,6 +628,21 @@ CTFWearableDemoShield* GetEquippedDemoShield( CTFPlayer * pPlayer )
 	{
 		CTFWearableDemoShield *pWearableShield = dynamic_cast<CTFWearableDemoShield*>( pPlayer->GetWearable( i ) );
 		if ( pWearableShield )
+		{
+			return pWearableShield;
+		}
+	}
+
+	return NULL;
+}
+
+CWeaponMedigunPassive* GetEquippedMediPassive(CTFPlayer* pPlayer)
+{
+	// Loop through our wearables in search of a shield
+	for (int i = 0; i < pPlayer->GetNumWearables(); ++i)
+	{
+		CWeaponMedigunPassive* pWearableShield = dynamic_cast<CWeaponMedigunPassive*>(pPlayer->GetWearable(i));
+		if (pWearableShield)
 		{
 			return pWearableShield;
 		}
@@ -12280,6 +12296,21 @@ bool CTFPlayer::DoClassSpecialSkill( void )
 			bDoSkill = TryToPickupBuilding();
 		}
 		break;
+	case TF_CLASS_ASSALIENT:
+		{
+			if (!m_Shared.HasPasstimeBall())
+			{
+				CWeaponMedigunPassive* pWearableShield = GetEquippedMediPassive(this);
+				if (pWearableShield)
+				{
+					if (!pWearableShield->IsHealing())
+						pWearableShield->DoSpecialAction(this);
+					else
+						pWearableShield->EndSpecialAction(this);
+				}
+				break;
+			}
+		}
 	default:
 		break;
 	}
@@ -12311,7 +12342,16 @@ bool CTFPlayer::EndClassSpecialSkill( void )
 			}
 		}
 		break;
-
+	case TF_CLASS_ASSALIENT:
+	{
+		CWeaponMedigunPassive* pWearableShield = GetEquippedMediPassive(this);
+		if (pWearableShield)
+		{
+			pWearableShield->EndSpecialAction(this);
+			break;
+		}
+	}
+	break;
 	default:
 		break;
 	}

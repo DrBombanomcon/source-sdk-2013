@@ -59,6 +59,7 @@ static const char *g_szBlueClassImages[] =
 	"../hud/class_scoutblue", //Swarmer TODO: Replace
 	"../hud/class_engiblue",
 	"../hud/class_soldierblue",
+	"../hud/class_medicblue",
 };
 
 static const char *g_szRedClassImages[] = 
@@ -76,6 +77,7 @@ static const char *g_szRedClassImages[] =
 	"../hud/class_scoutred", //Swarmer TODO: Replace
 	"../hud/class_engired",
 	"../hud/class_soldierred",
+	"../hud/class_medicred",
 };
 
 enum

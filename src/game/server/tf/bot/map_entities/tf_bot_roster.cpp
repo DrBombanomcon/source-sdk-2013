@@ -25,6 +25,7 @@ BEGIN_DATADESC( CTFBotRoster )
 	DEFINE_KEYFIELD(m_bAllowedClasses[TF_CLASS_SWARMER], FIELD_BOOLEAN, "allowSwarmer"),
 	DEFINE_KEYFIELD(m_bAllowedClasses[TF_CLASS_WESTERN], FIELD_BOOLEAN, "allowWestern"),
 	DEFINE_KEYFIELD(m_bAllowedClasses[TF_CLASS_GUNNER], FIELD_BOOLEAN, "allowGunner"),
+	DEFINE_KEYFIELD(m_bAllowedClasses[TF_CLASS_ASSALIENT], FIELD_BOOLEAN, "allowAssalient"),
 
 	DEFINE_INPUTFUNC( FIELD_STRING, "SetTeam", InputSetTeam ),
 	DEFINE_INPUTFUNC( FIELD_BOOLEAN, "SetAllowScout", InputSetAllowScout ),
@@ -39,6 +40,7 @@ BEGIN_DATADESC( CTFBotRoster )
 	DEFINE_INPUTFUNC(FIELD_BOOLEAN, "SetAllowSwarmer", InputSetAllowSwarmer),
 	DEFINE_INPUTFUNC(FIELD_BOOLEAN, "SetAllowWestern", InputSetAllowWestern),
 	DEFINE_INPUTFUNC(FIELD_BOOLEAN, "SetAllowGunner", InputSetAllowGunner),
+	DEFINE_INPUTFUNC(FIELD_BOOLEAN, "SetAllowAssalient", InputSetAllowAssalient),
 
 END_DATADESC()
 
@@ -111,6 +113,11 @@ void CTFBotRoster::InputSetAllowWestern(inputdata_t& inputdata)
 void CTFBotRoster::InputSetAllowGunner(inputdata_t& inputdata)
 {
 	m_bAllowedClasses[TF_CLASS_GUNNER] = inputdata.value.Bool();
+}
+
+void CTFBotRoster::InputSetAllowAssalient(inputdata_t& inputdata)
+{
+	m_bAllowedClasses[TF_CLASS_ASSALIENT] = inputdata.value.Bool();
 }
 //------------------------------------------------------------------------------
 

@@ -77,9 +77,11 @@ public:
 	virtual void OnClose();
 	virtual void ShowPanel( bool bShow );
 	virtual void UpdateClassCounts( void ){}
+	virtual void UpdateClassButtons(void);
 	void		 SelectClass( int iClass );
 
 	virtual int GetTeamNumber( void ) = 0;
+	bool		IsShowingOriginals(void) { return m_bShowOriginals; }
 
 	// IGameEventListener interface:
 	virtual void FireGameEvent( IGameEvent *event );
@@ -111,6 +113,7 @@ protected:
 	CTFClassTipsPanel		*m_pClassTipsPanel;
 	CTFPlayerModelPanel		*m_pTFPlayerModelPanel;
 	CExButton				*m_pEditLoadoutButton;
+	CExImageButton          *m_pToggleClassGroup;
 	CExLabel				*m_pSelectAClassLabel;
 	CExplanationPopup		*m_pClassHighlightPanel;
 	CSCHintIcon				*m_pEditLoadoutHintIcon;
@@ -129,6 +132,7 @@ private:
 	vgui::CKeyRepeatHandler	m_KeyRepeat;
 
 	int				m_nBaseMusicGuid;
+	bool			m_bShowOriginals;
 
 #ifndef _X360
 	CTFImagePanel *m_ClassCountImages[CLASS_COUNT_IMAGES];

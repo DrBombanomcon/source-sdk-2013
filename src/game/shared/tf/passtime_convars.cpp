@@ -47,6 +47,7 @@ PASSTIME_CONVAR( tf_passtime_throwarc_spy, 0.0f, "" );
 PASSTIME_CONVAR(tf_passtime_throwarc_swarmer, 0.1f, "");
 PASSTIME_CONVAR(tf_passtime_throwarc_western, 0.1f, "");
 PASSTIME_CONVAR(tf_passtime_throwarc_gunner, 0.1f, "");
+PASSTIME_CONVAR(tf_passtime_throwarc_assalient, 0.0f, "");
 PASSTIME_CONVAR( tf_passtime_throwspeed_scout, 700.0f, "" );
 PASSTIME_CONVAR( tf_passtime_throwspeed_soldier, 800.0f, "" );
 PASSTIME_CONVAR( tf_passtime_throwspeed_pyro, 750.0f, "" );
@@ -59,6 +60,7 @@ PASSTIME_CONVAR( tf_passtime_throwspeed_spy, 900.0f, "" );
 PASSTIME_CONVAR(tf_passtime_throwspeed_swarmer, 700.0f, "");
 PASSTIME_CONVAR(tf_passtime_throwspeed_western, 700.0f, "");
 PASSTIME_CONVAR(tf_passtime_throwspeed_gunner, 800.0f, "");
+PASSTIME_CONVAR(tf_passtime_throwspeed_assalient, 900.0f, "");
 PASSTIME_CONVAR( tf_passtime_throwspeed_velocity_scale, 0.33f, "How much player velocity to add when tossing (0=none 1=100%)" );
 PASSTIME_CONVAR( tf_passtime_save_stats, 0, "" );
 

@@ -52,7 +52,8 @@ const char *g_pszTipsClassImages[] =
 	"class_portraits/engineer",		// TF_CLASS_ENGINEER,
 	"class_portraits/scout",	// TF_CLASS_SWARMER,
 	"class_portraits/engineer",		// TF_CLASS_WESTERN,	
-	"class_portraits/soldier",		// TF_CLASS_GUNNER,			
+	"class_portraits/soldier",		// TF_CLASS_GUNNER,	
+	"class_portraits/medic",		// TF_CLASS_ASSALIENT,		
 };
 
 ClassDetails_t g_PerClassStatDetails[15] =
