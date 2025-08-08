@@ -54,11 +54,7 @@ public:
 
 	float				GetProgress(void) { return GetEffectBarProgress(); }
 	const char* GetEffectLabelText(void) { return "Spawn Swarm"; }
-
-	void RemoveZombie( void );
 private:
-	//TODO: Figure out a way to get the actual zombie entities spawned from this
-	int m_iRosterSize;
 	CTFSwarmer_Melee(const CTFSwarmer_Melee&) {}
 };
 #endif

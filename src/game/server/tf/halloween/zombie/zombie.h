@@ -143,9 +143,7 @@ public:
 	CSwarmie();
 	~CSwarmie();
 	virtual void UpdateOnRemove();
-	static CSwarmie* SpawnAtPos(const Vector& vSpawnPos, float flLifeTime = 0.f, int nTeam = TF_TEAM_HALLOWEEN, CTFSwarmer_Melee* pWeapon = NULL, SkeletonType_t nSkeletonType = SKELETON_NORMAL);
-private:
-	CTFSwarmer_Melee* m_Source;
+	static CSwarmie* SpawnAtPos(const Vector& vSpawnPos, float flLifeTime = 0.f, int nTeam = TF_TEAM_HALLOWEEN, CBaseEntity* pOwner = NULL, SkeletonType_t nSkeletonType = SKELETON_NORMAL);
 };
 
 //--------------------------------------------------------------------------------------------------------------

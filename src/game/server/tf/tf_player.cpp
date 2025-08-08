@@ -843,6 +843,7 @@ IMPLEMENT_SERVERCLASS_ST( CTFPlayer, DT_TFPlayer )
 	SendPropInt( SENDINFO( m_iPlayerSkinOverride ) ),
 	SendPropBool( SENDINFO( m_bViewingCYOAPDA ) ),
 	SendPropBool( SENDINFO( m_bRegenerating ) ),
+	SendPropArray3( SENDINFO_ARRAY3( m_hSwarm ), SendPropEHandle( SENDINFO_ARRAY( m_hSwarm ) ) ),
 END_SEND_TABLE()
 
 // -------------------------------------------------------------------------------- //
@@ -1122,6 +1123,11 @@ CTFPlayer::CTFPlayer()
 	m_bRespawning = false;
 
 	m_bAlreadyUsedExtendFreezeThisDeath = false;
+
+	for (int i = 0; i < 4; i++)
+	{
+		m_hSwarm.Set(i, NULL);
+	}
 }
 
 //-----------------------------------------------------------------------------
@@ -23091,4 +23097,46 @@ void CTFPlayer::ScriptEquipWearableViewModel( HSCRIPT hWearableViewModel )
 void CTFPlayer::ScriptStunPlayer( float flTime, float flReductionAmount, int iStunFlags /* = TF_STUN_MOVEMENT */, HSCRIPT hAttacker /* = NULL */ )
 {
 	m_Shared.StunPlayer( flTime, flReductionAmount, iStunFlags, ScriptToEntClass< CTFPlayer >( hAttacker ) );
+}
+
+//-------------------------------------------------------------------
+// Swarmer swarm control functions
+// Moving these to tf_player so they are tied to the player vs their weapon
+//-------------------------------------------------------------------
+void CTFPlayer::AddSwarm(CSwarmie* entry)
+{
+	//Todo; Set max to be dependent on swarmer weapon
+	for (int i = 0; i < 4; i++)
+	{
+		if (!m_hSwarm[i])
+		{
+			m_hSwarm.Set(i, entry);
+			break;
+		}
+	}
+}
+
+void CTFPlayer::RemoveSwarm(CSwarmie* entry)
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (entry == m_hSwarm[i])
+		{
+			m_hSwarm.Set(i, NULL);
+			break;
+		}
+	}
+}
+
+int CTFPlayer::GetSwarmAmount()
+{
+	int size = 0;
+	for (int i = 0; i < 4; i++)
+	{
+		if (m_hSwarm[i])
+		{
+			size++;
+		}
+	}
+	return size;
 }

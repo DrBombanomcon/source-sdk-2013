@@ -17,6 +17,7 @@
 #include "steam/steam_gameserver.h"
 #include "ihasattributes.h"
 #include "tf_item_inventory.h"
+#include "halloween/zombie/zombie.h"
 
 class CTFPlayer;
 class CTFTeam;
@@ -642,6 +643,12 @@ public:
 	virtual void			ReapplyProvision( void ) { return; }
 
 	CVoteController 		*GetTeamVoteController() OVERRIDE;
+
+	void AddSwarm(CSwarmie* entry);
+	void RemoveSwarm(CSwarmie* entry);
+	int GetSwarmAmount();
+
+	CNetworkArray(EHANDLE, m_hSwarm, 4);
 
 protected:
 	CNetworkVarEmbedded( CAttributeContainerPlayer, m_AttributeManager );

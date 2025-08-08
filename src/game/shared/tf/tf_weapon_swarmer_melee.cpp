@@ -55,7 +55,6 @@ END_DATADESC()
 
 CTFSwarmer_Melee::CTFSwarmer_Melee()
 {
-	m_iRosterSize = 0;
 }
 
 void CTFSwarmer_Melee::Precache(void)
@@ -83,9 +82,14 @@ void CTFSwarmer_Melee::SecondaryAttack(void)
 	if (m_flNextPrimaryAttack > gpGlobals->curtime)
 		return;
 
+#ifdef GAME_DLL
+	if (pOwner->GetSwarmAmount() > 4)
+		return;
+#endif
+
 	int iSpawnActive = pOwner->GetAmmoCount(TF_AMMO_GRENADES1);
 
-	if ((m_iRosterSize < 4) && CanSummon(pOwner) && (iSpawnActive > 0))
+	if (CanSummon(pOwner) && (iSpawnActive > 0))
 	{
 		m_flNextPrimaryAttack = gpGlobals->curtime + 0.25;
 
@@ -129,7 +133,6 @@ bool CTFSwarmer_Melee::CanSummon(CTFPlayer* pPlayer)
 
 bool CTFSwarmer_Melee::SpawnSwarm(CTFPlayer* pPlayer)
 {
-
 #ifdef GAME_DLL
 	int skeletonType = 0;
 	CALL_ATTRIB_HOOK_INT(skeletonType, spawnType);
@@ -137,18 +140,12 @@ bool CTFSwarmer_Melee::SpawnSwarm(CTFPlayer* pPlayer)
 	AngleVectors(pPlayer->EyeAngles(), &vecForward, &vecRight, &vecUp);
 	Vector vecSkeleLeft = pPlayer->GetAbsOrigin() + (vecRight * -98);
 	Vector vecSkeleRight = pPlayer->GetAbsOrigin() + (vecRight * 98);
-	CSwarmie::SpawnAtPos(vecSkeleLeft, 90.0f, GetTeamNumber(), this, (CZombie::SkeletonType_t)skeletonType);
-	CSwarmie::SpawnAtPos(vecSkeleRight, 90.0f, GetTeamNumber(), this, (CZombie::SkeletonType_t)skeletonType);
+	pPlayer->AddSwarm(CSwarmie::SpawnAtPos(vecSkeleLeft, 90.0f, GetTeamNumber(), pPlayer, (CZombie::SkeletonType_t)skeletonType));
+	pPlayer->AddSwarm(CSwarmie::SpawnAtPos(vecSkeleRight, 90.0f, GetTeamNumber(), pPlayer, (CZombie::SkeletonType_t)skeletonType));
 	pPlayer->RemoveAmmo(1, TF_AMMO_GRENADES1);
 
 #endif
 
-	m_iRosterSize += 2;
 	StartEffectBarRegen();
 	return true;
-}
-
-void CTFSwarmer_Melee::RemoveZombie(void)
-{
-	m_iRosterSize--;
 }

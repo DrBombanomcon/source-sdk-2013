@@ -658,17 +658,14 @@ END_DATADESC()
 
 CSwarmie::CSwarmie()
 {
-	m_Source = NULL;
 }
 
 CSwarmie::~CSwarmie()
 {
-	m_Source = NULL;
 }
 
-CSwarmie* CSwarmie::SpawnAtPos(const Vector& vSpawnPos, float flLifeTime , int nTeam , CTFSwarmer_Melee* pWeapon , SkeletonType_t nSkeletonType)
+CSwarmie* CSwarmie::SpawnAtPos(const Vector& vSpawnPos, float flLifeTime /*= 0.f*/, int nTeam /*= TF_TEAM_HALLOWEEN*/, CBaseEntity* pOwner /*= NULL*/, SkeletonType_t nSkeletonType /*= SKELETON_NORMAL*/)
 {
-	CBaseEntity* pOwner = pWeapon->GetTFPlayerOwner();
 	CSwarmie* pZombie = (CSwarmie*)CreateEntityByName("tf_swarmie");
 	if (pZombie)
 	{
@@ -685,7 +682,6 @@ CSwarmie* CSwarmie::SpawnAtPos(const Vector& vSpawnPos, float flLifeTime , int n
 		}
 
 		pZombie->SetSkeletonType(nSkeletonType);
-		pZombie->m_Source = pWeapon;
 	}
 
 	return pZombie;
@@ -693,10 +689,10 @@ CSwarmie* CSwarmie::SpawnAtPos(const Vector& vSpawnPos, float flLifeTime , int n
 
 void CSwarmie::UpdateOnRemove()
 {
-	if (m_Source)
+	if (GetOwnerEntity() && GetOwnerEntity()->IsPlayer() )
 	{
-		m_Source->RemoveZombie();
-		m_Source = NULL;
+		CTFPlayer* pOwner = ToTFPlayer(GetOwnerEntity());
+		pOwner->RemoveSwarm(this);
 	}
 	BaseClass::UpdateOnRemove();
 }
