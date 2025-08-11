@@ -21,7 +21,7 @@
 #define TF_CHAINGUN_MAX_RAMP 1.0f
 #define TF_CHAINGUN_RAMP_WITHDRAW 2.0f
 
-class CTFChainGun : public CTFRocketLauncher
+class CTFChainGun : public CTFRocketLauncher, public ITFChargeUpWeapon
 {
 public:
 
@@ -50,6 +50,14 @@ public:
 	virtual void	WeaponIdle();
 	virtual void	ItemPostFrame(void);
 
+	float		GetProgress(void) { return m_flOverheatPercent; }
+	const char* GetEffectLabelText(void) { return "Overheat"; }
+
+public:
+	virtual bool CanCharge(void) { return true; }
+	virtual float GetChargeBeginTime(void) { return m_flFiringStartTime; }
+	virtual float GetChargeMaxTime(void) { float flChargeTime = TF_CHAINGUN_RAMP_WITHDRAW;	return flChargeTime; }
+	virtual float GetCurrentCharge(void) { return GetRampUp(); }
 
 private:
 

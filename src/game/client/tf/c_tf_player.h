@@ -952,6 +952,7 @@ private:
 	CNetworkVar( float, m_flHelpmeButtonPressTime );
 	CNetworkVar( bool, m_bViewingCYOAPDA );
 	CNetworkVar( bool, m_bRegenerating );
+	CNetworkArray(EHANDLE, m_hSwarm, 4);
 
 	bool m_bNotifiedWeaponInspectThisLife;
 

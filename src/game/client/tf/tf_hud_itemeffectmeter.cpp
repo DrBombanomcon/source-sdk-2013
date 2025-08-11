@@ -35,6 +35,8 @@
 #include "tf_weapon_rocketpack.h"
 #include "tf_weapon_bonesaw.h"
 #include "tf_weapon_slap.h"
+#include "tf_weapon_swarmer_melee.h"
+#include "tf_weapon_chaingun.h"
 
 #include <vgui_controls/ImagePanel.h>
 
@@ -341,6 +343,13 @@ void CHudItemEffectMeter::CreateHudElementsForClass( C_TFPlayer* pPlayer, CUtlVe
 	case TF_CLASS_MEDIC:
 		DECLARE_ITEM_EFFECT_METER( CWeaponMedigun, TF_WEAPON_MEDIGUN, true, "resource/UI/HudItemEffectMeter_Scout.res" );
 		DECLARE_ITEM_EFFECT_METER( CTFBonesaw, TF_WEAPON_BONESAW, false, "resource/UI/HUDItemEffectMeter_Organs.res" );
+		break;
+	case TF_CLASS_SWARMER:
+		//lambdaAddItemEffectMeter("tf_weapon_swarmer_melee", true);
+		DECLARE_ITEM_EFFECT_METER( CTFSwarmer_Melee, TF_WEAPON_SWARMER_MELEE, true, NULL );
+		break;
+	case TF_CLASS_GUNNER:
+		DECLARE_ITEM_EFFECT_METER(CTFChainGun, TF_WEAPON_CHAINGUN, true, NULL);
 		break;
 	}
 

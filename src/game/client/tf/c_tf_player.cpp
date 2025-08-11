@@ -3764,6 +3764,7 @@ IMPLEMENT_CLIENTCLASS_DT( C_TFPlayer, DT_TFPlayer, CTFPlayer )
 	RecvPropInt( RECVINFO( m_iPlayerSkinOverride ) ),
 	RecvPropBool( RECVINFO( m_bViewingCYOAPDA ) ),
 	RecvPropBool( RECVINFO( m_bRegenerating ) ),
+	RecvPropArray3( RECVINFO_ARRAY(m_hSwarm), RecvPropEHandle(RECVINFO(m_hSwarm)) ),
 END_RECV_TABLE()
 
 

@@ -99,7 +99,7 @@ void CTFChainGun::PrimaryAttack(void)
 		BaseClass::PrimaryAttack();
 		if (m_flFiringStartTime <= 0.f)
 		{
-			Warning("Reseting firing time \n");
+			//Warning("Reseting firing time \n");
 			m_flFiringStartTime = gpGlobals->curtime;
 			m_flOldOverheatPercent = m_flOverheatPercent;
 		}
@@ -139,14 +139,14 @@ void CTFChainGun::ItemPostFrame(void)
 		{
 			m_flOverheatStartTime = gpGlobals->curtime;
 
-			Warning("Began overheating [Doing this since no hud yet]\n");
+			//Warning("Began overheating [Doing this since no hud yet]\n");
 		}
 		else
 		{
 			float overheatCooldown = gpGlobals->curtime - m_flOverheatStartTime;
 			if (overheatCooldown >= GetOverheatEndTime())
 			{
-				Warning("Overheat over [Again, no hud]\n");
+				//Warning("Overheat over [Again, no hud]\n");
 				m_bOverheatState = false;
 				m_flRampUp = 0.f;
 				m_flFiringStartTime = 0.f;
