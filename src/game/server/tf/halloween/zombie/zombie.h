@@ -89,7 +89,8 @@ public:
 	{
 		SKELETON_NORMAL = 0,
 		SKELETON_KING,
-		SKELETON_MINI
+		SKELETON_MINI,
+		SKELETON_SWARM,
 	};
 	SkeletonType_t GetSkeletonType() const { return m_nType; }
 	void SetSkeletonType( SkeletonType_t nType );
@@ -143,7 +144,7 @@ public:
 	CSwarmie();
 	~CSwarmie();
 	virtual void UpdateOnRemove();
-	static CSwarmie* SpawnAtPos(const Vector& vSpawnPos, float flLifeTime = 0.f, int nTeam = TF_TEAM_HALLOWEEN, CBaseEntity* pOwner = NULL, SkeletonType_t nSkeletonType = SKELETON_NORMAL);
+	static CSwarmie* SpawnAtPos(const Vector& vSpawnPos, float flLifeTime = 0.f, int nTeam = TF_TEAM_HALLOWEEN, CBaseEntity* pOwner = NULL, SkeletonType_t nSkeletonType = SKELETON_SWARM);
 };
 
 //--------------------------------------------------------------------------------------------------------------

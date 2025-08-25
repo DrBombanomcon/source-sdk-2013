@@ -134,7 +134,7 @@ bool CTFSwarmer_Melee::CanSummon(CTFPlayer* pPlayer)
 bool CTFSwarmer_Melee::SpawnSwarm(CTFPlayer* pPlayer)
 {
 #ifdef GAME_DLL
-	int skeletonType = 0;
+	int skeletonType = 3;
 	CALL_ATTRIB_HOOK_INT(skeletonType, spawnType);
 	Vector vecForward, vecUp, vecRight;
 	AngleVectors(pPlayer->EyeAngles(), &vecForward, &vecRight, &vecUp);

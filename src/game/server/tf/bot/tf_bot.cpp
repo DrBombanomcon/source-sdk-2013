@@ -1086,10 +1086,29 @@ ETFClass CTFBot::GetPresetClassToSpawn() const
 		TF_CLASS_SPY,
 	};
 
+
+	static ETFClass modRoster[] =
+	{
+		TF_CLASS_ASSALIENT,
+		TF_CLASS_SWARMER,
+		TF_CLASS_GUNNER,
+		TF_CLASS_WESTERN,
+		TF_CLASS_WESTERN,
+		TF_CLASS_GUNNER,
+
+		TF_CLASS_SWARMER,
+		TF_CLASS_ASSALIENT,
+		TF_CLASS_GUNNER,
+		TF_CLASS_WESTERN,
+		TF_CLASS_GUNNER,
+		TF_CLASS_SWARMER,
+	};
+
 	// make sure we have completed list of rolls per team
 	COMPILE_TIME_ASSERT( ARRAYSIZE( offenseRoster ) == 12 );
 	COMPILE_TIME_ASSERT( ARRAYSIZE( defenseRoster ) == 12 );
 	COMPILE_TIME_ASSERT( ARRAYSIZE( compRoster ) == 12 );
+	COMPILE_TIME_ASSERT( ARRAYSIZE( modRoster ) == 12);
 
 	// assume offense
 	ETFClass *desiredRoster = offenseRoster;
@@ -1134,6 +1153,11 @@ ETFClass CTFBot::GetPresetClassToSpawn() const
 		{
 			desiredRoster = defenseRoster;
 		}
+	}
+	
+	if (!mod_enable_original_classes.GetBool())
+	{
+		desiredRoster = modRoster;
 	}
 
 	// count classes in use by my team, not including me

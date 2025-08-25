@@ -717,7 +717,7 @@ ConVar tf_test_special_ducks( "tf_test_special_ducks", "1", FCVAR_DEVELOPMENTONL
 
 ConVar tf_mm_abandoned_players_per_team_max( "tf_mm_abandoned_players_per_team_max", "1", FCVAR_DEVELOPMENTONLY );
 #endif // GAME_DLL
-ConVar mod_enable_original_classes("mod_enable_original_classes", "1", FCVAR_REPLICATED | FCVAR_CHEAT | FCVAR_HIDDEN, "Enables joinning as the original classes.");
+ConVar mod_enable_original_classes("mod_enable_original_classes", "0", FCVAR_REPLICATED /* | FCVAR_CHEAT*/ | FCVAR_HIDDEN, "Enables joinning as the original classes.");
 ConVar tf_mm_next_map_vote_time( "tf_mm_next_map_vote_time", "30", FCVAR_REPLICATED );
 
 
