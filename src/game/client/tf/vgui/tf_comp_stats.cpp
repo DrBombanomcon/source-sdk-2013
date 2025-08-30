@@ -124,6 +124,7 @@ public:
 			SetupClassIcon(pStatsContainer, "western", TF_CLASS_WESTERN, stats);
 			SetupClassIcon(pStatsContainer, "gunner", TF_CLASS_GUNNER, stats);
 			SetupClassIcon(pStatsContainer, "assalient", TF_CLASS_ASSALIENT, stats);
+			SetupClassIcon(pStatsContainer, "firewalker", TF_CLASS_FIREWALKER, stats);
 
 			SetupMedalForStat( pStatsContainer, stats.kills_medal(), "kills" );
 			SetupMedalForStat( pStatsContainer, stats.damage_medal(), "damage" );

@@ -58,6 +58,7 @@ static const char *g_pszClassSubdirectories[] =
 	"western",		// TF_CLASS_WESTERN,
 	"gunner",		// TF_CLASS_GUNNER,
 	"assalient",	// TF_CLASS_ASSALIENT,
+	"firewalker",	// TF_CLASS_FIREWALKER,
 };
 
 //-----------------------------------------------------------------------------

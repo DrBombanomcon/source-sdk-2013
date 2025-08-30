@@ -368,6 +368,7 @@ bool CFlexSceneFileManager::Init()
 		"western",
 		"gunner",
 		"assalient",
+		"firewalker",
 	};
 
 	char fn[ MAX_PATH ];

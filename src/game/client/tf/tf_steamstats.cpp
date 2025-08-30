@@ -87,6 +87,7 @@ StatMap_t* g_SteamStats_Class[] = {
 	NULL,					// Western
 	NULL,					// Gunner
 	NULL,					// Assalient
+	NULL,					// Firewalker
 };
 
 // subset of map stats which we store in Steam

@@ -6,63 +6,26 @@
 
 #include "cbase.h"
 
-#include "tf_weapon_dragons_fury.h"
+#include "tf_projectile_dragons_fury.h"
 
-#ifdef CLIENT_DLL
-	#include "c_tf_player.h"
-	#include "dlight.h"
-	#include "iefx.h"
-	#include "tempent.h"
-	#include "debugoverlay_shared.h"
-#else
-	#include "tf_player.h"
-	#include "tf_fx.h"
-	#include "tf_projectile_rocket.h"
-	#include "tf_logic_robot_destruction.h"
-	#include "tf_weapon_compound_bow.h"
-	#include "tf_pumpkin_bomb.h"
-	#include "halloween/merasmus/merasmus_trick_or_treat_prop.h"
-	#include "tf_robot_destruction_robot.h"
-	#include "tf_generic_bomb.h"
-#endif
+extern ConVar tf_fireball_distance( "tf_fireball_distance", "500", FCVAR_REPLICATED | FCVAR_CHEAT ); // 375 = 3000 * 0.125, which is the speed and lifetime we tested with
+extern ConVar tf_fireball_speed( "tf_fireball_speed", "3000", FCVAR_REPLICATED | FCVAR_CHEAT );
+extern ConVar tf_fireball_damage( "tf_fireball_damage", "25", FCVAR_REPLICATED | FCVAR_CHEAT );
+extern ConVar tf_fireball_burn_duration( "tf_fireball_burn_duration", "2", FCVAR_REPLICATED | FCVAR_CHEAT );
+extern ConVar tf_fireball_radius( "tf_fireball_radius", "22.5", FCVAR_REPLICATED | FCVAR_CHEAT );
+extern ConVar tf_fireball_draw_debug_radius( "tf_fireball_draw_debug_radius", "0", FCVAR_REPLICATED | FCVAR_CHEAT );
+extern ConVar tf_fireball_burning_bonus( "tf_fireball_burning_bonus", "3", FCVAR_REPLICATED | FCVAR_CHEAT );
+extern ConVar tf_fireball_max_lifetime( "tf_fireball_max_lifetime", "0.5", FCVAR_REPLICATED | FCVAR_CHEAT );
 
-#ifdef CLIENT_DLL
-	#define CTFProjectile_BallOfFire				C_TFProjectile_BallOfFire
-#endif
-
-ConVar tf_fireball_distance( "tf_fireball_distance", "500", FCVAR_REPLICATED | FCVAR_CHEAT ); // 375 = 3000 * 0.125, which is the speed and lifetime we tested with
-ConVar tf_fireball_speed( "tf_fireball_speed", "3000", FCVAR_REPLICATED | FCVAR_CHEAT );
-ConVar tf_fireball_damage( "tf_fireball_damage", "25", FCVAR_REPLICATED | FCVAR_CHEAT );
-ConVar tf_fireball_burn_duration( "tf_fireball_burn_duration", "2", FCVAR_REPLICATED | FCVAR_CHEAT );
-ConVar tf_fireball_radius( "tf_fireball_radius", "22.5", FCVAR_REPLICATED | FCVAR_CHEAT );
-ConVar tf_fireball_draw_debug_radius( "tf_fireball_draw_debug_radius", "0", FCVAR_REPLICATED | FCVAR_CHEAT );
-ConVar tf_fireball_burning_bonus( "tf_fireball_burning_bonus", "3", FCVAR_REPLICATED | FCVAR_CHEAT );
-ConVar tf_fireball_max_lifetime( "tf_fireball_max_lifetime", "0.5", FCVAR_REPLICATED | FCVAR_CHEAT );
-
-
-class CTFProjectile_BallOfFire : public CTFProjectile_Rocket
+CTFProjectile_BallOfFire::~CTFProjectile_BallOfFire()
 {
-public:
-	DECLARE_CLASS( CTFProjectile_BallOfFire, CTFProjectile_Rocket );
-	DECLARE_NETWORKCLASS();
-
-	CTFProjectile_BallOfFire() {}
-
-	~CTFProjectile_BallOfFire()
+	if (tf_fireball_draw_debug_radius.GetBool())
 	{
-		if ( tf_fireball_draw_debug_radius.GetBool() )
-		{
-			NDebugOverlay::Sphere( GetAbsOrigin(), tf_fireball_radius.GetFloat() * 3.f, 255, 0, 255, false, 2.f );
-		}
+		NDebugOverlay::Sphere(GetAbsOrigin(), tf_fireball_radius.GetFloat() * 3.f, 255, 0, 255, false, 2.f);
 	}
+}
 
-	virtual void Precache() OVERRIDE
-	{
-		PrecacheModel( "models/empty.mdl" );
-		PrecacheScriptSound( "Weapon_DragonsFury.Nearmiss" );
-	}
-
-	virtual void Spawn() OVERRIDE
+void CTFProjectile_BallOfFire::Spawn()
 	{
 		BaseClass::Spawn();
 
@@ -89,22 +52,42 @@ public:
 
 		m_vecSpawnOrigin = GetAbsOrigin();
 		// This will limit how far we can go
+
+		//Retro-fitting
+		m_flMaxDistance = tf_fireball_distance.GetFloat();
+		m_flBurnDuration = tf_fireball_burn_duration.GetFloat();
+
 		SetContextThink( &CTFProjectile_BallOfFire::DistanceLimitThink, gpGlobals->curtime, "DistanceLimitThink" );
 
 		// This will limit how long we're alive (in case we get stuck somewhere)
 		SetContextThink( &CTFProjectile_BallOfFire::ExpireDelayThink, gpGlobals->curtime + tf_fireball_max_lifetime.GetFloat(), "ExpireDelayThink" );
 #endif
-	}
+}
 
 #ifdef GAME_DLL
-	void ExpireDelayThink()
+void CTFProjectile_BallOfFire::SetDurationThink(float duration)
+{
+	SetContextThink(&CTFProjectile_BallOfFire::ExpireDelayThink, gpGlobals->curtime + (tf_fireball_max_lifetime.GetFloat() * duration), "ExpireDelayThink");
+}
+
+void CTFProjectile_BallOfFire::SetMaxDistance(float modifer)
+{
+	m_flMaxDistance = (m_flMaxDistance * modifer);
+}
+
+void CTFProjectile_BallOfFire::SetBurnDuration(float modifer)
+{
+	m_flBurnDuration = (m_flBurnDuration + modifer);
+}
+
+void CTFProjectile_BallOfFire::ExpireDelayThink()
 	{
 		SetContextThink( &CBaseGrenade::SUB_Remove, gpGlobals->curtime, "RemoveThink" );
 	}
 
 	// This gets called *BEFORE* the physics move, so we have a chance to update our velocity
 	// so that physics won't move us beyond our distance limit
-	void DistanceLimitThink()
+void CTFProjectile_BallOfFire::DistanceLimitThink()
 	{
 		if ( m_bFizzling )
 			return;
@@ -115,7 +98,7 @@ public:
 			return;
 		}
 
-		const float flMaxDist = tf_fireball_distance.GetFloat();
+		const float flMaxDist = m_flMaxDistance;
 		float flDistance = ( GetAbsOrigin() - m_vecSpawnOrigin ).Length();
 		const float flDt = gpGlobals->frametime;
 
@@ -154,7 +137,7 @@ public:
 		SetContextThink( &CTFProjectile_BallOfFire::DistanceLimitThink, gpGlobals->curtime, "DistanceLimitThink" );
 	}
 
-	void StopAndFizzle()
+void CTFProjectile_BallOfFire::StopAndFizzle()
 	{
 		if ( m_bFizzling )
 			return;
@@ -164,12 +147,10 @@ public:
 		m_bFizzling = true;
 		SetContextThink( &CBaseGrenade::SUB_Remove, gpGlobals->curtime + 0.1f, "RemoveThink" );
 	}
-	virtual const char *GetProjectileModelName( void ) { return "models/empty.mdl"; } // We dont have a model by default, and that's OK
 
-	virtual float		GetDamageRadius()	const			{ return tf_fireball_radius.GetFloat(); }
-	virtual int			GetCustomDamageType() const OVERRIDE { Assert( false ); return TF_DMG_CUSTOM_DRAGONS_FURY_IGNITE; }
+float CTFProjectile_BallOfFire::GetDamageRadius() const { return tf_fireball_radius.GetFloat(); }
 
-	virtual void RocketTouch( CBaseEntity *pOther ) OVERRIDE
+void CTFProjectile_BallOfFire::RocketTouch( CBaseEntity *pOther )
 	{
 		if ( m_bFizzling )
 			return;
@@ -223,7 +204,7 @@ public:
 		StopAndFizzle();
 	}
 
-	void RefundAmmo()
+void CTFProjectile_BallOfFire::RefundAmmo()
 	{
 		if ( !m_bRefunded )
 		{
@@ -236,9 +217,7 @@ public:
 		}
 	}
 
-	virtual const char *GetExplodeEffectSound()	const		{ return "Halloween.spell_fireball_impact"; }
-
-	void OnCollideWithTeammate( CTFPlayer *pTFPlayer )
+void CTFProjectile_BallOfFire::OnCollideWithTeammate( CTFPlayer *pTFPlayer )
 	{
 		// Only care about Snipers
 		if ( !pTFPlayer->IsPlayerClass( TF_CLASS_SNIPER ) )
@@ -259,7 +238,7 @@ public:
 		}
 	}
 
-	void Burn( CBaseEntity* pTarget )
+void CTFProjectile_BallOfFire::Burn( CBaseEntity* pTarget )
 	{
 		CBaseEntity *pOwner = GetOwnerEntity();
 		CTFPlayer* pTFOwner = ToTFPlayer( pOwner );
@@ -334,12 +313,13 @@ public:
 			//NDebugOverlay::Line( GetAbsOrigin(), GetAbsOrigin() + GetAbsVelocity() * gpGlobals->frametime, 255.f, 0.f, 0.f, false, 2.5f );
 			//NDebugOverlay::Cross3D( trForward.endpos, 32.f, 0.f, 255.f, 0.f, false, 2.5f );
 
-			bBonusDamage = ( pTFPlayer->m_Shared.InCond( TF_COND_BURNING ) && bHitBBox );
+			//Modified so the firewalker doesn't have bonus damage against players
+			bBonusDamage = ( pTFPlayer->m_Shared.InCond( TF_COND_BURNING ) && bHitBBox && m_bBonusDamage);
 			float flDamageBonusScale = ( bBonusDamage ) ? tf_fireball_burning_bonus.GetFloat() : 1.f;
 			info.SetDamage( GetDamage() * flDamageBonusScale );
 			info.SetDamageCustom( bBonusDamage ? TF_DMG_CUSTOM_DRAGONS_FURY_BONUS_BURNING : TF_DMG_CUSTOM_DRAGONS_FURY_IGNITE );
 
-			float flBurnDuration = tf_fireball_burn_duration.GetFloat();
+			float flBurnDuration = m_flBurnDuration;
 
 			// This burn affects pyros, too, but only half as long
 			if ( pTFPlayer->IsPlayerClass( TF_CLASS_PYRO ) )
@@ -355,6 +335,8 @@ public:
 			// This weapon sucks against non-players since it can't light them on fire, but if you've managed
 			// to get in range as a Pyro you deserve to destroy it.  We're going to give the bonus
 			// damage always against these targets to help with this.
+
+			//Firewalker: Keep the bonus damage against buildings
 			bBonusDamage = true;
 			info.SetDamage( GetDamage() * tf_fireball_burning_bonus.GetFloat() );
 			info.SetDamageCustom( TF_DMG_CUSTOM_DRAGONS_FURY_BONUS_BURNING );
@@ -430,7 +412,7 @@ public:
 		}
 	}
 
-	bool IsEntityVisible( CBaseEntity *pEntity )
+bool CTFProjectile_BallOfFire::IsEntityVisible( CBaseEntity *pEntity )
 	{
 		const trace_t *pTrace = &CBaseEntity::GetTouchTrace();
 		
@@ -442,18 +424,11 @@ public:
 		return true;
 	}
 
-	CUtlVector< int > m_vecHitPlayers;
 #endif
 
 #ifdef CLIENT_DLL
-	
-	// Do nothing
-	virtual void CreateTrails( void ) OVERRIDE
-	{}
 
-	const char* GetParticle( bool bCrit ) const { return bCrit ? ( GetTeamNumber()==TF_TEAM_BLUE ? "projectile_fireball_crit_blue" : "projectile_fireball_crit_red" ) : "projectile_fireball"; }
-
-	virtual void OnDataChanged( DataUpdateType_t updateType ) OVERRIDE
+void CTFProjectile_BallOfFire::OnDataChanged( DataUpdateType_t updateType )
 	{
 		BaseClass::OnDataChanged( updateType );
 
@@ -480,7 +455,7 @@ public:
 		}
 	}
 
-	virtual void ClientThink() OVERRIDE
+void CTFProjectile_BallOfFire::ClientThink()
 	{
 		BaseClass::ClientThink();
 
@@ -534,36 +509,12 @@ public:
 		}
 	}
 #endif // CLIENT_DLL
-
-protected:
-	virtual float GetFireballScale() const { return 1.f; }
-
-private:
-#ifdef CLIENT_DLL
-	dlight_t*			m_pDynamicLight = NULL;
-	bool				m_bNearMiss = false;
-	float				m_flLastNearMissCheck = 0.f;
-	float				m_flTempProjCreationTime = 0.f;
-	bool				m_bTempProjCreated = false;
-#endif // CLIENT_DLL
-
-	CNetworkVector( m_vecSpawnOrigin );
-	CNetworkVector( m_vecInitialVelocity );
-
-#ifdef GAME_DLL
-	bool m_bRefunded = false;
-	bool m_bFizzling = false;
-	bool m_bImpactSoundPlayed = false;
-	bool m_bBonusSoundPlayed = false;
-#endif
-};
-
 // Lightning ball
-IMPLEMENT_NETWORKCLASS_ALIASED( TFProjectile_BallOfFire, DT_TFProjectile_BallOfFire )
-BEGIN_NETWORK_TABLE( CTFProjectile_BallOfFire, DT_TFProjectile_BallOfFire )
+IMPLEMENT_NETWORKCLASS_ALIASED(TFProjectile_BallOfFire, DT_TFProjectile_BallOfFire)
+BEGIN_NETWORK_TABLE(CTFProjectile_BallOfFire, DT_TFProjectile_BallOfFire)
 #if !defined( CLIENT_DLL )
-SendPropVector( SENDINFO( m_vecInitialVelocity ), 0, SPROP_NOSCALE ), 
-SendPropVector( SENDINFO( m_vecSpawnOrigin ), 0, SPROP_NOSCALE ), 
+SendPropVector(SENDINFO(m_vecInitialVelocity), 0, SPROP_NOSCALE),
+SendPropVector(SENDINFO(m_vecSpawnOrigin), 0, SPROP_NOSCALE),
 #else
 RecvPropVector( RECVINFO(m_vecInitialVelocity), 0 ),
 RecvPropVector( RECVINFO(m_vecSpawnOrigin), 0 ),

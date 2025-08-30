@@ -1662,6 +1662,7 @@ protected:
 	COutputEvent m_outputOnPlayerSpawnAsWestern;
 	COutputEvent m_outputOnPlayerSpawnAsGunner;
 	COutputEvent m_outputOnPlayerSpawnAsAssalient;
+	COutputEvent m_outputOnPlayerSpawnAsFirewalker;
 	// outputs based on the weapon the player swapped to
 	COutputEvent m_outputOnPlayerSwappedToWeaponSlotPrimary;
 	COutputEvent m_outputOnPlayerSwappedToWeaponSlotSecondary;

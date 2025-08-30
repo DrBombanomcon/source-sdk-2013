@@ -1967,6 +1967,7 @@ void CTFPlayer::RuneRegenThink( void )
 	case TF_CLASS_PYRO:
 	case TF_CLASS_SWARMER:
 	case TF_CLASS_ASSALIENT:
+	case TF_CLASS_FIREWALKER:
 		flAmount = 12;
 		break;
 	case TF_CLASS_SOLDIER:

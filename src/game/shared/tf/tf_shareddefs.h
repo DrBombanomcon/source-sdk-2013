@@ -214,11 +214,12 @@ enum ETFClass
 	TF_CLASS_HEAVYWEAPONS,
 	TF_CLASS_PYRO,
 	TF_CLASS_SPY,
-	TF_CLASS_ENGINEER,
+	TF_CLASS_ENGINEER, // TF_LAST_ORIGINAL_CLASS
 	TF_CLASS_SWARMER,
 	TF_CLASS_WESTERN,
 	TF_CLASS_GUNNER,	//Todo: Come up with a more original naming scheme
 	TF_CLASS_ASSALIENT,
+	TF_CLASS_FIREWALKER,
 
 	// Add any new classes after Engineer
 	TF_CLASS_CIVILIAN,		// TF_LAST_NORMAL_CLASS
@@ -526,7 +527,7 @@ enum ETFWeaponType
 	TF_WEAPON_BOTTLE_WESTERN,
 	TF_WEAPON_CHAINGUN,
 	TF_WEAPON_CLUB_GUNNER,
-
+	TF_WEAPON_FIREWALKER_CANNON,
 
 	//
 	// ADD NEW WEAPONS HERE TO AVOID BREAKING DEMOS
@@ -648,7 +649,7 @@ extern const char *g_pszInvasionMaps[];
 bool IsPlayingInvasionMap( void );
 
 #define SCOREBOARD_DOMINATION_ICONS		17
-#define SCOREBOARD_CLASS_ICONS			27
+#define SCOREBOARD_CLASS_ICONS			29
 #define SCOREBOARD_PING_ICONS			6
 
 extern const char *g_pszClassIcons[];

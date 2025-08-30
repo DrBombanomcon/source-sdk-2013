@@ -279,6 +279,12 @@ bool CTFBotVision::IsIgnored( CBaseEntity *subject ) const
 			{
 				return true;
 			}
+
+		case TF_CLASS_FIREWALKER:
+			if (me->IsBehaviorFlagSet(TFBOT_IGNORE_ENEMY_FIREWALKER))
+			{
+				return true;
+			}
 			break;
 		}
 

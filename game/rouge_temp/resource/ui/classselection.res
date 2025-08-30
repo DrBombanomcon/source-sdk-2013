@@ -1053,6 +1053,70 @@
 			"scaleImage"	"1"
 		}				
 	}
+	"firewalker"
+	{
+		"ControlName"		"CExImageButton"
+		"fieldName"			"firewalker"
+		"xpos"				"c-250"
+		"xpos_hidef"				"c-244"
+		"xpos_lodef"		"c-225"
+		"ypos"				"-5"
+		"ypos_lodef"				"9"
+		"ypos_hidef"				"0"
+		"zpos"				"6"
+		"wide"				"50"
+		"tall"				"100"
+		"autoResize"		"0"
+		"pinCorner"			"2"
+		"visible"			"1"
+		"enabled"			"1"
+		"tabPosition"		"0"
+		"labelText"			"2"	[$WIN32]
+		"labelText"			""		[$X360]
+		"textAlignment"		"south-west"
+		"Command"			"select 15"
+		"Default"			"0"
+		"font"				"MenuKeys"
+		"scaleImage"		"1"
+		
+		"image_default"		"class_sel_sm_pyro_inactive"
+		"image_armed"		"class_sel_sm_pyro_inactive"
+		
+		"fgcolor"			"TanDark"
+		"defaultFgColor_override" "TanDark"
+		"armedFgColor_override" "TanDark"
+		"depressedFgColor_override" "TanDark"
+		"selectedFgColor_override" "TanDark"
+		
+		"sound_depressed"	"UI/buttonclick.wav"
+		"sound_released"	"UI/buttonclickrelease.wav"
+		"sound_armed"		"UI/buttonrollover.wav"
+		
+		"paintbackground"	"0"
+		
+		"image_drawcolor"		"255 255 255 180"
+		"image_armedcolor"		"255 255 255 255"
+		"image_selectedcolor"	"255 255 255 255"
+		
+		"stayselectedonclick"	"1"
+		"selectonhover"			"1"
+		"keyboardinputenabled"	"0"
+		
+		"SubImage"
+		{
+			"ControlName"	"ImagePanel"
+			"fieldName"		"SubImage"
+			"xpos"			"0"
+			"ypos"			"0"
+			"zpos"			"7"
+			"wide"			"50"
+			"tall"			"100"
+			"visible"		"1"
+			"enabled"		"1"
+			"image"			"class_sel_sm_pyro_inactive"
+			"scaleImage"	"1"
+		}				
+	}
 
 	"CancelButton" [$WIN32] 
 	{
