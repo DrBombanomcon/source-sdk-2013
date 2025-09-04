@@ -71,7 +71,7 @@ public:
 	void StartCurrentWave( void );
 	void JumpToWave( uint32 waveNumber, float fCleanMoneyPercent = -1.0f );
 	void WaveEnd ( bool bSuccess );
-	void VscriptForceWaveEnd( bool bSuccess );
+	void ScriptForceWaveEnd( bool bSuccess );
 
 	CWave *GetCurrentWave( void );
 

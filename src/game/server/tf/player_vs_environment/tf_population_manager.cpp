@@ -1260,7 +1260,7 @@ void CPopulationManager::WaveEnd( bool bSuccess )
 	}
 }
 
-void CPopulationManager::VscriptForceWaveEnd(bool bSuccess)
+void CPopulationManager::ScriptForceWaveEnd(bool bSuccess)
 {
 	CWave* pWave = GetCurrentWave();
 	if ( !bSuccess )
