@@ -10117,6 +10117,26 @@ void CTFPlayer::ModifyDamageInfo( CTakeDamageInfo *pInfo, const CBaseEntity *pTa
 				}
 			}
 		}
+		
+		if (IsPlayerClass( TF_CLASS_MECHANIST ))
+		{
+			float flDamageMod = 1.f;
+			float flDamageAmp = 1.f;
+			CALL_ATTRIB_HOOK_FLOAT_ON_OTHER( GetActiveWeapon(), flDamageMod, mult_dmg_by_sentries_on_target );
+			if (flDamageMod > 1.f)
+			{
+				for (int i = 0; i < GetObjectCount(); i++)
+				{
+					//This will either crash on fire or work without issue
+					CObjectSentrygun* pSentry = dynamic_cast<CObjectSentrygun*>(GetObject(i));
+					if (pSentry && (pSentry->GetTarget() == pTarget))
+					{
+						flDamageAmp *= flDamageMod;
+					}
+					pInfo->SetDamage(pInfo->GetDamage() * flDamageAmp);
+				}
+			}
+		}
 	}
 }
 #endif
@@ -11325,7 +11345,19 @@ int CTFPlayer::CanBuild( int iObjectType, int iObjectMode )
 
 	// Make sure we haven't hit maximum number
 	int iObjectCount = GetNumObjects( iObjectType, iObjectMode );
-	if ( iObjectCount >= GetObjectInfo( iObjectType )->m_nMaxObjects && GetObjectInfo( iObjectType )->m_nMaxObjects != -1)
+	int iObjectBonus = 0;
+
+	//System for allowing more buildings base on attributes
+	switch (iObjectType)
+	{
+	case OBJ_SENTRYGUN:
+		CALL_ATTRIB_HOOK_INT(iObjectBonus, sentry_bonus_total);
+		break;
+	default:
+		break;
+	}
+
+	if ( iObjectCount >= (GetObjectInfo( iObjectType )->m_nMaxObjects + iObjectBonus) && GetObjectInfo( iObjectType )->m_nMaxObjects != -1)
 	{
 		return CB_LIMIT_REACHED;
 	}
@@ -11338,7 +11370,7 @@ int CTFPlayer::CanBuild( int iObjectType, int iObjectMode )
 	{
 		return CB_NEED_RESOURCES;
 	}
-
+	
 	return CB_CAN_BUILD;
 }
 
@@ -11454,6 +11486,11 @@ int CTFPlayerShared::CalculateObjectCost( CTFPlayer* pBuilder, int iObjectType )
 		nCost -= 30;
 	}
 	
+	// Mechanist can only build sentries
+	if (m_pOuter->IsPlayerClass(TF_CLASS_MECHANIST) )
+	{
+		nCost -= 80;
+	}
 
 	if ( iObjectType == OBJ_TELEPORTER )
 	{
@@ -11517,8 +11554,9 @@ int CTFPlayer::GetNumObjects( int iObjectType, int iObjectMode /*= 0*/ )
 		if ( !GetObject(i) )
 			continue;
 
-		if ( GetObject(i)->IsDisposableBuilding() )
-			continue;
+		//TODO: Find a suitable replacement for mvm
+		//if ( GetObject(i)->IsDisposableBuilding() )
+		//	continue;
 
 		if ( GetObject(i)->GetType() == iObjectType && 
 			( GetObject(i)->GetObjectMode() == iObjectMode || iObjectMode == BUILDING_MODE_ANY ) )

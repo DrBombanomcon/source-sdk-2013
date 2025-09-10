@@ -845,6 +845,7 @@ bool CTFBot::GetWeightDesiredClassToSpawn( CUtlVector< ETFClass > &vecClassToSpa
 		{ TF_CLASS_GUNNER,	3, 0, 0, { 1, 1, 2, 2 } },
 		{ TF_CLASS_ASSALIENT,			4, 4, 1, { 1, 1, 2, 2 } },
 		{ TF_CLASS_FIREWALKER,			3, 0, 0, { NoLimit, NoLimit, NoLimit, NoLimit } },
+		{ TF_CLASS_MECHANIST,		0, 4, 1, { 1, 2, 3, 3 } },
 
 		{ TF_CLASS_UNDEFINED,		0, -1 },
 	};
@@ -865,6 +866,7 @@ bool CTFBot::GetWeightDesiredClassToSpawn( CUtlVector< ETFClass > &vecClassToSpa
 		{ TF_CLASS_GUNNER,	3, 0, 0, { 1, 1, 2, 2 } },
 		{ TF_CLASS_ASSALIENT,			4, 4, 1, { 1, 1, 2, 2 } },
 		{ TF_CLASS_FIREWALKER,			3, 0, 0, { NoLimit, NoLimit, NoLimit, NoLimit } },
+		{ TF_CLASS_MECHANIST,		5, 0, 0, { 1, 1, 1, 1 } },
 
 		{ TF_CLASS_UNDEFINED,		0, -1 },
 	};
@@ -885,6 +887,7 @@ bool CTFBot::GetWeightDesiredClassToSpawn( CUtlVector< ETFClass > &vecClassToSpa
 		{ TF_CLASS_GUNNER,	3, 0, 0, { 0, 0, 2, 2 } },
 		{ TF_CLASS_ASSALIENT,			1, 0, 1, { 0, 0, 1, 1 } },
 		{ TF_CLASS_FIREWALKER,			0, 0, 0, { 0, 0, 2, 2 } },
+		{ TF_CLASS_MECHANIST,		0, -1 },
 
 		{ TF_CLASS_UNDEFINED,		0, -1 },
 	};
@@ -1097,13 +1100,13 @@ ETFClass CTFBot::GetPresetClassToSpawn() const
 		TF_CLASS_GUNNER,
 		TF_CLASS_WESTERN,
 		TF_CLASS_FIREWALKER,
-		TF_CLASS_GUNNER,
+		TF_CLASS_MECHANIST,
 
 		TF_CLASS_SWARMER,
 		TF_CLASS_ASSALIENT,
 		TF_CLASS_GUNNER,
 		TF_CLASS_WESTERN,
-		TF_CLASS_GUNNER,
+		TF_CLASS_MECHANIST,
 		TF_CLASS_FIREWALKER,
 	};
 
@@ -3123,6 +3126,7 @@ float CTFBot::GetThreatDanger( CBaseCombatCharacter *who ) const
 
 		case TF_CLASS_ENGINEER:
 		case TF_CLASS_SNIPER:
+		case TF_CLASS_MECHANIST:
 			return 0.4f;		// 2/5
 
 		case TF_CLASS_SCOUT:

@@ -104,6 +104,8 @@ static const char *GetPlayerProgressPortrait( C_TFPlayer *pPlayer )
 			return (iTeam == TF_TEAM_RED) ? "../passtime/hud/portrait_medic_red" : "../passtime/hud/portrait_medic_blu";
 		case TF_CLASS_FIREWALKER:
 			return (iTeam == TF_TEAM_RED) ? "../passtime/hud/portrait_pyro_red" : "../passtime/hud/portrait_pyro_blu";
+		case TF_CLASS_MECHANIST:
+			return (iTeam == TF_TEAM_RED) ? "../passtime/hud/portrait_spy_red" : "../passtime/hud/portrait_spy_blu";
 		default:
 			return (iTeam == TF_TEAM_RED) ? "../passtime/hud/portrait_scout_red"		: "../passtime/hud/portrait_scout_blu";
 	}

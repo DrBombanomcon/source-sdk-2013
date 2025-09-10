@@ -636,6 +636,7 @@ enum kill_eater_event_t
 	kKillEaterEvent_GunnerKill,
 	kKillEaterEvent_AssalientKill,
 	kKillEaterEvent_FirewalkerKill,
+	kKillEaterEvent_MechanistKill,
 	kKillEaterEvent_BuildingDestroyed,		// (part)
 	kKillEaterEvent_ProjectileReflect,	// = 20	// (part)
 	kKillEaterEvent_HeadshotKill,			// (part)
@@ -699,6 +700,7 @@ enum kill_eater_event_t
 	kKillEaterEvent_RobotGunnerKill,
 	kKillEaterEvent_RobotAssalientKill,
 	kKillEaterEvent_RobotFirewalkerKill,
+	kKillEaterEvent_RobotMechanistKill,
 	kKillEaterEvent_TauntKill,					// Taunt Kills
 	kKillEaterEvent_PlayersWearingUnusualKill,	// (part) we killed someone wearing an unusual hat (!)
 	kKillEaterEvent_BurningEnemyKill,			// (part) we killed someone who was on fire up until they died

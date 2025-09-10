@@ -350,7 +350,14 @@ bool CObjectSentrygun::StartBuilding( CBaseEntity *pBuilder )
 	SetPoseParameter( m_iPitchPoseParameter, 0.0 );
 	SetPoseParameter( m_iYawPoseParameter, 0.0 );
 
-	SetObjectMode( IsDisposableBuilding() ? MODE_SENTRYGUN_DISPOSABLE : MODE_SENTRYGUN_NORMAL );
+	if (GetOwner()->IsPlayerClass(TF_CLASS_MECHANIST))
+	{
+		SetObjectMode(MODE_SENTRYGUN_NORMAL);
+	}
+	else
+	{
+		SetObjectMode(IsDisposableBuilding() ? MODE_SENTRYGUN_DISPOSABLE : MODE_SENTRYGUN_NORMAL);
+	}
 
 	return BaseClass::StartBuilding( pBuilder );
 }
@@ -2166,16 +2173,21 @@ void CObjectSentrygun::MakeCarriedObject( CTFPlayer *pCarrier )
 //-----------------------------------------------------------------------------
 void CObjectSentrygun::MakeDisposableBuilding( CTFPlayer* pPlayer )
 {
-	// We don't have our main gun
-	if ( !( pPlayer->GetNumObjects( OBJ_SENTRYGUN ) && pPlayer->CanBuild( OBJ_SENTRYGUN ) == CB_CAN_BUILD ) )
-		return;
+	//Mechanist only uses disposible sentries, so any changes will be filtered to them/their items
+	if (!(pPlayer->IsPlayerClass(TF_CLASS_MECHANIST)))
+	{
 
-	// We're carrying our main gun
-	if ( pPlayer->m_Shared.IsCarryingObject() && pPlayer->m_Shared.GetCarriedObject() && !pPlayer->m_Shared.GetCarriedObject()->IsDisposableBuilding() )
-		return;
+		// We don't have our main gun
+		if (!(pPlayer->GetNumObjects(OBJ_SENTRYGUN) && pPlayer->CanBuild(OBJ_SENTRYGUN) == CB_CAN_BUILD))
+			return;
 
-	if ( IsDisposableBuilding() )
-		return;
+		// We're carrying our main gun
+		if (pPlayer->m_Shared.IsCarryingObject() && pPlayer->m_Shared.GetCarriedObject() && !pPlayer->m_Shared.GetCarriedObject()->IsDisposableBuilding())
+			return;
+
+		if (IsDisposableBuilding())
+			return;
+	}
 
 	SetMaxHealth( SENTRYGUN_MINI_MAX_HEALTH );
 	SetHealth( SENTRYGUN_MINI_MAX_HEALTH );

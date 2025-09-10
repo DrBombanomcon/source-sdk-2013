@@ -294,6 +294,7 @@ int g_nLoadoutClassOrder[] =
 	TF_CLASS_GUNNER,
 	TF_CLASS_ASSALIENT,
 	TF_CLASS_FIREWALKER,
+	TF_CLASS_MECHANIST,
 };
 
 
@@ -323,6 +324,7 @@ CCharInfoLoadoutSubPanel::CCharInfoLoadoutSubPanel(Panel *parent) : vgui::Proper
 	m_pClassButtons[ TF_CLASS_GUNNER ] = new CImageButton(this, "gunner");
 	m_pClassButtons[ TF_CLASS_ASSALIENT ] = new CImageButton(this, "assalient");
 	m_pClassButtons[TF_CLASS_FIREWALKER] = new CImageButton(this, "firewalker");
+	m_pClassButtons[TF_CLASS_MECHANIST] = new CImageButton(this, "mechanist");
 
 	for( int i = 0; i < Q_ARRAYSIZE( m_pClassButtons ); i++ )
 	{

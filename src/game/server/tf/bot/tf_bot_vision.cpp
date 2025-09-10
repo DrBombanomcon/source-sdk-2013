@@ -197,6 +197,8 @@ bool CTFBotVision::IsIgnored( CBaseEntity *subject ) const
 			}
 			break;
 
+		//Just do this for now until I can think of a better way
+		case TF_CLASS_MECHANIST:
 		case TF_CLASS_ENGINEER:
 			if (me->IsBehaviorFlagSet(TFBOT_IGNORE_ENEMY_ENGINEERS))
 			{

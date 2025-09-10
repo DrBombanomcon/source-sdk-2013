@@ -1960,6 +1960,7 @@ void CTFPlayer::RuneRegenThink( void )
 		break;
 	case TF_CLASS_SNIPER:
 	case TF_CLASS_ENGINEER:
+	case TF_CLASS_MECHANIST:
 		flAmount = 14;
 		break;
 	case TF_CLASS_MEDIC:
@@ -14863,7 +14864,7 @@ CBaseObject	*CTFPlayer::GetObjectOfType( int iObjectType, int iObjectMode ) cons
 		if ( pObj->GetObjectMode() != iObjectMode )
 			continue;
 
-		if ( pObj->IsDisposableBuilding() )
+		if ( pObj->IsDisposableBuilding() && !IsPlayerClass(TF_CLASS_MECHANIST))
 			continue;
 
 		return pObj;

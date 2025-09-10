@@ -195,6 +195,7 @@ const LoadoutPanelPositioningInstance *g_VisibleLoadoutSlotsPerClass[] =
 	& g_DefaultLoadoutPanelPositioning,			// TF_CLASS_GUNNER
 	& g_LoadoutPanelPositioning_Engineer,			// TF_CLASS_ASSALIENT
 	& g_DefaultLoadoutPanelPositioning,			// TF_CLASS_FIREWALKER
+	& g_LoadoutPanelPositioning_Engineer,			// TF_CLASS_MECHANIST
 };
 
 COMPILE_TIME_ASSERT( ARRAYSIZE( g_VisibleLoadoutSlotsPerClass ) == TF_LAST_NORMAL_CLASS );

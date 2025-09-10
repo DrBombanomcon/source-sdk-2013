@@ -125,6 +125,7 @@ public:
 			SetupClassIcon(pStatsContainer, "gunner", TF_CLASS_GUNNER, stats);
 			SetupClassIcon(pStatsContainer, "assalient", TF_CLASS_ASSALIENT, stats);
 			SetupClassIcon(pStatsContainer, "firewalker", TF_CLASS_FIREWALKER, stats);
+			SetupClassIcon(pStatsContainer, "mechanist", TF_CLASS_MECHANIST, stats);
 
 			SetupMedalForStat( pStatsContainer, stats.kills_medal(), "kills" );
 			SetupMedalForStat( pStatsContainer, stats.damage_medal(), "damage" );

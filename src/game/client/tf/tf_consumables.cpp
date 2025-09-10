@@ -1644,6 +1644,7 @@ public:
 				case TF_CLASS_GUNNER: 		pKeyValues->SetWString("player_class", g_pVGuiLocalize->Find("#TF_Class_Name_Gunner")); break;
 				case TF_CLASS_ASSALIENT: 			pKeyValues->SetWString("player_class", g_pVGuiLocalize->Find("#TF_Class_Name_Assalient")); break;
 				case TF_CLASS_FIREWALKER: 			pKeyValues->SetWString("player_class", g_pVGuiLocalize->Find("#TF_Class_Name_Firewalker")); break;
+				case TF_CLASS_MECHANIST: 			pKeyValues->SetWString("player_class", g_pVGuiLocalize->Find("#TF_Class_Name_Mechanist")); break;
 				}
 				ShowMessageBox( "#TF_Duel_Title",  "#TF_Duel_WrongClass", pKeyValues, "#GameUI_OK" );
 				return;
@@ -1852,6 +1853,7 @@ public:
 			case TF_CLASS_GUNNER: 		pKeyValues->SetWString("player_class", g_pVGuiLocalize->Find("#TF_Class_Name_Gunner")); break;
 			case TF_CLASS_ASSALIENT: 			pKeyValues->SetWString("player_class", g_pVGuiLocalize->Find("#TF_Class_Name_Assalient")); break;
 			case TF_CLASS_FIREWALKER: 			pKeyValues->SetWString("player_class", g_pVGuiLocalize->Find("#TF_Class_Name_Firewalker")); break;
+			case TF_CLASS_MECHANIST: 			pKeyValues->SetWString("player_class", g_pVGuiLocalize->Find("#TF_Class_Name_Mechanist")); break;
 			}
 		}
 		if ( localSteamID == steamIDInitiator || localSteamID == steamIDTarget )
@@ -2372,6 +2374,7 @@ void CSelectPlayerForDuelDialog::SetSelectedClass( int iClass )
 	case TF_CLASS_GUNNER: 		pClassName = "#TF_Class_Name_Gunner"; break;
 	case TF_CLASS_ASSALIENT: 			pClassName = "#TF_Class_Name_Assalient"; break;
 	case TF_CLASS_FIREWALKER: 			pClassName = "#TF_Class_Name_Firewalker"; break;
+	case TF_CLASS_MECHANIST: 			pClassName = "#TF_Class_Name_Mechanist"; break;
 	}
 
 	wchar_t wszText[1024]=L"";

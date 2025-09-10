@@ -30,6 +30,7 @@ public:
 	void InputSetAllowGunner(inputdata_t& inputdata);
 	void InputSetAllowAssalient(inputdata_t& inputdata);
 	void InputSetAllowFirewalker(inputdata_t& inputdata);
+	void InputSetAllowMechanist(inputdata_t& inputdata);
 
 	// misc.
 	bool IsClassAllowed( int iBotClass ) const;

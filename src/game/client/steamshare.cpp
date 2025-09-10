@@ -123,6 +123,9 @@ static const char *GetTimelineClassImage( int nTeam, int nClass )
 	case TF_CLASS_FIREWALKER:
 		pszReturnImage = (nTeam == TF_TEAM_BLUE) ? "pyro_blu" : "pyro_red";
 		break;
+	case TF_CLASS_MECHANIST:
+		pszReturnImage = (nTeam == TF_TEAM_BLUE) ? "spy_blu" : "spy_red";
+		break;
 	default:
 		break;
 	}

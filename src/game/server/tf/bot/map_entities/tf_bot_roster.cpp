@@ -27,6 +27,7 @@ BEGIN_DATADESC( CTFBotRoster )
 	DEFINE_KEYFIELD(m_bAllowedClasses[TF_CLASS_GUNNER], FIELD_BOOLEAN, "allowGunner"),
 	DEFINE_KEYFIELD(m_bAllowedClasses[TF_CLASS_ASSALIENT], FIELD_BOOLEAN, "allowAssalient"),
 	DEFINE_KEYFIELD(m_bAllowedClasses[TF_CLASS_FIREWALKER], FIELD_BOOLEAN, "allowFirewalker"),
+	DEFINE_KEYFIELD(m_bAllowedClasses[TF_CLASS_MECHANIST], FIELD_BOOLEAN, "allowMechanist"),
 
 	DEFINE_INPUTFUNC( FIELD_STRING, "SetTeam", InputSetTeam ),
 	DEFINE_INPUTFUNC( FIELD_BOOLEAN, "SetAllowScout", InputSetAllowScout ),
@@ -43,6 +44,7 @@ BEGIN_DATADESC( CTFBotRoster )
 	DEFINE_INPUTFUNC(FIELD_BOOLEAN, "SetAllowGunner", InputSetAllowGunner),
 	DEFINE_INPUTFUNC(FIELD_BOOLEAN, "SetAllowAssalient", InputSetAllowAssalient),
 	DEFINE_INPUTFUNC(FIELD_BOOLEAN, "SetAllowFirewalker", InputSetAllowFirewalker),
+	DEFINE_INPUTFUNC(FIELD_BOOLEAN, "SetAllowMechanist", InputSetAllowMechanist),
 
 END_DATADESC()
 
@@ -122,10 +124,14 @@ void CTFBotRoster::InputSetAllowAssalient(inputdata_t& inputdata)
 	m_bAllowedClasses[TF_CLASS_ASSALIENT] = inputdata.value.Bool();
 }
 
-
 void CTFBotRoster::InputSetAllowFirewalker(inputdata_t& inputdata)
 {
 	m_bAllowedClasses[TF_CLASS_FIREWALKER] = inputdata.value.Bool();
+}
+
+void CTFBotRoster::InputSetAllowMechanist(inputdata_t& inputdata)
+{
+	m_bAllowedClasses[TF_CLASS_MECHANIST] = inputdata.value.Bool();
 }
 //------------------------------------------------------------------------------
 

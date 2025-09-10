@@ -1,4 +1,8 @@
 #base items_game.txt
+// Even though we don't use any of the life tf2 items, we still refer to the schema
+// For referencing certain attributes/backwards compatiablity
+// And using this method saves the issue of conflicts for when it gets updated every few months
+// ...even though we 100% won't be using those items.
 
 "items_game"
 {
@@ -336,6 +340,141 @@
 			"mouse_pressed_sound"	"ui/item_knife_small_pickup.wav"
 			"drop_sound"		"ui/item_metal_weapon_drop.wav"
 		}
+		"weapon_mechanist_primary"
+		{
+			"prefab"	"moditem"
+			"enabled"	"1"
+			"item_class"	"tf_weapon_shotgun_building_rescue"
+			"craft_class"	"weapon"
+			"craft_material_type"	"weapon"
+			"capabilities"
+			{
+				"nameable"		"1"
+			}
+			"tags"
+			{
+				"can_deal_damage"			"1"
+				"can_deal_posthumous_damage"	"1"
+				"can_deal_critical_damage"	"1"
+				"can_deal_long_distance_damage"	"1"
+			}
+			"show_in_armory"	"1"
+			"item_logname"	"rescue_ranger"
+			"item_iconname"	"rescue_ranger"
+			"item_type_name"	"#TF_Weapon_Shotgun"
+			"item_name"	"RT_Weapon_Mechanist_Primary"
+			"item_slot"	"primary"
+			"item_quality"	"unique"
+			"propername"	"1"
+			"min_ilevel"	"1"
+			"max_ilevel"	"100"
+			"attach_to_hands"	"1"
+			"inspect_panel_dist" "45"
+			"image_inventory"	"backpack/workshop/weapons/c_models/c_tele_shotgun/c_tele_shotgun"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"
+			"model_player"	"models/workshop/weapons/c_models/c_tele_shotgun/c_tele_shotgun.mdl"
+			"used_by_classes"
+			{
+				"mechanist"	"1"
+			}
+			"static_attrs"
+			{
+				"min_viewmodel_offset"			"10 0 -10"
+				"weapon_stattrak_module_scale"		"0.608"
+			}
+			"attributes"
+			{
+				"override projectile type"
+				{
+					"attribute_class"	"override_projectile_type"
+					"value"				"18" 
+				}
+				"clip size penalty"
+				{
+					"attribute_class"	"mult_clipsize"
+					"value"				"0.66"
+				}
+				"mechanist damage bonus vs sentry target"
+				{
+					"attribute_class"	"mult_dmg_by_sentries_on_target"
+					"value"				"1.4"
+				}
+			}
+			"visuals"
+			{
+				"attached_models"
+				{
+					"0"
+					{
+						"model"	"models/workshop/weapons/c_models/c_tele_shotgun/c_tele_shotgun_screen.mdl"
+					}
+				}
+				"sound_single_shot"	"Weapon_RescueRanger.Single"
+				"sound_burst"    "Weapon_RescueRanger.SingleCrit"
+			}
+			"mouse_pressed_sound"	"ui/item_heavy_gun_pickup.wav"
+			"drop_sound"		"ui/item_heavy_gun_drop.wav"
+		}
+		"weapon_mechanist_wrench"
+		{
+			"prefab"	"moditem"
+			"capabilities"
+			{
+				"nameable"		"1"
+			}
+			"tags"
+			{
+				"can_deal_damage"			"1"
+				"can_deal_critical_damage"	"1"
+				"can_destroy_sappers"		"1"
+			}
+			"inspect_panel_dist" "45"
+			"base_item_name"	"TF_WEAPON_WRENCH"
+			"enabled"	"0"
+			"item_class"	"tf_weapon_wrench"
+			"craft_class"	"weapon"
+			"craft_material_type"	"weapon"
+			"item_type_name"	"#TF_Weapon_Wrench"
+			"item_name"	"#TF_Weapon_Wrench"
+			"item_description"	"#TF_Weapon_Wrench_Desc"
+			"item_slot"	"melee"
+			"item_quality"	"normal"
+			"baseitem" "0"
+			"min_ilevel"	"1"
+			"max_ilevel"	"1"
+			"image_inventory"	"backpack/weapons/w_models/w_wrench"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"
+			"model_player"	"models/weapons/c_models/c_wrench/c_wrench.mdl"
+			"attach_to_hands"	"1"
+			"used_by_classes"
+			{
+				"mechanist"	"1"
+			}
+			"static_attrs"
+			{
+				"weapon_stattrak_module_scale"			"0.756"
+				"min_viewmodel_offset"					"10 -2 -9"
+			}
+			"attributes"
+			{
+				"kill eater score type"
+				{
+					"attribute_class"	"kill_eater_score_type"
+					"value" 	"3"									
+				}
+				"kill eater score type 2"
+				{
+					"attribute_class"	"kill_eater_score_type_2"
+					"value" 	"0"									
+				}
+			}
+			"mouse_pressed_sound"	"ui/item_metal_weapon_pickup.wav"
+			"drop_sound"		"ui/item_metal_weapon_drop.wav"
+			"particle_suffix"		"wrench"
+		}
+
 	}
 	"items"
 	{
@@ -533,6 +672,7 @@
 			"used_by_classes"
 			{
 				"assalient"	"1"
+				"mechanist"	"1"
 			}
 			"static_attrs"
 			{
@@ -665,6 +805,106 @@
 			}
 			"mouse_pressed_sound"	"ui/item_metal_weapon_pickup.wav"
 			"drop_sound"		"ui/item_metal_weapon_drop.wav"
+		}
+
+		"34414"
+		{
+			"name"	"RT_WEAPON_PDA_MECHANIST_BUILD"
+			"capabilities"
+			{
+				"nameable"		"1"
+			}
+			"prefab"	"moditem"
+			"first_sale_date"	"2010/09/29"
+			"item_class"	"tf_weapon_pda_engineer_build"
+			"craft_class"	"weapon"
+			"craft_material_type"	"weapon"
+			"item_name"	"#TF_Weapon_PDA_Engineer_Builder"
+			"item_type_name"	"#TF_Weapon_PDA_Engineer"
+			"item_slot"	"pda"
+			"item_quality"	"normal"
+			"min_ilevel"	"1"
+			"max_ilevel"	"1"
+			"attach_to_hands" "1"
+			"image_inventory"	"backpack/weapons/w_models/w_builder"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"
+			"model_player"	"models/weapons/c_models/c_builder/c_builder.mdl"
+			"baseitem"	"1"
+			"used_by_classes"
+			{
+				"mechanist"	"1"
+			}
+			"static_attrs"
+			{
+				"min_viewmodel_offset"					"10 0 -10"				
+			}
+			"attributes"
+			{
+				"kill eater score type"
+				{
+					"attribute_class"	"kill_eater_score_type"
+					"value" 	"3" 
+				}
+				"kill eater score type 2"
+				{
+					"attribute_class"	"kill_eater_score_type_2"
+					"value" 	"59" 
+				}
+				"kill eater score type 3"
+				{
+					"attribute_class"	"kill_eater_score_type_3"
+					"value" 	"60" 
+				}
+				"sentry bonus max"
+				{
+					"attribute_class"	"sentry_bonus_total"
+					"value"	"3"
+				}
+			}
+			"mouse_pressed_sound"	"ui/item_metal_weapon_pickup.wav"
+			"drop_sound"		"ui/item_metal_weapon_drop.wav"
+			"visuals"
+			{
+				"animation_replacement"
+				{
+					"ACT_VM_IDLE"	"ACT_ENGINEER_PDA2_VM_IDLE"
+					"ACT_VM_DRAW"	"ACT_ENGINEER_PDA2_VM_DRAW"
+				}
+			}
+		}
+		"34415"
+		{
+			"name"	"Focus Fire"
+			"prefab"	"weapon_mechanist_primary"
+			"baseitem"	"1"
+		}
+		"34416"
+		{
+			"name"	"Mechanist's Wrench"
+			"prefab" "weapon_mechanist_wrench"
+			"baseitem"	"1"
+		}
+	}
+	"attributes"
+	{
+		"4000"
+		{
+			"name"	"sentry bonus max"
+			"attribute_class"	"sentry_bonus_total"
+			"description_format"	"value_is_additive"
+			"hidden"	"1"
+			"effect_type"	"positive"
+			"stored_as_integer"	"1"
+		}
+		"4001"
+		{
+			"name"	"mechanist damage bonus vs sentry target"
+			"attribute_class"	"mult_dmg_by_sentries_on_target"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+			"stored_as_integer"	"0"
 		}
 	}
 }

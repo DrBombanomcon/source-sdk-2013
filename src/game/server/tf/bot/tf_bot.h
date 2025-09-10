@@ -49,6 +49,9 @@ extern void BotGenerateAndWearItem( CTFPlayer *pBot, const char *itemName );
 #define TFBOT_IGNORE_ENEMY_ASSALIENT	0x4000
 #define TFBOT_IGNORE_ENEMY_FIREWALKER   0x8000
 
+//TODO: Find a better way to do this
+//#define TFBOT_IGNORE_ENEMY_MECHANIST
+
 #define TFBOT_ALL_BEHAVIOR_FLAGS		0xFFFF
 
 #define TFBOT_MVM_MAX_PATH_LENGTH		0.0f // 7000.0f			// in MvM, all pathfinds are limited to this (0 == no limit)

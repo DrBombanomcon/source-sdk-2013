@@ -178,6 +178,7 @@ static int g_TauntCamRagdollAchievements[] =
 	0,		// TF_CLASS_GUNNER,
 	0,		// TF_CLASS_ASSALIENT,
 	0,		// TF_CLASS_FIREWALKER,
+	0,		// TF_CLASS_MECHANIST,
 
 	0,		// TF_CLASS_CIVILIAN,
 	0,		// TF_CLASS_COUNT_ALL,
@@ -201,6 +202,7 @@ static int g_TauntCamAchievements[] =
 	0,		// TF_CLASS_GUNNER,
 	0,		// TF_CLASS_ASSALIENT,
 	0,		// TF_CLASS_FIREWALKER,
+	0,		// TF_CLASS_MECHANIST,
 	0,		// TF_CLASS_CIVILIAN,
 	0,		// TF_CLASS_COUNT_ALL,
 };
@@ -224,6 +226,7 @@ static int g_TauntCamAchievements2[] =
 	0,		// TF_CLASS_GUNNER,
 	0,		// TF_CLASS_ASSALIENT,
 	0,		// TF_CLASS_FIREWALKER,
+	0,		// TF_CLASS_MECHANIST,
 
 	0,		// TF_CLASS_CIVILIAN,
 	0,		// TF_CLASS_COUNT_ALL,
@@ -806,6 +809,7 @@ ConVar tf_tournament_classlimit_western("tf_tournament_classlimit_western", "-1"
 ConVar tf_tournament_classlimit_gunner("tf_tournament_classlimit_gunner", "-1", FCVAR_REPLICATED, "Tournament mode per-team class limit for Gunners.\n");
 ConVar tf_tournament_classlimit_assalient("tf_tournament_classlimit_assalient", "-1", FCVAR_REPLICATED, "Tournament mode per-team class limit for Assalients.\n");
 ConVar tf_tournament_classlimit_firewalker("tf_tournament_classlimit_firewalker", "-1", FCVAR_REPLICATED, "Tournament mode per-team class limit for Firewalkers.\n");
+ConVar tf_tournament_classlimit_mechanist("tf_tournament_classlimit_mechanist", "-1", FCVAR_REPLICATED, "Tournament mode per-team class limit for Mechanists.\n");
 ConVar tf_tournament_classchange_allowed( "tf_tournament_classchange_allowed", "1", FCVAR_REPLICATED, "Allow players to change class while the game is active?.\n" );
 ConVar tf_tournament_classchange_ready_allowed( "tf_tournament_classchange_ready_allowed", "1", FCVAR_REPLICATED, "Allow players to change class after they are READY?.\n" );
 
@@ -1328,6 +1332,7 @@ Vector g_TFClassViewVectors[TF_LAST_NORMAL_CLASS + 1] =
 	Vector(0, 0, 68),		// TF_CLASS_GUNNER,
 	Vector(0, 0, 75),		// TF_CLASS_ASSALIENT,
 	Vector(0, 0, 68),		// TF_CLASS_FIREWALKER,
+	Vector(0, 0, 75),		// TF_CLASS_MECHANIST,
 
 	Vector( 0, 0, 65 ),		// TF_CLASS_CIVILIAN,		// TF_LAST_NORMAL_CLASS
 };
@@ -11265,6 +11270,7 @@ static kill_eater_event_t g_eClassKillEvents[] =
 	kKillEaterEvent_GunnerKill,					// TF_CLASS_GUNNER
 	kKillEaterEvent_AssalientKill,					// TF_CLASS_ASSALIENT
 	kKillEaterEvent_FirewalkerKill,					// TF_CLASS_FIREWALKER
+	kKillEaterEvent_MechanistKill,					// TF_CLASS_MECHANIST
 };
 COMPILE_TIME_ASSERT( ARRAYSIZE( g_eClassKillEvents ) == (TF_LAST_NORMAL_CLASS - TF_FIRST_NORMAL_CLASS) );
 
@@ -11285,6 +11291,7 @@ static kill_eater_event_t g_eRobotClassKillEvents[] =
 	kKillEaterEvent_RobotGunnerKill,				// TF_CLASS_GUNNER
 	kKillEaterEvent_RobotAssalientKill,					// TF_CLASS_ASSALIENT
 	kKillEaterEvent_RobotFirewalkerKill,					// TF_CLASS_FIREWALKER
+	kKillEaterEvent_RobotMechanistKill,					// TF_CLASS_MECHANIST
 };
 COMPILE_TIME_ASSERT( ARRAYSIZE( g_eRobotClassKillEvents ) == (TF_LAST_NORMAL_CLASS - TF_FIRST_NORMAL_CLASS) );
 
@@ -17631,6 +17638,7 @@ int CTFGameRules::GetClassLimit( int iClass )
 		case TF_CLASS_GUNNER: return tf_tournament_classlimit_gunner.GetInt(); break;
 		case TF_CLASS_ASSALIENT: return tf_tournament_classlimit_assalient.GetInt(); break;
 		case TF_CLASS_FIREWALKER: return tf_tournament_classlimit_firewalker.GetInt(); break;
+		case TF_CLASS_MECHANIST: return tf_tournament_classlimit_mechanist.GetInt(); break;
 		default:
 			break;
 		}
@@ -19351,6 +19359,7 @@ BEGIN_DATADESC( CTrainingModeLogic )
 	DEFINE_OUTPUT(m_outputOnPlayerSpawnAsGunner, "OnPlayerSpawnAsGunner"),
 	DEFINE_OUTPUT(m_outputOnPlayerSpawnAsAssalient, "OnPlayerSpawnAsAssalient"),
 	DEFINE_OUTPUT(m_outputOnPlayerSpawnAsFirewalker, "OnPlayerSpawnAsFirewalker"),
+	DEFINE_OUTPUT(m_outputOnPlayerSpawnAsMechanist, "OnPlayerSpawnAsMechanist"),
 	DEFINE_OUTPUT( m_outputOnPlayerDied, "OnPlayerDied" ),
 	DEFINE_OUTPUT( m_outputOnBotDied, "OnBotDied" ),
 	DEFINE_OUTPUT( m_outputOnPlayerSwappedToWeaponSlotPrimary, "OnPlayerSwappedToPrimary" ),
@@ -19415,6 +19424,7 @@ void CTrainingModeLogic::OnPlayerSpawned( CTFPlayer* pPlayer )
 	case TF_CLASS_GUNNER:		m_outputOnPlayerSpawnAsGunner.FireOutput(this, this); break;
 	case TF_CLASS_ASSALIENT:		m_outputOnPlayerSpawnAsAssalient.FireOutput(this, this); break;
 	case TF_CLASS_FIREWALKER:		m_outputOnPlayerSpawnAsFirewalker.FireOutput(this, this); break;
+	case TF_CLASS_MECHANIST:		m_outputOnPlayerSpawnAsMechanist.FireOutput(this, this); break;
 	}
 }
 

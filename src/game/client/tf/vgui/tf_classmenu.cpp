@@ -496,6 +496,7 @@ CTFClassMenu::CTFClassMenu( IViewPort *pViewPort )
 	m_pClassButtons[TF_CLASS_GUNNER] = new CExImageButton(this, "gunner", "", this);
 	m_pClassButtons[TF_CLASS_ASSALIENT] = new CExImageButton(this, "assalient", "", this);
 	m_pClassButtons[TF_CLASS_FIREWALKER] = new CExImageButton(this, "firewalker", "", this);
+	m_pClassButtons[TF_CLASS_MECHANIST] = new CExImageButton(this, "mechanist", "", this);
 #endif
 
 	m_pEditLoadoutButton = NULL;
@@ -525,6 +526,7 @@ CTFClassMenu::CTFClassMenu( IViewPort *pViewPort )
 	m_pMvmUpgradeImages[TF_CLASS_GUNNER] = new vgui::ImagePanel(this, "MvMUpgradeImageSolider");
 	m_pMvmUpgradeImages[TF_CLASS_ASSALIENT] = new vgui::ImagePanel(this, "MvMUpgradeImageMedic");
 	m_pMvmUpgradeImages[TF_CLASS_FIREWALKER] = new vgui::ImagePanel(this, "MvMUpgradeImagePyro");
+	m_pMvmUpgradeImages[TF_CLASS_MECHANIST] = new vgui::ImagePanel(this, "MvMUpgradeImageSpy");
 
 	vgui::ivgui()->AddTickSignal( GetVPanel() );
 }
@@ -563,6 +565,7 @@ void CTFClassMenu::ApplySchemeSettings( IScheme *pScheme )
 		m_pClassHintIcons[TF_CLASS_GUNNER] = dynamic_cast<CSCHintIcon*>(FindChildByName("SoldierHintIcon"));
 		m_pClassHintIcons[TF_CLASS_ASSALIENT] = dynamic_cast<CSCHintIcon*>(FindChildByName("MedicHintIcon"));
 		m_pClassHintIcons[TF_CLASS_FIREWALKER] = dynamic_cast<CSCHintIcon*>(FindChildByName("PyroHintIcon"));
+		m_pClassHintIcons[TF_CLASS_MECHANIST] = dynamic_cast<CSCHintIcon*>(FindChildByName("SpyHintIcon"));
 
 		for ( int i = 0; i < TF_CLASS_MENU_BUTTONS; i++ )
 		{
@@ -725,6 +728,7 @@ const char *g_pszLegacyClassSelectVCDWeapons[TF_LAST_NORMAL_CLASS] =
 	"",										// TF_CLASS_GUNNER
 	"",										// TF_CLASS_ASSALIENT
 	"",										// TF_CLASS_FIREWALKER
+	"",										// TF_CLASS_MECHANIST
 };
 
 int g_iLegacyClassSelectWeaponSlots[TF_LAST_NORMAL_CLASS] =
@@ -744,6 +748,7 @@ int g_iLegacyClassSelectWeaponSlots[TF_LAST_NORMAL_CLASS] =
 	LOADOUT_POSITION_PRIMARY,		// TF_CLASS_GUNNER
 	LOADOUT_POSITION_PRIMARY,		// TF_CLASS_ASSALIENT	
 	LOADOUT_POSITION_PRIMARY,		// TF_CLASS_FIREWALKER,	
+	LOADOUT_POSITION_MELEE,			// TF_CLASS_MECHANIST,
 };
 
 //-----------------------------------------------------------------------------
@@ -1404,6 +1409,7 @@ static const char *g_sDialogVariables[] = {
 
 	"numAssalient",
 	"numFirewalker",
+	"numMechanist",
 	"",
 };
 
@@ -1427,6 +1433,7 @@ static const char *g_sClassImagesBlue[] = {
 
 	"class_sel_sm_medic_blu",
 	"class_sel_sm_pyro_blu",
+	"class_sel_sm_spy_blu",
 	"class_sel_sm_scout_blu",
 };
 
@@ -1450,6 +1457,7 @@ static const char *g_sClassImagesRed[] = {
 
 	"class_sel_sm_medic_red",
 	"class_sel_sm_pyro_red",
+	"class_sel_sm_spy_red",
 	"class_sel_sm_scout_red",
 };
 
@@ -1473,6 +1481,8 @@ int g_ClassDefinesRemap[] = {
 
 	TF_CLASS_ASSALIENT,
 	TF_CLASS_FIREWALKER,
+	TF_CLASS_MECHANIST,
+
 	TF_CLASS_CIVILIAN,
 };
 

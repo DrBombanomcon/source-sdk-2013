@@ -250,6 +250,7 @@ const char *g_pszHeadGibs[] =
 	"models/player\\gibs\\soldiergib007.mdl",
 	"models/player\\gibs\\medicgib007.mdl",
 	"models/player\\gibs\\pyrogib008.mdl",
+	"models/player\\gibs\\spygib007.mdl",
 };
 
 const char *g_pszBotHeadGibs[] =
@@ -269,6 +270,7 @@ const char *g_pszBotHeadGibs[] =
 	"models/bots\\gibs\\soldierbot_gib_head.mdl",
 	"models/bots\\gibs\\medicbot_gib_head.mdl",
 	"models/bots\\gibs\\pyrobot_gib_head.mdl",
+	"models/bots\\gibs\\spybot_gib_head.mdl",
 };
 
 const char *pszHeadLabelNames[] =

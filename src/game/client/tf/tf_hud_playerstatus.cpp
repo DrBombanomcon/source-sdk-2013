@@ -61,6 +61,7 @@ static const char *g_szBlueClassImages[] =
 	"../hud/class_soldierblue",
 	"../hud/class_medicblue",
 	"../hud/class_pyroblue",
+	"../hud/class_spyblue",
 };
 
 static const char *g_szRedClassImages[] = 
@@ -80,6 +81,7 @@ static const char *g_szRedClassImages[] =
 	"../hud/class_soldierred",
 	"../hud/class_medicred",
 	"../hud/class_pyrored",
+	"../hud/class_spyred",
 };
 
 enum

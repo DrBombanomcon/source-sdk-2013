@@ -220,6 +220,7 @@ enum ETFClass
 	TF_CLASS_GUNNER,	//Todo: Come up with a more original naming scheme
 	TF_CLASS_ASSALIENT,
 	TF_CLASS_FIREWALKER,
+	TF_CLASS_MECHANIST,
 
 	// Add any new classes after Engineer
 	TF_CLASS_CIVILIAN,		// TF_LAST_NORMAL_CLASS
@@ -649,7 +650,7 @@ extern const char *g_pszInvasionMaps[];
 bool IsPlayingInvasionMap( void );
 
 #define SCOREBOARD_DOMINATION_ICONS		17
-#define SCOREBOARD_CLASS_ICONS			29
+#define SCOREBOARD_CLASS_ICONS			31
 #define SCOREBOARD_PING_ICONS			6
 
 extern const char *g_pszClassIcons[];
