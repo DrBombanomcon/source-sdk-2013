@@ -2817,7 +2817,6 @@ void CEconItemDescription::Generate_CollectionDesc( const CLocalizationProvider 
 	if ( !pItemDef )
 		return;
 
-
 	// Adding a check for if the collection we are browsing contains cosmetics or decorated weapons.
 	// We can handle decorated weapons the same as cosmetics, since they have proper schema entries
 	bool bIsHatOrDecorated = false;
@@ -2829,8 +2828,10 @@ void CEconItemDescription::Generate_CollectionDesc( const CLocalizationProvider 
 	if ( GetPaintKitDefIndex( pEconItem, &nPaintkitDefindex ) )
 	{
 		auto pPaintkitItemDef = GetItemSchema()->GetPaintKitItemDefinition( nPaintkitDefindex );
-		if (pPaintkitItemDef == NULL) 
+		if ( pPaintkitItemDef == NULL )
+		{
 			bIsHatOrDecorated = true;
+		}
 		pItemDef = pPaintkitItemDef ? pPaintkitItemDef : pItemDef;
 	}
 
@@ -3696,7 +3697,8 @@ void CEconItemDescription::AddAttributeDescription( const CLocalizationProvider 
 	}
 	// They can also be from Halloween spells. These are intended to expire after Halloween in any
 	// event, but for display purposes they'll appear in grey unless the holiday is active.
-	else if ( pAttribDef->GetUserGenerationType() == kUserGeneratedAttributeType_HalloweenSpell && !EconHolidays_IsHolidayActive( kHoliday_Halloween, CRTime::RTime32TimeCur() ) )
+	else if ( pAttribDef->GetUserGenerationType() == kUserGeneratedAttributeType_HalloweenSpell &&
+	!(EconHolidays_IsHolidayActive(kHoliday_Halloween, CRTime::RTime32TimeCur()) || EconHolidays_IsHolidayActive(kHoliday_FullMoon, CRTime::RTime32TimeCur())) )
 	{
 		eDefaultAttribColor = ATTRIB_COL_ITEMSET_MISSING;
 	}
